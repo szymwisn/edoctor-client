@@ -9,6 +9,7 @@ import { HistoryPageComponent } from "./pages/history-page/containers/history-pa
 import { ExaminationPageComponent } from "./pages/examination-page/containers/examination-page/examination-page.component";
 import { ErrorPageComponent } from "./pages/error-page/containers/error-page/error-page.component";
 import { LandingPageComponent } from "./pages/landing-page/containers/landing-page/landing-page.component";
+import { AuthGuard } from "./_shared/security/guards/auth-guard.service";
 
 const routes: Routes = [
   {
@@ -19,34 +20,42 @@ const routes: Routes = [
   {
     path: "welcome",
     component: LandingPageComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: "signin",
     component: SignInPageComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: "register",
     component: RegisterPageComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: "profile",
     component: ProfilePageComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: "diagnosis",
     component: DiagnosisPageComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: "doctors",
     component: DoctorsNearbyComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: "history",
     component: HistoryPageComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: "examination",
     component: ExaminationPageComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: "404",
