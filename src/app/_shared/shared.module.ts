@@ -13,6 +13,7 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
 import { LogoComponent } from './components/logo/logo.component';
 import { IconComponent } from './components/sidebar/icon/icon.component';
 import { SearchComponent } from './components/search/search.component';
+import { HeadingBoxComponent } from './components/heading-box/heading-box.component';
 
 const items = [
   InputComponent,
@@ -31,7 +32,7 @@ const items = [
 ];
 
 @NgModule({
-  declarations: [...items],
+  declarations: [...items, HeadingBoxComponent],
   imports: [CommonModule],
   exports: [...items],
 })
