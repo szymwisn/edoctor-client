@@ -17,7 +17,7 @@ const tempDecodedToken: DecodedToken = {
   userId: "5ea099512e74d85412886174",
 };
 
-@Injectable()
+@Injectable({ providedIn: "root" })
 export class AuthService {
   constructor(private http: HttpClient) {}
 

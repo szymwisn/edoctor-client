@@ -15,7 +15,7 @@ const tempUser: User = {
   bloodType: BloodType.A_Plus,
 };
 
-@Injectable()
+@Injectable({ providedIn: "root" })
 export class UserService {
   constructor(private http: HttpClient) {}
 
