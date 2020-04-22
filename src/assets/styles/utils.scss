@@ -1,0 +1,42 @@
+@mixin box-shadow(
+  $h_offset,
+  $v_offset,
+  $blur_radius,
+  $spread_radius,
+  $color,
+  $inset: false
+) {
+  @if $inset {
+    -webkit-box-shadow: inset
+      $h_offset
+      $v_offset
+      $blur_radius
+      $spread_radius
+      $color;
+    -moz-box-shadow: inset
+      $h_offset
+      $v_offset
+      $blur_radius
+      $spread_radius
+      $color;
+    box-shadow: inset $h_offset $v_offset $blur_radius $spread_radius $color;
+  } @else {
+    -webkit-box-shadow: $h_offset $v_offset $blur_radius $spread_radius $color;
+    -moz-box-shadow: $h_offset $v_offset $blur_radius $spread_radius $color;
+    box-shadow: $h_offset $v_offset $blur_radius $spread_radius $color;
+  }
+}
+
+@mixin rounded($radius: 0.5em) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+
+@mixin gradient($start-color, $end-color) {
+  background: $start-color;
+  background: -moz-linear-gradient(-45deg, $start-color 0%, $end-color 100%);
+  background: -webkit-linear-gradient(-45deg, $start-color 0%, $end-color 100%);
+  background: linear-gradient(135deg, $start-color 0%, $end-color 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=$start-color, endColorstr=$end-color,GradientType=1 );
+}
