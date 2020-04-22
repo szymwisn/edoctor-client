@@ -7,7 +7,6 @@ import { Sex } from "../models/sex";
 import { BloodType } from "../models/blood-type";
 
 const tempUser: User = {
-  _id: "5ea099512e74d85412886174",
   email: "john@doe.com",
   age: 21,
   height: 178,
@@ -20,12 +19,12 @@ const tempUser: User = {
 export class UserService {
   constructor(private http: HttpClient) {}
 
-  fetchUser(): Observable<User> {
-    // return this.http.get<User>("api/profile");
+  fetchUser(userId: string): Observable<User> {
+    // return this.http.get<User>(`api/user/${id}`);
     return of(tempUser);
   }
 
-  changeSettings(form: ChangeSettingsForm): Observable<any> {
-    return this.http.put("api/settings", form);
+  changeSettings(userId: string, form: ChangeSettingsForm) {
+    return this.http.put("api/settings", { userId, form });
   }
 }
