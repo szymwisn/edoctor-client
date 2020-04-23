@@ -1,1 +1,21 @@
-<p>input works!</p>
+<div class="input-wrapper">
+  <div class="label" [class.active]="currentlyActive">
+    {{ label }}
+  </div>
+  <input
+    #inputEl
+    (focus)="onFocus()"
+    (blur)="onBlur()"
+    [type]="type"
+    [value]="value"
+    [placeholder]="placeholder"
+    [disabled]="disabled"
+  />
+  <app-icon
+    class="icon"
+    name="close"
+    (click)="onClear()"
+    [hidden]="!currentlyActive"
+  ></app-icon>
+  <p class="invalid-message">{{ invalidMessage }}</p>
+</div>

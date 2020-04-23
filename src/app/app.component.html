@@ -1,8 +1,14 @@
 <ng-container *ngIf="allData$ | async as allData">
-  <h1>{{ allData.profile.email }}</h1>
   <app-sidebar></app-sidebar>
   <router-outlet> </router-outlet>
 
   <button (click)="tempSignIn()">Sign in</button>
   <button (click)="tempSignOut()">Sign out</button>
+
+  <app-input label="Email" placeholder="write..."></app-input>
+  <app-input
+    label="Password"
+    type="password"
+    invalidMessage="Please provide valid password"
+  ></app-input>
 </ng-container>

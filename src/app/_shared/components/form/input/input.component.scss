@@ -1,0 +1,36 @@
+@import "src/assets/styles/styles";
+
+.input-wrapper {
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.label {
+  @include rubik-medium();
+  margin-bottom: 3px;
+}
+
+.active {
+  color: $dodger-blue;
+}
+
+input {
+  width: 100%;
+  background-color: $mercury;
+  border: none;
+  border-radius: 4px;
+  padding: 6px;
+}
+
+.icon {
+  position: absolute;
+  right: 3px;
+  top: 29px;
+  cursor: pointer;
+}
+
+.invalid-message {
+  color: $bittersweet;
+  font-size: 1.2rem;
+  margin-top: 3px;
+}
