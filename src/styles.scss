@@ -1,6 +1,10 @@
 @import "~normalize.css";
 @import "./assets/styles/styles";
 
+*:focus {
+  outline: none;
+}
+
 html {
   font-size: 62.5%;
 }
