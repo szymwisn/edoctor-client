@@ -4,6 +4,7 @@
   </div>
   <input
     #inputEl
+    (input)="changeValue($event)"
     (focus)="onFocus()"
     (blur)="onBlur()"
     [type]="type"
@@ -17,5 +18,5 @@
     (click)="onClear()"
     [hidden]="!currentlyActive"
   ></app-icon>
-  <p class="invalid-message">{{ invalidMessage }}</p>
+  <p class="invalid-message" *ngIf="invalid">{{ invalidMessage }}</p>
 </div>
