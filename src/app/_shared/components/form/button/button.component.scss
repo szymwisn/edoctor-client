@@ -1,0 +1,71 @@
+@import "src/assets/styles/styles";
+
+button {
+  border: none;
+  border-radius: 4px;
+}
+
+.btn-without-icon {
+  padding: 8px 15px;
+  cursor: pointer;
+}
+
+.primary {
+  background-color: $dodger-blue;
+  color: $alabaster;
+}
+
+.secondary {
+  background-color: $alabaster;
+  color: $mine-shaft;
+}
+
+.tertiary {
+  background-color: $alabaster;
+  color: $rock-blue;
+}
+
+.btn-without-icon:hover {
+  color: $dodger-blue;
+  transition: all 0.1s ease-in-out;
+}
+
+.primary:hover {
+  color: $rock-blue;
+}
+
+button[disabled] {
+  opacity: 0.5;
+  cursor: default;
+}
+
+button[disabled]:hover {
+  opacity: 0.5;
+  cursor: default;
+  background-color: $dodger-blue;
+  color: $alabaster;
+}
+
+.btn-icon {
+  display: flex;
+  padding: 0;
+  background: none;
+  color: $rock-blue;
+  cursor: pointer;
+
+  app-icon {
+    align-self: center;
+    padding: 3px 2px 0px 3px;
+    background-color: $alabaster;
+    border-radius: 4px;
+  }
+
+  .text {
+    align-self: center;
+    margin-left: 6px;
+  }
+}
+
+.btn-icon:hover {
+  color: $dodger-blue;
+}

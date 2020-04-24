@@ -1,1 +1,23 @@
-<p>button works!</p>
+<button
+  class="btn-without-icon"
+  *ngIf="!icon"
+  (click)="(onClick)"
+  [type]="type"
+  [class]="class"
+  [disabled]="disabled"
+>
+  {{ text }}
+</button>
+
+<button
+  *ngIf="icon"
+  (click)="(onClick)"
+  class="btn-icon"
+  [disabled]="disabled"
+  [type]="type"
+>
+  <app-icon [name]="icon" [height]="24" [width]="24"></app-icon>
+  <div class="text">
+    {{ text }}
+  </div>
+</button>

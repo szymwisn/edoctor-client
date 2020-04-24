@@ -1,3 +1,9 @@
+@mixin default-shadow() {
+  -webkit-box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.08);
+  -moz-box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.08);
+  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.08);
+}
+
 @mixin box-shadow(
   $h_offset,
   $v_offset,

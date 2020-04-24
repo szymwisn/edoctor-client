@@ -1,15 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, Output } from "@angular/core";
+import { Subject } from "rxjs";
+
+export enum ButtonTypes {
+  Primary = "primary",
+  Secondary = "secondary",
+  Tertiary = "tertiary",
+}
 
 @Component({
-  selector: 'app-button',
-  templateUrl: './button.component.html',
-  styleUrls: ['./button.component.scss']
+  selector: "app-button",
+  templateUrl: "./button.component.html",
+  styleUrls: ["./button.component.scss"],
 })
-export class ButtonComponent implements OnInit {
+export class ButtonComponent {
+  @Input() type: string = "button";
+  @Input() text: string = "Button";
+  @Input() class: ButtonTypes = ButtonTypes.Secondary;
+  @Input() icon: string;
+  @Input() disabled: boolean = false;
 
-  constructor() { }
+  @Output() btnClick = new Subject();
 
-  ngOnInit(): void {
+  onClick() {
+    this.btnClick.next();
   }
-
 }
