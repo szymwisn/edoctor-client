@@ -37,6 +37,13 @@
       [invalid]="formSubmitted && !testForm.get('doctors').valid"
     ></app-select>
 
+    <app-checkbox
+      formControlName="checkbox"
+      label="Checkbox"
+      [items]="checkboxItems"
+      [invalid]="formSubmitted && !testForm.get('doctors').valid"
+    ></app-checkbox>
+
     <app-button class="primary" type="submit" text="Submit"></app-button>
     <app-button class="secondary" text="Secondary"></app-button>
     <app-button class="tertiary" text="Tertiary"></app-button>

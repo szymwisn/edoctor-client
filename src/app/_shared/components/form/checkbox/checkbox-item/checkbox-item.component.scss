@@ -1,0 +1,17 @@
+@import "src/assets/styles/styles";
+
+.checkbox-item-wrapper {
+  display: flex;
+  padding: 3px 0;
+  transition: color 0.1s ease-in-out;
+  cursor: pointer;
+
+  .icon {
+    margin-top: 3px;
+    margin-right: 10px;
+  }
+}
+
+.checkbox-item-wrapper:hover {
+  color: $dodger-blue;
+}

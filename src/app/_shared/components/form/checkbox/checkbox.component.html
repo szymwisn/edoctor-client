@@ -1,1 +1,14 @@
-<p>checkbox works!</p>
+<div class="checkbox-wrapper">
+  <div class="label">
+    {{ label }}
+  </div>
+  <div class="checkboxes">
+    <app-checkbox-item
+      *ngFor="let item of items"
+      [item]="item"
+      (boxClick)="selectItem(item)"
+    >
+    </app-checkbox-item>
+  </div>
+  <p class="invalid-message" *ngIf="invalid">{{ invalidMessage }}</p>
+</div>

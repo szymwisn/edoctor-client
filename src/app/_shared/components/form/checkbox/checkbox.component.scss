@@ -1,0 +1,23 @@
+@import "src/assets/styles/styles";
+
+.checkbox-wrapper {
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.label {
+  @include rubik-medium();
+  margin-bottom: 3px;
+}
+
+.invalid-message {
+  color: $bittersweet;
+  font-size: 1.2rem;
+  margin-top: 3px;
+}
+
+.checkboxes {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
