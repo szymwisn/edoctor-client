@@ -26,6 +26,17 @@
       placeholder="write your story..."
       [invalid]="formSubmitted && !testForm.get('description').valid"
     ></app-textarea>
-    <button type="submit">submit</button>
+    <app-button class="primary" type="submit" text="Submit"></app-button>
+    <app-button class="secondary" text="Secondary"></app-button>
+    <app-button class="tertiary" text="Tertiary"></app-button>
+    <app-button
+      class="primary"
+      type="submit"
+      [disabled]="true"
+      text="Disabled"
+    ></app-button>
+
+    <app-button icon="back" text="go back"></app-button>
+    <app-button icon="filter" text="filters"></app-button>
   </form>
 </ng-container>
