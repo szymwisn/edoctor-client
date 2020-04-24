@@ -1,1 +1,23 @@
-<p>select works!</p>
+<div class="select-wrapper">
+  <div class="label" [class.active]="dropdownOpen">
+    {{ label }}
+  </div>
+
+  <div class="bar" (click)="toggleDropdown()">
+    <div class="selectedOption">
+      {{ value || placeholder }}
+    </div>
+    <app-icon class="icon" [name]="icon" width="24" height="24"></app-icon>
+  </div>
+  <div *ngIf="dropdownOpen" class="dropdown">
+    <div
+      *ngFor="let option of options"
+      class="option"
+      [class.selected]="value === option"
+      (click)="selectOption(option)"
+    >
+      {{ option }}
+    </div>
+  </div>
+  <p class="invalid-message" *ngIf="invalid">{{ invalidMessage }}</p>
+</div>
