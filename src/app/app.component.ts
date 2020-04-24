@@ -39,6 +39,7 @@ export class AppComponent {
     this.testForm = fb.group({
       email: ["", [Validators.required, Validators.email]],
       password: ["", [Validators.required]],
+      description: ["", [Validators.required]],
     });
   }
 

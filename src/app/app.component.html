@@ -20,6 +20,12 @@
       invalidMessage="Please provide a valid password"
       [invalid]="formSubmitted && !testForm.get('password').valid"
     ></app-input>
+    <app-textarea
+      formControlName="description"
+      label="Description"
+      placeholder="write your story..."
+      [invalid]="formSubmitted && !testForm.get('description').valid"
+    ></app-textarea>
     <button type="submit">submit</button>
   </form>
 </ng-container>

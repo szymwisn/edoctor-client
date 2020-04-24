@@ -2,7 +2,6 @@ import {
   Component,
   Input,
   forwardRef,
-  Output,
   ElementRef,
   ViewChild,
 } from "@angular/core";

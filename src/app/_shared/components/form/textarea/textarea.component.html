@@ -1,1 +1,23 @@
-<p>textarea works!</p>
+<div class="textarea-wrapper">
+  <div class="label" [class.active]="currentlyActive">
+    {{ label }}
+  </div>
+  <textarea
+    #textareaEl
+    (input)="changeValue($event)"
+    (focus)="onFocus()"
+    (blur)="onBlur()"
+    [placeholder]="placeholder"
+    [disabled]="disabled"
+    [rows]="rows"
+    [value]="value"
+    >{{ value }}</textarea
+  >
+  <app-icon
+    class="icon"
+    name="close"
+    (click)="onClear()"
+    [hidden]="!currentlyActive"
+  ></app-icon>
+  <p class="invalid-message" *ngIf="invalid">{{ invalidMessage }}</p>
+</div>
