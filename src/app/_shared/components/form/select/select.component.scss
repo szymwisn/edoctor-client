@@ -1,0 +1,65 @@
+@import "src/assets/styles/styles";
+
+.select-wrapper {
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.label {
+  @include rubik-medium();
+  margin-bottom: 3px;
+}
+
+.active {
+  color: $dodger-blue;
+}
+
+.bar {
+  background-color: $mercury;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 0 6px 6px;
+  position: relative;
+  cursor: pointer;
+}
+
+.icon {
+  position: absolute;
+  right: 3px;
+  top: 5px;
+}
+
+.invalid-message {
+  color: $bittersweet;
+  font-size: 1.2rem;
+  margin-top: 3px;
+}
+
+.dropdown {
+  margin-top: 10px;
+  border-radius: 4px;
+  background-color: $alabaster;
+  @include default-shadow();
+  position: absolute;
+  width: 100%;
+  z-index: 999;
+
+  .option {
+    padding: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    transition: color 0.1s ease-in-out;
+    cursor: pointer;
+  }
+
+  .option:last-of-type {
+    border-bottom: none;
+  }
+
+  .option:hover {
+    color: $dodger-blue;
+  }
+}
+
+.selected {
+  color: $dodger-blue;
+}

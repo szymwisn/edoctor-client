@@ -21,6 +21,8 @@ export class AppComponent {
 
   formSubmitted = false;
 
+  doctors = ["dr Rick Owens", "dr Drake Ramoray", "dr Mario Pastini"];
+
   onSubmit() {
     this.formSubmitted = true;
     if (this.testForm.valid) {
@@ -40,6 +42,7 @@ export class AppComponent {
       email: ["", [Validators.required, Validators.email]],
       password: ["", [Validators.required]],
       description: ["", [Validators.required]],
+      doctors: ["", [Validators.required]],
     });
   }
 

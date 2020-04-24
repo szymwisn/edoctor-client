@@ -1,17 +1,18 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, Input, OnChanges } from "@angular/core";
 
 @Component({
   selector: "app-icon",
   templateUrl: "./icon.component.html",
   styleUrls: ["./icon.component.scss"],
 })
-export class IconComponent implements OnInit {
-  link = "/assets/icons/";
-  @Input() name = "";
-  @Input() width = 12;
-  @Input() height = 12;
+export class IconComponent implements OnChanges {
+  link: string;
 
-  ngOnInit() {
-    this.link += `${this.name}.svg`;
+  @Input() name: string = "";
+  @Input() width: number = 12;
+  @Input() height: number = 12;
+
+  ngOnChanges() {
+    this.link = `/assets/icons/${this.name}.svg`;
   }
 }
