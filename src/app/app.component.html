@@ -9,13 +9,16 @@
     <app-input
       formControlName="email"
       label="Email"
-      placeholder="write..."
+      placeholder="enter your e-mail..."
+      [invalid]="formSubmitted && !testForm.get('email').valid"
     ></app-input>
     <app-input
       formControlName="password"
       label="Password"
       type="password"
-      invalidMessage="Please provide valid password"
+      placeholder="enter your password..."
+      invalidMessage="Please provide a valid password"
+      [invalid]="formSubmitted && !testForm.get('password').valid"
     ></app-input>
     <button type="submit">submit</button>
   </form>

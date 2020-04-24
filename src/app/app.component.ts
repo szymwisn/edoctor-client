@@ -4,7 +4,7 @@ import { Observable, combineLatest } from "rxjs";
 import { DecodedToken } from "./_shared/security/models/token.model";
 import { User } from "./_shared/security/models/user.model";
 import { map } from "rxjs/operators";
-import { FormGroup, FormBuilder } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 @Component({
   selector: "app-root",
@@ -19,8 +19,15 @@ export class AppComponent {
     profile: User;
   }>;
 
+  formSubmitted = false;
+
   onSubmit() {
-    console.log(this.testForm.value);
+    this.formSubmitted = true;
+    if (this.testForm.valid) {
+      console.log(this.testForm.value);
+    } else {
+      console.log("form invalid");
+    }
   }
 
   constructor(private fb: FormBuilder, private userFacade: UserFacade) {
@@ -30,8 +37,8 @@ export class AppComponent {
     ).pipe(map(([token, profile]) => ({ token, profile })));
 
     this.testForm = fb.group({
-      email: "test",
-      password: "test",
+      email: ["", [Validators.required, Validators.email]],
+      password: ["", [Validators.required]],
     });
   }
 
