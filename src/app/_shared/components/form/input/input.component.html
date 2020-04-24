@@ -4,6 +4,7 @@
   </div>
   <input
     #inputEl
+    (input)="changeValue($event)"
     (focus)="onFocus()"
     (blur)="onBlur()"
     [type]="type"

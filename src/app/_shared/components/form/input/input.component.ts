@@ -7,7 +7,6 @@ import {
   ViewChild,
 } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
-import { Subject } from "rxjs";
 
 @Component({
   selector: "app-input",
@@ -34,11 +33,17 @@ export class InputComponent implements ControlValueAccessor {
   @Input() invalidMessage: string = null;
 
   onClear() {
-    this.inputEl.nativeElement.value = "";
+    this.value = "";
+    this.onChange(this.value);
     this.inputEl.nativeElement.focus();
     setTimeout(() => {
       this.currentlyActive = true;
-    }, 120);
+    }, 105);
+  }
+
+  changeValue(event: any) {
+    this.value = event.target.value;
+    this.onChange(this.value);
   }
 
   onFocus() {
@@ -48,7 +53,7 @@ export class InputComponent implements ControlValueAccessor {
   onBlur() {
     setTimeout(() => {
       this.currentlyActive = false;
-    }, 110);
+    }, 100);
   }
 
   toggleActive() {

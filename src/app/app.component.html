@@ -5,10 +5,18 @@
   <button (click)="tempSignIn()">Sign in</button>
   <button (click)="tempSignOut()">Sign out</button>
 
-  <app-input label="Email" placeholder="write..."></app-input>
-  <app-input
-    label="Password"
-    type="password"
-    invalidMessage="Please provide valid password"
-  ></app-input>
+  <form [formGroup]="testForm" (ngSubmit)="onSubmit()">
+    <app-input
+      formControlName="email"
+      label="Email"
+      placeholder="write..."
+    ></app-input>
+    <app-input
+      formControlName="password"
+      label="Password"
+      type="password"
+      invalidMessage="Please provide valid password"
+    ></app-input>
+    <button type="submit">submit</button>
+  </form>
 </ng-container>
