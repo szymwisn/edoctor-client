@@ -22,11 +22,6 @@ export class AppComponent {
   formSubmitted = false;
 
   doctors = ["dr Rick Owens", "dr Drake Ramoray", "dr Mario Pastini"];
-  checkboxItems = [
-    { name: "item 1", checked: false },
-    { name: "item 2", checked: false },
-    { name: "item 3", checked: false },
-  ];
 
   onSubmit() {
     this.formSubmitted = true;
@@ -48,7 +43,7 @@ export class AppComponent {
       password: ["", [Validators.required]],
       description: ["", [Validators.required]],
       doctors: ["", [Validators.required]],
-      checkbox: [[]],
+      checkbox: [],
     });
   }
 

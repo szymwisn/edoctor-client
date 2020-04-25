@@ -30,10 +30,12 @@ const items = [
   LogoComponent,
   IconComponent,
   SearchComponent,
+  HeadingBoxComponent,
+  CheckboxItemComponent,
 ];
 
 @NgModule({
-  declarations: [...items, HeadingBoxComponent, CheckboxItemComponent],
+  declarations: [...items],
   imports: [CommonModule],
   exports: [...items],
 })
