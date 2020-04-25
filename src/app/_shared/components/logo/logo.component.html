@@ -1,1 +1,6 @@
-<p>logo works!</p>
+<div class="logo-wrapper" (click)="onClick()">
+  <app-icon name="logo" width="20" height="20"></app-icon>
+  <div class="text" *ngIf="!iconOnly">
+    Edoktor
+  </div>
+</div>
