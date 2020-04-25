@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, Output } from "@angular/core";
+import { Subject } from "rxjs";
 
 @Component({
-  selector: 'app-logo',
-  templateUrl: './logo.component.html',
-  styleUrls: ['./logo.component.scss']
+  selector: "app-logo",
+  templateUrl: "./logo.component.html",
+  styleUrls: ["./logo.component.scss"],
 })
-export class LogoComponent implements OnInit {
+export class LogoComponent {
+  @Input() iconOnly: boolean = false;
+  @Output() logoClick = new Subject();
 
-  constructor() { }
-
-  ngOnInit(): void {
+  onClick() {
+    this.logoClick.next();
   }
-
 }

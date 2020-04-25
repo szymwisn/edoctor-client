@@ -1,0 +1,19 @@
+@import "src/assets/styles/styles";
+
+.logo-wrapper {
+  background-color: $dodger-blue;
+  display: flex;
+  cursor: pointer;
+}
+
+app-icon {
+  margin-bottom: -5px;
+}
+
+.text {
+  margin-left: 8px;
+  align-self: center;
+  color: $alabaster;
+
+  @include rubik-medium();
+}
