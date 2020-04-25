@@ -43,6 +43,7 @@ export class AppComponent {
       password: ["", [Validators.required]],
       description: ["", [Validators.required]],
       doctors: ["", [Validators.required]],
+      checkbox: [],
     });
   }
 

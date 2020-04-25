@@ -14,6 +14,7 @@ import { LogoComponent } from "./components/logo/logo.component";
 import { IconComponent } from "./components/icon/icon.component";
 import { SearchComponent } from "./components/search/search.component";
 import { HeadingBoxComponent } from "./components/heading-box/heading-box.component";
+import { CheckboxItemComponent } from "./components/form/checkbox/checkbox-item/checkbox-item.component";
 
 const items = [
   InputComponent,
@@ -29,10 +30,12 @@ const items = [
   LogoComponent,
   IconComponent,
   SearchComponent,
+  HeadingBoxComponent,
+  CheckboxItemComponent,
 ];
 
 @NgModule({
-  declarations: [...items, HeadingBoxComponent],
+  declarations: [...items],
   imports: [CommonModule],
   exports: [...items],
 })
