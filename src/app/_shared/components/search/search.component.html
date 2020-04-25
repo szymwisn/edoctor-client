@@ -1,1 +1,15 @@
-<p>search works!</p>
+<div class="search-wrapper">
+  <app-icon
+    class="icon"
+    (click)="onSearch()"
+    name="search"
+    [width]="24"
+    [height]="24"
+  ></app-icon>
+  <input
+    type="text"
+    (input)="changeValue($event)"
+    [value]="value"
+    [placeholder]="placeholder"
+  />
+</div>

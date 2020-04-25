@@ -1,15 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, Output } from "@angular/core";
+import { Subject } from "rxjs";
 
 @Component({
-  selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss']
+  selector: "app-search",
+  templateUrl: "./search.component.html",
+  styleUrls: ["./search.component.scss"],
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent {
+  value: string = "";
 
-  constructor() { }
+  @Input() placeholder: string = "Search...";
+  @Output() searchClick = new Subject();
 
-  ngOnInit(): void {
+  changeValue(event: any) {
+    this.value = event.target.value;
   }
 
+  onSearch() {
+    this.searchClick.next(this.value);
+  }
 }

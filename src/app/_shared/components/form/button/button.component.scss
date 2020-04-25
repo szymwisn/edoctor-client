@@ -47,11 +47,12 @@ button[disabled]:hover {
 }
 
 .btn-icon {
-  display: flex;
+  display: inline-flex;
   padding: 0;
   background: none;
   color: $rock-blue;
   cursor: pointer;
+  transition: opacity 0.1s ease-in-out;
 
   app-icon {
     align-self: center;
@@ -67,5 +68,5 @@ button[disabled]:hover {
 }
 
 .btn-icon:hover {
-  color: $dodger-blue;
+  opacity: 0.5;
 }
