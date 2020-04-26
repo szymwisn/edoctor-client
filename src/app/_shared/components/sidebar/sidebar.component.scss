@@ -1,0 +1,28 @@
+@import "src/assets/styles/styles";
+
+.sidebar-wrapper {
+  width: 70px;
+  padding: 20px 0;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: $dodger-blue;
+  z-index: 9999;
+}
+
+.icons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 50px;
+  height: 100%;
+}
+
+.icons-upper {
+  display: flex;
+  flex-direction: column;
+}

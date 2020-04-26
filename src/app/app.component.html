@@ -1,60 +1,61 @@
-<ng-container *ngIf="allData$ | async as allData">
-  <app-logo></app-logo>
+<div class="wrapper" *ngIf="allData$ | async as allData">
   <app-sidebar></app-sidebar>
-  <router-outlet> </router-outlet>
+  <div class="content">
+    <router-outlet> </router-outlet>
 
-  <button (click)="tempSignIn()">Sign in</button>
-  <button (click)="tempSignOut()">Sign out</button>
+    <button (click)="tempSignIn()">Sign in</button>
+    <button (click)="tempSignOut()">Sign out</button>
 
-  <form [formGroup]="testForm" (ngSubmit)="onSubmit()">
-    <app-input
-      formControlName="email"
-      label="Email"
-      placeholder="enter your e-mail..."
-      [invalid]="formSubmitted && !testForm.get('email').valid"
-    ></app-input>
+    <form [formGroup]="testForm" (ngSubmit)="onSubmit()">
+      <app-input
+        formControlName="email"
+        label="Email"
+        placeholder="enter your e-mail..."
+        [invalid]="formSubmitted && !testForm.get('email').valid"
+      ></app-input>
 
-    <app-input
-      formControlName="password"
-      label="Password"
-      type="password"
-      placeholder="enter your password..."
-      invalidMessage="Please provide a valid password"
-      [invalid]="formSubmitted && !testForm.get('password').valid"
-    ></app-input>
+      <app-input
+        formControlName="password"
+        label="Password"
+        type="password"
+        placeholder="enter your password..."
+        invalidMessage="Please provide a valid password"
+        [invalid]="formSubmitted && !testForm.get('password').valid"
+      ></app-input>
 
-    <app-textarea
-      formControlName="description"
-      label="Description"
-      placeholder="write your story..."
-      [invalid]="formSubmitted && !testForm.get('description').valid"
-    ></app-textarea>
+      <app-textarea
+        formControlName="description"
+        label="Description"
+        placeholder="write your story..."
+        [invalid]="formSubmitted && !testForm.get('description').valid"
+      ></app-textarea>
 
-    <app-select
-      formControlName="doctors"
-      label="Doctors"
-      placeholder="Select a doctor..."
-      [options]="doctors"
-      [invalid]="formSubmitted && !testForm.get('doctors').valid"
-    ></app-select>
+      <app-select
+        formControlName="doctors"
+        label="Doctors"
+        placeholder="Select a doctor..."
+        [options]="doctors"
+        [invalid]="formSubmitted && !testForm.get('doctors').valid"
+      ></app-select>
 
-    <app-checkbox
-      formControlName="checkbox"
-      label="Checkbox"
-      [items]="doctors"
-    ></app-checkbox>
+      <app-checkbox
+        formControlName="checkbox"
+        label="Checkbox"
+        [items]="doctors"
+      ></app-checkbox>
 
-    <app-button class="primary" type="submit" text="Submit"></app-button>
-    <app-button class="secondary" text="Secondary"></app-button>
-    <app-button class="tertiary" text="Tertiary"></app-button>
-    <app-button
-      class="primary"
-      type="submit"
-      [disabled]="true"
-      text="Disabled"
-    ></app-button>
-    <app-search></app-search>
-    <app-button icon="back" text="go back"></app-button>
-    <app-button icon="filter" text="filters"></app-button>
-  </form>
-</ng-container>
+      <app-button class="primary" type="submit" text="Submit"></app-button>
+      <app-button class="secondary" text="Secondary"></app-button>
+      <app-button class="tertiary" text="Tertiary"></app-button>
+      <app-button
+        class="primary"
+        type="submit"
+        [disabled]="true"
+        text="Disabled"
+      ></app-button>
+      <app-search></app-search>
+      <app-button icon="back" text="go back"></app-button>
+      <app-button icon="filter" text="filters"></app-button>
+    </form>
+  </div>
+</div>
