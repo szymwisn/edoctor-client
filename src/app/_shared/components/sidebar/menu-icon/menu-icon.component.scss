@@ -1,0 +1,39 @@
+@import "src/assets/styles/styles";
+
+.icon-wrapper {
+  position: relative;
+}
+
+a {
+  display: block;
+  margin-top: 5px;
+  padding: 5px 5px 0 5px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+a:hover {
+  background-color: rgba(1, 1, 1, 0.1);
+}
+
+.tip {
+  display: none;
+}
+
+a:hover ~ .tip {
+  display: block;
+  padding: 5px;
+  font-size: 1.2rem;
+  position: absolute;
+  top: -20px;
+  left: 35px;
+  color: $alabaster;
+  background-color: $mine-shaft;
+  border-radius: 4px;
+  border-bottom-left-radius: 0;
+  white-space: nowrap;
+}
+
+.active {
+  background-color: rgba(1, 1, 1, 0.1);
+}

@@ -9,18 +9,21 @@ import { ProfilePageModule } from "./profile-page/profile-page.module";
 import { RegisterPageModule } from "./register-page/register-page.module";
 import { SignInPageModule } from "./sign-in-page/sign-in-page.module";
 
+const pages = [
+  DiagnosisPageModule,
+  DoctorsNearbyPageModule,
+  ErrorPageModule,
+  ExaminationPageModule,
+  HistoryPageModule,
+  LandingPageModule,
+  ProfilePageModule,
+  RegisterPageModule,
+  SignInPageModule,
+];
+
 @NgModule({
   declarations: [],
-  imports: [
-    DiagnosisPageModule,
-    DoctorsNearbyPageModule,
-    ErrorPageModule,
-    ExaminationPageModule,
-    HistoryPageModule,
-    LandingPageModule,
-    ProfilePageModule,
-    RegisterPageModule,
-    SignInPageModule,
-  ],
+  imports: [...pages],
+  exports: [...pages],
 })
 export class PagesModule {}

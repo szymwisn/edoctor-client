@@ -1,1 +1,27 @@
-<p>sidebar works!</p>
+<div class="sidebar-wrapper">
+  <app-logo [iconOnly]="true"></app-logo>
+  <div class="icons">
+    <div class="icons-upper">
+      <app-menu-icon
+        [link]="['/examination']"
+        icon="examination"
+        tip="Examination"
+      ></app-menu-icon>
+      <app-menu-icon
+        [link]="['/history']"
+        icon="history"
+        tip="History"
+      ></app-menu-icon>
+      <app-menu-icon
+        [link]="['/doctors']"
+        icon="map"
+        tip="Doctors nearby"
+      ></app-menu-icon>
+    </div>
+    <app-menu-icon
+      [link]="['/profile']"
+      icon="profile"
+      tip="Profile"
+    ></app-menu-icon>
+  </div>
+</div>

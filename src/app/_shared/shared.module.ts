@@ -15,6 +15,8 @@ import { IconComponent } from "./components/icon/icon.component";
 import { SearchComponent } from "./components/search/search.component";
 import { HeadingBoxComponent } from "./components/heading-box/heading-box.component";
 import { CheckboxItemComponent } from "./components/form/checkbox/checkbox-item/checkbox-item.component";
+import { RouterModule } from "@angular/router";
+import { MenuIconComponent } from "./components/sidebar/menu-icon/menu-icon.component";
 
 const items = [
   InputComponent,
@@ -32,11 +34,12 @@ const items = [
   SearchComponent,
   HeadingBoxComponent,
   CheckboxItemComponent,
+  MenuIconComponent,
 ];
 
 @NgModule({
   declarations: [...items],
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   exports: [...items],
 })
 export class SharedModule {}
