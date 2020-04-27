@@ -68,4 +68,8 @@ export class AppComponent {
     console.log("b");
     this.userFacade.signout();
   }
+
+  changePage(page) {
+    console.log(page);
+  }
 }

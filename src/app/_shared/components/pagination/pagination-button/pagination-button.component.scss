@@ -1,0 +1,29 @@
+@import "src/assets/styles/styles";
+
+.pagination-button-wrapper {
+  padding: 5px;
+  background-color: $alabaster;
+  border-radius: 4px;
+  color: $rock-blue;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 5px;
+
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.5;
+  }
+}
+
+.active {
+  background-color: $dodger-blue;
+  color: $alabaster;
+
+  &:hover {
+    opacity: 1;
+  }
+}

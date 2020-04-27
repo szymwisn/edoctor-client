@@ -6,6 +6,11 @@
     <button (click)="showNotification()">Show notification</button>
     <button (click)="tempSignIn()">Sign in</button>
     <button (click)="tempSignOut()">Sign out</button>
+    <app-pagination
+      [totalPages]="10"
+      [currentPage]="5"
+      (currentPageChange)="changePage($event)"
+    ></app-pagination>
 
     <form [formGroup]="testForm" (ngSubmit)="onSubmit()">
       <app-input

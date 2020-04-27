@@ -17,6 +17,7 @@ import { HeadingBoxComponent } from "./components/heading-box/heading-box.compon
 import { CheckboxItemComponent } from "./components/form/checkbox/checkbox-item/checkbox-item.component";
 import { RouterModule } from "@angular/router";
 import { MenuIconComponent } from "./components/sidebar/menu-icon/menu-icon.component";
+import { PaginationButtonComponent } from "./components/pagination/pagination-button/pagination-button.component";
 
 const items = [
   InputComponent,
@@ -35,6 +36,7 @@ const items = [
   HeadingBoxComponent,
   CheckboxItemComponent,
   MenuIconComponent,
+  PaginationButtonComponent,
 ];
 
 @NgModule({
