@@ -3,12 +3,16 @@
   <div class="content">
     <router-outlet> </router-outlet>
 
-    <button (click)="showNotification()">Show notification</button>
-    <button (click)="tempSignIn()">Sign in</button>
-    <button (click)="tempSignOut()">Sign out</button>
+    <app-button
+      text="Show notification"
+      class="primary"
+      (click)="showNotification()"
+    ></app-button>
+    <app-button text="Sign in" (click)="tempSignIn()"></app-button>
+    <app-button text="Sign out" (click)="tempSignOut()"></app-button>
     <app-pagination
-      [totalPages]="10"
-      [currentPage]="5"
+      [currentPage]="1"
+      [totalPages]="5"
       (currentPageChange)="changePage($event)"
     ></app-pagination>
 

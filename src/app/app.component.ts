@@ -26,8 +26,12 @@ export class AppComponent {
 
   onSubmit() {
     this.formSubmitted = true;
+
     if (this.testForm.valid) {
       console.log(this.testForm.value);
+      this.notificationService.createNotification("Form submitted!", 3000);
+      this.testForm.reset();
+      this.formSubmitted = false;
     } else {
       console.log("form invalid");
     }
