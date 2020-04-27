@@ -1,1 +1,20 @@
-<p>pagination works!</p>
+<div class="pagination-wrapper">
+  <app-pagination-button
+    [disabled]="this.currentPage === 1"
+    value="<<"
+    (buttonClick)="navigateToFirst()"
+  ></app-pagination-button>
+  <div class="buttons" *ngFor="let page of pages">
+    <app-pagination-button
+      *ngIf="page >= 1 && page <= this.totalPages"
+      (buttonClick)="changePage(page)"
+      [active]="page === currentPage"
+      [value]="page"
+    ></app-pagination-button>
+  </div>
+  <app-pagination-button
+    [disabled]="this.currentPage === this.totalPages"
+    value=">>"
+    (buttonClick)="navigateToLast()"
+  ></app-pagination-button>
+</div>
