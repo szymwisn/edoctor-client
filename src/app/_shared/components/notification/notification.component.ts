@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef } from "@angular/core";
 
 @Component({
-  selector: 'app-notification',
-  templateUrl: './notification.component.html',
-  styleUrls: ['./notification.component.scss']
+  selector: "app-notification",
+  templateUrl: "./notification.component.html",
+  styleUrls: ["./notification.component.scss"],
 })
-export class NotificationComponent implements OnInit {
+export class NotificationComponent {
+  message: string;
 
-  constructor() { }
+  constructor(private host: ElementRef<HTMLElement>) {}
 
-  ngOnInit(): void {
+  close() {
+    this.host.nativeElement.remove();
   }
-
 }

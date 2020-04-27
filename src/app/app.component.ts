@@ -1,10 +1,11 @@
-import { Component } from "@angular/core";
+import { Component, ViewContainerRef } from "@angular/core";
 import { UserFacade } from "./_shared/security/user.facade";
 import { Observable, combineLatest } from "rxjs";
 import { DecodedToken } from "./_shared/security/models/token.model";
 import { User } from "./_shared/security/models/user.model";
 import { map } from "rxjs/operators";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { NotificationService } from "./_shared/services/notification.service";
 
 @Component({
   selector: "app-root",
@@ -32,7 +33,14 @@ export class AppComponent {
     }
   }
 
-  constructor(private fb: FormBuilder, private userFacade: UserFacade) {
+  constructor(
+    private fb: FormBuilder,
+    private userFacade: UserFacade,
+    private notificationService: NotificationService,
+    private viewContainerRef: ViewContainerRef
+  ) {
+    this.notificationService.setViewContainerRef(this.viewContainerRef);
+
     this.allData$ = combineLatest(
       this.userFacade.token$,
       this.userFacade.profile$
@@ -45,6 +53,10 @@ export class AppComponent {
       doctors: ["", [Validators.required]],
       checkbox: [],
     });
+  }
+
+  showNotification() {
+    this.notificationService.createNotification("Something happened!");
   }
 
   tempSignIn() {
