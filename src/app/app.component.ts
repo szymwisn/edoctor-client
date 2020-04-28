@@ -1,4 +1,9 @@
-import { Component, ViewContainerRef } from "@angular/core";
+import {
+  Component,
+  ViewContainerRef,
+  TemplateRef,
+  ViewChild,
+} from "@angular/core";
 import { UserFacade } from "./_shared/security/user.facade";
 import { Observable, combineLatest } from "rxjs";
 import { DecodedToken } from "./_shared/security/models/token.model";
@@ -6,6 +11,7 @@ import { User } from "./_shared/security/models/user.model";
 import { map } from "rxjs/operators";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { NotificationService } from "./_shared/services/notification.service";
+import { ModalService } from "./_shared/services/modal.service";
 
 @Component({
   selector: "app-root",
@@ -13,6 +19,8 @@ import { NotificationService } from "./_shared/services/notification.service";
   styleUrls: ["./app.component.scss"],
 })
 export class AppComponent {
+  @ViewChild("modalContent") modalContent: TemplateRef<any>;
+
   testForm: FormGroup;
 
   allData$: Observable<{
@@ -41,9 +49,11 @@ export class AppComponent {
     private fb: FormBuilder,
     private userFacade: UserFacade,
     private notificationService: NotificationService,
+    private modalService: ModalService,
     private viewContainerRef: ViewContainerRef
   ) {
     this.notificationService.setViewContainerRef(this.viewContainerRef);
+    this.modalService.setViewContainerRef(this.viewContainerRef);
 
     this.allData$ = combineLatest(
       this.userFacade.token$,
@@ -64,16 +74,18 @@ export class AppComponent {
   }
 
   tempSignIn() {
-    console.log("a");
     this.userFacade.signin(null);
   }
 
   tempSignOut() {
-    console.log("b");
     this.userFacade.signout();
   }
 
-  changePage(page) {
+  changePage(page: number) {
     console.log(page);
+  }
+
+  showModal() {
+    this.modalService.openModal(this.modalContent);
   }
 }

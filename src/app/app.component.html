@@ -1,5 +1,5 @@
 <div class="wrapper" *ngIf="allData$ | async as allData">
-  <app-sidebar></app-sidebar>
+  <app-sidebar *ngIf="allData.token"></app-sidebar>
   <div class="content">
     <app-breadcrumb text="testing dashboard"></app-breadcrumb>
     <router-outlet> </router-outlet>
@@ -9,8 +9,26 @@
       class="primary"
       (click)="showNotification()"
     ></app-button>
-    <app-button text="Sign in" (click)="tempSignIn()"></app-button>
-    <app-button text="Sign out" (click)="tempSignOut()"></app-button>
+
+    <app-button
+      text="Show modal"
+      class="primary"
+      (click)="showModal()"
+    ></app-button>
+
+    <br />
+    <br />
+
+    <app-button
+      *ngIf="!allData.token"
+      text="Sign in"
+      (click)="tempSignIn()"
+    ></app-button>
+    <app-button
+      *ngIf="allData.token"
+      text="Sign out"
+      (click)="tempSignOut()"
+    ></app-button>
 
     <br />
     <br />
@@ -78,3 +96,14 @@
     </form>
   </div>
 </div>
+
+<ng-template #modalContent>
+  <h3>Modal test</h3>
+  <app-input label="Email" placeholder="enter your e-mail..."></app-input>
+  <app-input
+    label="Password"
+    type="password"
+    placeholder="enter your password..."
+  ></app-input>
+  <app-checkbox label="Checkbox" [items]="doctors"></app-checkbox>
+</ng-template>

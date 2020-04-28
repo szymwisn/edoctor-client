@@ -8,6 +8,8 @@ import { AppRoutingModule } from "./app-routing.module";
 import { SharedModule } from "./_shared/shared.module";
 import { PagesModule } from "./pages/pages.module";
 import { AppComponent } from "./app.component";
+import { ModalComponent } from "./_shared/components/modal/modal.component";
+import { NotificationComponent } from "./_shared/components/notification/notification.component";
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,5 +24,6 @@ import { AppComponent } from "./app.component";
   ],
   providers: [],
   bootstrap: [AppComponent],
+  entryComponents: [NotificationComponent, ModalComponent],
 })
 export class AppModule {}
