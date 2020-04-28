@@ -1,6 +1,7 @@
 <div class="wrapper" *ngIf="allData$ | async as allData">
   <app-sidebar></app-sidebar>
   <div class="content">
+    <app-breadcrumb text="testing dashboard"></app-breadcrumb>
     <router-outlet> </router-outlet>
 
     <app-button
@@ -10,11 +11,15 @@
     ></app-button>
     <app-button text="Sign in" (click)="tempSignIn()"></app-button>
     <app-button text="Sign out" (click)="tempSignOut()"></app-button>
+
+    <br />
+    <br />
     <app-pagination
       [currentPage]="1"
       [totalPages]="5"
       (currentPageChange)="changePage($event)"
     ></app-pagination>
+    <br />
 
     <form [formGroup]="testForm" (ngSubmit)="onSubmit()">
       <app-input
@@ -63,7 +68,11 @@
         [disabled]="true"
         text="Disabled"
       ></app-button>
+      <br />
+      <br />
       <app-search></app-search>
+      <br />
+      <br />
       <app-button icon="back" text="go back"></app-button>
       <app-button icon="filter" text="filters"></app-button>
     </form>
