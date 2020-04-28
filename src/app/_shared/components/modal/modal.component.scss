@@ -1,0 +1,41 @@
+@import "src/assets/styles/styles";
+
+.modal-wrapper {
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal {
+  width: 50%;
+  height: 50%;
+  background-color: $alabaster;
+  display: block;
+  padding: 30px;
+  border-radius: 4px;
+  position: relative;
+  overflow-y: auto;
+  @include default-shadow();
+
+  @include screen(mobile) {
+    width: 70%;
+  }
+
+  @include screen(tablet) {
+    width: 60%;
+  }
+}
+
+.icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
