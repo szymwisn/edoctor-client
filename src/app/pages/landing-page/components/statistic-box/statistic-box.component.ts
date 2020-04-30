@@ -1,15 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from "@angular/core";
 
 @Component({
-  selector: 'app-statistic-box',
-  templateUrl: './statistic-box.component.html',
-  styleUrls: ['./statistic-box.component.scss']
+  selector: "app-statistic-box",
+  templateUrl: "./statistic-box.component.html",
+  styleUrls: ["./statistic-box.component.scss"],
 })
-export class StatisticBoxComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class StatisticBoxComponent {
+  @Input() value: string;
+  @Input() description: string;
 }

@@ -20,3 +20,13 @@
     }
   }
 }
+
+@mixin hideMobileAndTablet() {
+  @include screen(tablet) {
+    display: none;
+  }
+
+  @include screen(mobile) {
+    display: none;
+  }
+}
