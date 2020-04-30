@@ -1,0 +1,22 @@
+@import "src/assets/styles/styles";
+
+.statistic-box-wrapper {
+  width: 150px;
+  height: 171px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  border-top: 3px solid $bittersweet;
+  @include default-shadow();
+
+  .value {
+    @include rubik-medium();
+    font-size: 4.8rem;
+  }
+
+  .description {
+    @include rubik-regular();
+    font-size: 1.8rem;
+  }
+}

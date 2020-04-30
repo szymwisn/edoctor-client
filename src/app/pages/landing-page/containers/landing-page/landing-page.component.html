@@ -1,1 +1,38 @@
-<p>landing-page works!</p>
+<div class="landing-page-wrapper">
+  <div class="top-bar">
+    <app-logo></app-logo>
+    <div class="bar-buttons">
+      <app-button
+        [routerLink]="['/signin']"
+        class="primary"
+        text="Sign in"
+      ></app-button>
+      <app-button [routerLink]="['/register']" text="Register"></app-button>
+    </div>
+  </div>
+  <div class="heading">
+    <h1>Heart diseases online assistant.</h1>
+  </div>
+
+  <div class="dont-wait-section">
+    <p>Don't wait until it's too late.</p>
+    <div class="diagnose-btn" [routerLink]="['/signin']">
+      <p>Diagnose yourself</p>
+      <app-icon name="arrow-right" [width]="24" [height]="24"></app-icon>
+    </div>
+  </div>
+
+  <div class="statistic-boxes">
+    <app-statistic-box value="95%" description="Efficiency"></app-statistic-box>
+    <app-statistic-box
+      value="433"
+      description="Diagnosed Patients"
+    ></app-statistic-box>
+    <app-statistic-box
+      value="5"
+      description="Ilnesses in database"
+    ></app-statistic-box>
+  </div>
+
+  <div class="doctor-img"></div>
+</div>
