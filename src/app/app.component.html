@@ -1,9 +1,9 @@
 <div class="wrapper" *ngIf="allData$ | async as allData">
   <app-sidebar *ngIf="allData.token"></app-sidebar>
-  <div class="content">
-    <app-breadcrumb text="testing dashboard"></app-breadcrumb>
+  <div [class.paddingLeft]="allData.token">
     <router-outlet> </router-outlet>
 
+    <!-- <app-breadcrumb text="testing dashboard"></app-breadcrumb>
     <app-button
       text="Show notification"
       class="primary"
@@ -93,11 +93,11 @@
       <br />
       <app-button icon="back" text="go back"></app-button>
       <app-button icon="filter" text="filters"></app-button>
-    </form>
+    </form> -->
   </div>
 </div>
 
-<ng-template #modalContent>
+<!-- <ng-template #modalContent>
   <h3>Modal test</h3>
   <app-input label="Email" placeholder="enter your e-mail..."></app-input>
   <app-input
@@ -106,4 +106,4 @@
     placeholder="enter your password..."
   ></app-input>
   <app-checkbox label="Checkbox" [items]="doctors"></app-checkbox>
-</ng-template>
+</ng-template> -->

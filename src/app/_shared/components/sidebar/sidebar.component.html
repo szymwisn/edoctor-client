@@ -18,10 +18,17 @@
         tip="Doctors nearby"
       ></app-menu-icon>
     </div>
-    <app-menu-icon
-      [link]="['/profile']"
-      icon="profile"
-      tip="Profile"
-    ></app-menu-icon>
+    <div class="icons-bottom">
+      <app-menu-icon
+        [link]="['/profile']"
+        icon="profile"
+        tip="Profile"
+      ></app-menu-icon>
+      <app-menu-icon
+        icon="logout"
+        tip="Logout"
+        (click)="logout()"
+      ></app-menu-icon>
+    </div>
   </div>
 </div>
