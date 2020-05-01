@@ -31,6 +31,7 @@ export class InputComponent implements ControlValueAccessor {
   @Input() type: string = "text";
   @Input() invalidMessage: string = "Please provide a valid value";
   @Input() invalid: boolean = false;
+  @Input() darkLabel: boolean = false;
 
   onClear() {
     this.value = "";

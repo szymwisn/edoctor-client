@@ -1,0 +1,88 @@
+@import "src/assets/styles/styles";
+
+.signin-wrapper {
+  width: 100%;
+  height: 100vh;
+  background-color: $dodger-blue;
+  padding: 30px;
+  color: $alabaster;
+  position: relative;
+  overflow: hidden;
+}
+
+.top-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .bar-buttons {
+    app-button {
+      margin-left: 15px;
+    }
+  }
+}
+
+.signin-box-wrapper {
+  width: 100%;
+  margin-top: 20vh;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+
+  @include screen(mobile) {
+    margin-top: 5vh;
+  }
+}
+
+.signin-box {
+  max-width: 500px;
+  height: 260px;
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row wrap;
+  align-items: center;
+  background-color: $alabaster;
+  border-radius: 15px;
+  overflow: hidden;
+  @include default-shadow();
+
+  @include screen(mobile) {
+    width: 100%;
+  }
+}
+
+.left {
+  width: 60%;
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 30px;
+
+  @include screen(mobile) {
+    width: 100%;
+  }
+
+  form {
+    width: 100%;
+  }
+}
+
+.right {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  background-color: red;
+  padding: 30px;
+  text-align: center;
+
+  @include gradient(#ff756c, #ffaa6c);
+  @include screen(mobile) {
+    display: none;
+  }
+}
