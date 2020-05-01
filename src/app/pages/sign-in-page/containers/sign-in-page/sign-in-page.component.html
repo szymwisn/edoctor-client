@@ -1,1 +1,50 @@
-<p>sign-in-page works!</p>
+<div class="signin-wrapper">
+  <div class="top-bar">
+    <app-logo></app-logo>
+    <div class="bar-buttons">
+      <app-button
+        [routerLink]="['/signin']"
+        class="primary"
+        text="Sign in"
+      ></app-button>
+      <app-button [routerLink]="['/register']" text="Register"></app-button>
+    </div>
+  </div>
+  <div class="signin-box-wrapper">
+    <div class="heading">
+      <h2>Sign in</h2>
+    </div>
+    <div class="signin-box">
+      <div class="left">
+        <form [formGroup]="form" (ngSubmit)="signin()">
+          <app-input
+            formControlName="email"
+            label="Email"
+            placeholder="enter your e-mail..."
+            [invalid]="formSubmitted && !form.get('email').valid"
+            [darkLabel]="true"
+          ></app-input>
+
+          <app-input
+            formControlName="password"
+            label="Password"
+            type="password"
+            placeholder="enter your password..."
+            invalidMessage="Please provide a valid password"
+            [darkLabel]="true"
+            [invalid]="formSubmitted && !form.get('password').valid"
+          ></app-input>
+          <app-button text="Sign in" class="primary" type="submit"></app-button>
+        </form>
+      </div>
+      <div class="right">
+        <p>No account yet?</p>
+        <app-button
+          [routerLink]="['/register']"
+          text="Register"
+          class="secondary"
+        ></app-button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -18,6 +18,7 @@ import { CheckboxItemComponent } from "./components/form/checkbox/checkbox-item/
 import { RouterModule } from "@angular/router";
 import { MenuIconComponent } from "./components/sidebar/menu-icon/menu-icon.component";
 import { PaginationButtonComponent } from "./components/pagination/pagination-button/pagination-button.component";
+import { ReactiveFormsModule } from "@angular/forms";
 
 const items = [
   InputComponent,
@@ -41,7 +42,7 @@ const items = [
 
 @NgModule({
   declarations: [...items],
-  imports: [CommonModule, RouterModule],
-  exports: [...items],
+  imports: [CommonModule, RouterModule, ReactiveFormsModule],
+  exports: [...items, RouterModule, ReactiveFormsModule],
 })
 export class SharedModule {}

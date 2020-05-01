@@ -10,12 +10,13 @@
   margin-bottom: 3px;
 }
 
-.active {
+.active,
+.dark.active {
   color: $dodger-blue;
 }
 
 input {
-  width: calc(100% - 12px);
+  width: 100%;
   padding: 6px;
   background-color: $mercury;
   border: none;
@@ -33,4 +34,8 @@ input {
   color: $bittersweet;
   font-size: 1.2rem;
   margin-top: 3px;
+}
+
+.dark {
+  color: $mine-shaft;
 }
