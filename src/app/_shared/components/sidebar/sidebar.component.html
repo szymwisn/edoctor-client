@@ -1,34 +1,51 @@
-<div class="sidebar-wrapper">
+<app-icon
+  class="open"
+  [class.hide]="mobileOpened"
+  name="menu"
+  [width]="24"
+  [height]="24"
+  (click)="open()"
+></app-icon>
+
+<div class="sidebar-wrapper" [class.mobileOpened]="mobileOpened">
   <app-logo [iconOnly]="true"></app-logo>
   <div class="icons">
     <div class="icons-upper">
-      <app-menu-icon
-        [link]="['/examination']"
-        icon="examination"
-        tip="Examination"
-      ></app-menu-icon>
-      <app-menu-icon
-        [link]="['/history']"
-        icon="history"
-        tip="History"
-      ></app-menu-icon>
-      <app-menu-icon
-        [link]="['/doctors']"
-        icon="map"
-        tip="Doctors nearby"
-      ></app-menu-icon>
+      <div class="entry" [routerLink]="['/examination']" (click)="close()">
+        <app-menu-icon icon="examination" tip="Examination"></app-menu-icon>
+        <p>Healthcheck</p>
+      </div>
+      <div class="entry" [routerLink]="['/history']" (click)="close()">
+        <app-menu-icon icon="history" tip="History"></app-menu-icon>
+        <p>History</p>
+      </div>
+      <div class="entry" [routerLink]="['/doctors']" (click)="close()">
+        <app-menu-icon icon="map" tip="Doctors nearby"></app-menu-icon>
+        <p>Doctors nearby</p>
+      </div>
     </div>
     <div class="icons-bottom">
-      <app-menu-icon
-        [link]="['/profile']"
-        icon="profile"
-        tip="Profile"
-      ></app-menu-icon>
-      <app-menu-icon
-        icon="logout"
-        tip="Logout"
-        (click)="logout()"
-      ></app-menu-icon>
+      <div class="entry" [routerLink]="['/profile']" (click)="close()">
+        <app-menu-icon icon="profile" tip="Profile"></app-menu-icon>
+        <p>Profile</p>
+      </div>
+      <div class="entry" (click)="logout(); close()">
+        <app-menu-icon
+          icon="logout"
+          tip="Logout"
+          (click)="logout()"
+        ></app-menu-icon>
+        <p>Logout</p>
+      </div>
     </div>
   </div>
+
+  <app-icon
+    class="close"
+    [class.hide]="!mobileOpened"
+    name="close-light"
+    [width]="24"
+    [height]="24"
+    (click)="close()"
+  ></app-icon>
 </div>

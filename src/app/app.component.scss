@@ -1,3 +1,9 @@
+@import "src/assets/styles/styles";
+
 .content {
   padding: 30px 30px 30px 100px;
+
+  @include screen(mobile) {
+    padding: 30px;
+  }
 }

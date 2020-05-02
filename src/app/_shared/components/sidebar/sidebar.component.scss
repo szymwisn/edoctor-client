@@ -12,6 +12,34 @@
   flex-direction: column;
   background-color: $dodger-blue;
   z-index: 9999;
+
+  @include screen(mobile) {
+    left: -70px;
+  }
+}
+
+.mobileOpened.sidebar-wrapper {
+  width: 100%;
+  left: 0px;
+}
+
+.entry {
+  display: flex;
+  color: $alabaster;
+  cursor: pointer;
+
+  p {
+    margin-left: 10px;
+    line-height: 1.4rem;
+
+    @include screen(desktop) {
+      display: none;
+    }
+
+    @include screen(tablet) {
+      display: none;
+    }
+  }
 }
 
 .icons {
@@ -25,4 +53,35 @@
 .icons-upper {
   display: flex;
   flex-direction: column;
+}
+
+.close {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  cursor: pointer;
+}
+
+.hide {
+  display: none;
+}
+
+.open {
+  background-color: $dodger-blue;
+  padding: 10px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+
+  @include screen(desktop) {
+    display: none;
+  }
+
+  @include screen(tablet) {
+    display: none;
+  }
 }
