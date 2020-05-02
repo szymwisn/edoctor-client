@@ -1,0 +1,9 @@
+<div class="wrapper">
+  <div class="boxes">
+    <app-box
+      *ngFor="let box of boxes"
+      [link]="box.link"
+      [title]="box.title"
+    ></app-box>
+  </div>
+</div>

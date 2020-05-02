@@ -1,0 +1,28 @@
+@import "src/assets/styles/styles";
+
+.wrapper {
+  width: 100%;
+  background-color: $rock-blue;
+  border-radius: 15px;
+  padding: 0 55px 0 15px;
+  height: 100px;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
+  color: $alabaster;
+  position: relative;
+  font-size: 1.8rem;
+  cursor: pointer;
+  @include rubik-medium();
+}
+
+app-icon {
+  margin-top: 5px;
+  position: absolute;
+  right: 15px;
+}
+
+.healthcheck {
+  @include gradient(#ff756c, #ffaa6c);
+}

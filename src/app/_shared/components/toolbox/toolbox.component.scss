@@ -1,0 +1,45 @@
+@import "src/assets/styles/styles";
+
+.wrapper {
+  width: 100%;
+  padding: 15px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+
+  @include default-shadow();
+}
+
+.boxes {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+
+  app-box {
+    width: 23%;
+  }
+
+  @include screen(mobile) {
+    app-box {
+      width: 100%;
+      margin-bottom: 15px;
+    }
+
+    app-box:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  @include screen(tablet) {
+    app-box {
+      width: 100%;
+      margin-bottom: 15px;
+    }
+
+    app-box:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+}

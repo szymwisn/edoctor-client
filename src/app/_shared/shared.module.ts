@@ -19,6 +19,8 @@ import { RouterModule } from "@angular/router";
 import { MenuIconComponent } from "./components/sidebar/menu-icon/menu-icon.component";
 import { PaginationButtonComponent } from "./components/pagination/pagination-button/pagination-button.component";
 import { ReactiveFormsModule } from "@angular/forms";
+import { ToolboxComponent } from "./components/toolbox/toolbox.component";
+import { BoxComponent } from "./components/toolbox/box/box.component";
 
 const items = [
   InputComponent,
@@ -38,6 +40,8 @@ const items = [
   CheckboxItemComponent,
   MenuIconComponent,
   PaginationButtonComponent,
+  ToolboxComponent,
+  BoxComponent,
 ];
 
 @NgModule({
