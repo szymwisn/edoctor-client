@@ -1,1 +1,23 @@
-<div class="wrapper"></div>
+<div class="wrapper">
+  <div class="heading">
+    <h3>Recent healthcheck result</h3>
+    <p class="date">performed on 21 Jun 2019</p>
+  </div>
+  <div class="result">
+    <h2>Healthy</h2>
+    <h2>98%</h2>
+  </div>
+  <div class="description">
+    <p class="description-title">
+      Everything's fine!
+    </p>
+    <p class="description-content">
+      Keep on checking your health regurarly
+    </p>
+  </div>
+  <app-button
+    (click)="showDetails()"
+    text="Details"
+    class="tertiary"
+  ></app-button>
+</div>
