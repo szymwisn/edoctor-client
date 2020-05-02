@@ -8,6 +8,7 @@
   flex-direction: column;
   justify-content: space-evenly;
   border-top: 3px solid $bittersweet;
+  background-color: $dodger-blue;
   @include default-shadow();
 
   .value {

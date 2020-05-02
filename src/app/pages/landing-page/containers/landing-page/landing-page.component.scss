@@ -4,19 +4,27 @@
   width: 100%;
   height: 100vh;
   background-color: $dodger-blue;
-  padding: 30px 30px 200px 30px;
+  padding: 30px 200px 200px 200px;
   display: flex;
   flex-flow: column nowrap;
   justify-content: space-between;
   color: $alabaster;
   position: relative;
-  overflow: hidden;
+
+  @include screen(mobile) {
+    padding: 30px 30px 200px 30px;
+  }
+
+  @include screen(tablet) {
+    padding: 30px 30px 200px 30px;
+  }
 }
 
 .top-bar {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  z-index: 2;
 
   .bar-buttons {
     app-button {
@@ -28,6 +36,7 @@
 .heading {
   margin-top: 100px;
   max-width: 400px;
+  z-index: 2;
 
   @include screen(tablet) {
     margin-top: 0;
@@ -48,12 +57,14 @@
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
+  z-index: 1;
 
   @include hideMobileAndTablet();
 }
 
 .dont-wait-section {
   font-size: 1.6rem;
+  z-index: 2;
   @include rubik-medium();
 
   p {
@@ -70,6 +81,7 @@
   border-radius: 4px;
   padding: 0 10px;
   cursor: pointer;
+  z-index: 2;
 
   @include gradient(#ff756c, #ffaa6c);
   @include default-shadow();
@@ -84,6 +96,27 @@
   display: flex;
   justify-content: space-between;
   width: 550px;
+  z-index: 2;
+
+  @include hideMobileAndTablet();
+}
+
+app-logo {
+  cursor: pointer;
+  z-index: 2;
+}
+
+.vector-img {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 500px;
+  background-image: url("/assets/images/landing-page-vector.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
 
   @include hideMobileAndTablet();
 }
