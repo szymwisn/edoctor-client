@@ -6,6 +6,7 @@
   background-color: $dodger-blue;
   padding: 30px 200px 200px 200px;
   color: $alabaster;
+  overflow: auto;
 
   @include gradient(#504dff, #9b4dff);
 
