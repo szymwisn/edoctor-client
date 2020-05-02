@@ -20,7 +20,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
   ],
 })
 export class InputComponent implements ControlValueAccessor {
-  disabled: boolean = false;
   value: string = "";
   currentlyActive: boolean = false;
 
@@ -32,6 +31,7 @@ export class InputComponent implements ControlValueAccessor {
   @Input() invalidMessage: string = "Please provide a valid value";
   @Input() invalid: boolean = false;
   @Input() darkLabel: boolean = false;
+  @Input() disabled: boolean = false;
 
   onClear() {
     this.value = "";

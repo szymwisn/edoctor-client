@@ -1,0 +1,7 @@
+@import "src/assets/styles/styles";
+
+.wrapper {
+  padding: 15px;
+  @include default-shadow();
+  border-radius: 15px;
+}

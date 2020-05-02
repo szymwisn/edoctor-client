@@ -1,1 +1,88 @@
-<p>personal-info works!</p>
+<div class="wrapper">
+  <h3>Personal Info</h3>
+  <form [formGroup]="form" (ngSubmit)="save()">
+    <app-input
+      formControlName="email"
+      label="Email"
+      placeholder="eg. edoktor@mail.com"
+      [invalid]="formSubmitted && !form.get('email').valid"
+      [darkLabel]="true"
+      [disabled]="!editMode"
+    ></app-input>
+
+    <app-input
+      formControlName="age"
+      label="Age [years]"
+      type="number"
+      placeholder="eg. 33"
+      invalidMessage="Please provide age in years, eg. 33"
+      [darkLabel]="true"
+      [invalid]="formSubmitted && !form.get('age').valid"
+      [disabled]="!editMode"
+    ></app-input>
+
+    <app-input
+      formControlName="height"
+      label="Height [cm]"
+      type="number"
+      placeholder="eg. 178"
+      invalidMessage="Please provide height in centimeters, eg. 178"
+      [darkLabel]="true"
+      [invalid]="formSubmitted && !form.get('height').valid"
+      [disabled]="!editMode"
+    ></app-input>
+
+    <app-input
+      formControlName="mass"
+      label="Mass [kg]"
+      type="number"
+      placeholder="eg. 85"
+      invalidMessage="Please provide mass in kilograms, eg. 85"
+      [darkLabel]="true"
+      [invalid]="formSubmitted && !form.get('mass').valid"
+      [disabled]="!editMode"
+    ></app-input>
+
+    <app-select
+      formControlName="bloodType"
+      label="Blood Type"
+      placeholder="Select your blood type"
+      [options]="bloodTypes"
+      [invalid]="formSubmitted && !form.get('bloodType').valid"
+      [darkLabel]="true"
+      [disabled]="!editMode"
+    ></app-select>
+
+    <app-select
+      formControlName="sex"
+      label="Sex"
+      placeholder="Select your sex"
+      [options]="sexes"
+      [invalid]="formSubmitted && !form.get('sex').valid"
+      [darkLabel]="true"
+      [disabled]="!editMode"
+    ></app-select>
+
+    <div class="buttons">
+      <app-button
+        *ngIf="!editMode"
+        text="Update"
+        class="tertiary"
+        (click)="toggleEditMode()"
+      ></app-button>
+      <app-button
+        *ngIf="editMode"
+        (click)="cancel()"
+        text="cancel"
+        class="tertiary"
+      ></app-button>
+      <app-button
+        *ngIf="editMode"
+        (click)="save()"
+        text="Save"
+        class="primary"
+        type="submit"
+      ></app-button>
+    </div>
+  </form>
+</div>

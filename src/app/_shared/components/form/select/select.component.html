@@ -3,11 +3,17 @@
     {{ label }}
   </div>
 
-  <div class="bar" (click)="toggleDropdown()">
+  <div class="bar" (click)="toggleDropdown()" [class.disabled]="disabled">
     <div class="selectedOption">
       {{ value || placeholder }}
     </div>
-    <app-icon class="icon" [name]="icon" width="24" height="24"></app-icon>
+    <app-icon
+      [class.disabled]="disabled"
+      class="icon"
+      [name]="icon"
+      width="24"
+      height="24"
+    ></app-icon>
   </div>
   <div *ngIf="dropdownOpen" class="dropdown">
     <div

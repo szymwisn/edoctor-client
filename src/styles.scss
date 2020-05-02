@@ -19,6 +19,7 @@ body {
   font-size: 1.5rem;
   line-height: 1.5;
   color: $mine-shaft;
+  background-color: $alabaster;
 
   @include roboto-regular();
 }
@@ -38,6 +39,10 @@ h1 {
 
 h2 {
   font-size: 3.4rem;
+}
+
+h3 {
+  font-size: 1.8rem;
 }
 
 input,
