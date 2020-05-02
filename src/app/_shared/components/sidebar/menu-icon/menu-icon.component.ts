@@ -7,6 +7,5 @@ import { Component, OnInit, Input } from "@angular/core";
 })
 export class MenuIconComponent {
   @Input() icon: string;
-  @Input() link: string;
   @Input() tip: string;
 }
