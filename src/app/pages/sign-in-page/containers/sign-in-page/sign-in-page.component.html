@@ -20,7 +20,6 @@
           <app-input
             formControlName="email"
             label="Email"
-            placeholder="enter your e-mail..."
             [invalid]="formSubmitted && !form.get('email').valid"
             [darkLabel]="true"
           ></app-input>
@@ -29,7 +28,6 @@
             formControlName="password"
             label="Password"
             type="password"
-            placeholder="enter your password..."
             invalidMessage="Please provide a valid password"
             [darkLabel]="true"
             [invalid]="formSubmitted && !form.get('password').valid"

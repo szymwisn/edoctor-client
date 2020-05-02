@@ -19,7 +19,7 @@
         <app-input
           formControlName="email"
           label="Email"
-          placeholder="enter your e-mail..."
+          placeholder="eg. edoktor@mail.com"
           [invalid]="formSubmitted && !form.get('email').valid"
           [darkLabel]="true"
         ></app-input>
@@ -28,7 +28,7 @@
           formControlName="password"
           label="Password"
           type="password"
-          placeholder="enter your password..."
+          placeholder="eg. littlekitten53"
           invalidMessage="Please provide a valid password"
           [darkLabel]="true"
           [invalid]="formSubmitted && !form.get('password').valid"
@@ -67,7 +67,7 @@
         <app-select
           formControlName="bloodType"
           label="Blood Type"
-          placeholder="Select your blood type..."
+          placeholder="Select your blood type"
           [options]="bloodTypes"
           [invalid]="formSubmitted && !form.get('bloodType').valid"
           [darkLabel]="true"
@@ -76,7 +76,7 @@
         <app-select
           formControlName="sex"
           label="Sex"
-          placeholder="Select your sex..."
+          placeholder="Select your sex"
           [options]="sexes"
           [invalid]="formSubmitted && !form.get('sex').valid"
           [darkLabel]="true"
