@@ -3,6 +3,7 @@
 .select-wrapper {
   margin-bottom: 15px;
   position: relative;
+  color: $mine-shaft;
 }
 
 .label {
@@ -10,7 +11,8 @@
   margin-bottom: 3px;
 }
 
-.active {
+.active,
+.dark.active {
   color: $dodger-blue;
 }
 
@@ -62,4 +64,8 @@
 
 .selected {
   color: $dodger-blue;
+}
+
+.dark {
+  color: $mine-shaft;
 }

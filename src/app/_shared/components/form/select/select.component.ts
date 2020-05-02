@@ -30,6 +30,7 @@ export class SelectComponent implements ControlValueAccessor {
   @Input() options: string[] = [];
   @Input() invalidMessage: string = "Please provide a valid value";
   @Input() invalid: boolean = false;
+  @Input() darkLabel: boolean = false;
 
   constructor(private elRef: ElementRef) {}
 
