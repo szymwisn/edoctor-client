@@ -10,6 +10,7 @@
   border-top: 3px solid $bittersweet;
   background-color: $dodger-blue;
   @include default-shadow();
+  @include gradient(#504dff, #9b4dff);
 
   .value {
     @include rubik-medium();
