@@ -1,1 +1,89 @@
-<p>register-page works!</p>
+<div class="register-wrapper">
+  <div class="top-bar">
+    <app-logo [routerLink]="['/welcome']"></app-logo>
+    <div class="bar-buttons">
+      <app-button
+        [routerLink]="['/signin']"
+        class="primary"
+        text="Sign in"
+      ></app-button>
+      <app-button [routerLink]="['/register']" text="Register"></app-button>
+    </div>
+  </div>
+  <div class="register-box-wrapper">
+    <div class="heading">
+      <h2>Register</h2>
+    </div>
+    <div class="register-box">
+      <form [formGroup]="form" (ngSubmit)="register()">
+        <app-input
+          formControlName="email"
+          label="Email"
+          placeholder="enter your e-mail..."
+          [invalid]="formSubmitted && !form.get('email').valid"
+          [darkLabel]="true"
+        ></app-input>
+
+        <app-input
+          formControlName="password"
+          label="Password"
+          type="password"
+          placeholder="enter your password..."
+          invalidMessage="Please provide a valid password"
+          [darkLabel]="true"
+          [invalid]="formSubmitted && !form.get('password').valid"
+        ></app-input>
+
+        <app-input
+          formControlName="age"
+          label="Age [years]"
+          type="number"
+          placeholder="eg. 33"
+          invalidMessage="Please provide age in years, eg. 33"
+          [darkLabel]="true"
+          [invalid]="formSubmitted && !form.get('age').valid"
+        ></app-input>
+
+        <app-input
+          formControlName="height"
+          label="Height [cm]"
+          type="number"
+          placeholder="eg. 178"
+          invalidMessage="Please provide height in centimeters, eg. 178"
+          [darkLabel]="true"
+          [invalid]="formSubmitted && !form.get('height').valid"
+        ></app-input>
+
+        <app-input
+          formControlName="mass"
+          label="Mass [kg]"
+          type="number"
+          placeholder="eg. 85"
+          invalidMessage="Please provide mass in kilograms, eg. 85"
+          [darkLabel]="true"
+          [invalid]="formSubmitted && !form.get('mass').valid"
+        ></app-input>
+
+        <app-select
+          formControlName="bloodType"
+          label="Blood Type"
+          placeholder="Select your blood type..."
+          [options]="bloodTypes"
+          [invalid]="formSubmitted && !form.get('bloodType').valid"
+          [darkLabel]="true"
+        ></app-select>
+
+        <app-select
+          formControlName="sex"
+          label="Sex"
+          placeholder="Select your sex..."
+          [options]="sexes"
+          [invalid]="formSubmitted && !form.get('sex').valid"
+          [darkLabel]="true"
+        ></app-select>
+
+        <app-button text="Register" class="primary" type="submit"></app-button>
+      </form>
+    </div>
+  </div>
+</div>
