@@ -1,0 +1,23 @@
+@import "src/assets/styles/styles";
+
+.wrapper {
+  width: 100%;
+  height: 240px;
+  background-color: $rock-blue;
+  padding: 15px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+}
+
+h2 {
+  color: $alabaster;
+}
+
+img {
+  position: absolute;
+  right: 30px;
+  bottom: -30px;
+}

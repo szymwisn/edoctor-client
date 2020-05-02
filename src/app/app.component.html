@@ -1,6 +1,6 @@
 <div class="wrapper" *ngIf="allData$ | async as allData">
   <app-sidebar *ngIf="allData.token"></app-sidebar>
-  <div [class.paddingLeft]="allData.token">
+  <div [class.content]="allData.token">
     <router-outlet> </router-outlet>
 
     <!-- <app-breadcrumb text="testing dashboard"></app-breadcrumb>
