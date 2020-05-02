@@ -4,10 +4,18 @@
   width: 100%;
   height: 100vh;
   background-color: $dodger-blue;
-  padding: 30px;
+  padding: 30px 200px 200px 200px;
   color: $alabaster;
-  position: relative;
-  overflow: hidden;
+
+  @include gradient(#504dff, #9b4dff);
+
+  @include screen(mobile) {
+    padding: 30px;
+  }
+
+  @include screen(tablet) {
+    padding: 30px;
+  }
 }
 
 .top-bar {
@@ -23,20 +31,22 @@
 }
 
 .signin-box-wrapper {
-  width: 100%;
-  margin-top: 20vh;
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
+  width: 30%;
+  margin: 0 auto;
+  padding-top: 100px;
 
   @include screen(mobile) {
-    margin-top: 5vh;
+    width: 100%;
+    padding-top: 0;
+  }
+
+  @include screen(tablet) {
+    width: 70%;
   }
 }
 
 .signin-box {
-  max-width: 500px;
+  width: 100%;
   height: 260px;
   display: flex;
   justify-content: space-between;
@@ -46,10 +56,6 @@
   border-radius: 15px;
   overflow: hidden;
   @include default-shadow();
-
-  @include screen(mobile) {
-    width: 100%;
-  }
 }
 
 .left {
@@ -85,4 +91,8 @@
   @include screen(mobile) {
     display: none;
   }
+}
+
+app-logo {
+  cursor: pointer;
 }
