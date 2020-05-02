@@ -22,6 +22,11 @@ app-personal-info {
 app-recent-healthcheck {
   width: 49%;
 
+  @include screen(mobile) {
+    margin-top: 30px;
+    width: 100%;
+  }
+
   @include screen(tablet) {
     margin-top: 30px;
     width: 100%;
