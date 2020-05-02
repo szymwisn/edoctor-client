@@ -1,15 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-recent-healthcheck',
-  templateUrl: './recent-healthcheck.component.html',
-  styleUrls: ['./recent-healthcheck.component.scss']
+  selector: "app-recent-healthcheck",
+  templateUrl: "./recent-healthcheck.component.html",
+  styleUrls: ["./recent-healthcheck.component.scss"],
 })
-export class RecentHealthcheckComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class RecentHealthcheckComponent {
+  showDetails() {}
 }

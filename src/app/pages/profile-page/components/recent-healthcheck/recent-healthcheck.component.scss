@@ -1,0 +1,52 @@
+@import "src/assets/styles/styles";
+
+.wrapper {
+  padding: 15px;
+  @include default-shadow();
+  border-radius: 15px;
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+}
+
+h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.date {
+  margin-top: 0;
+  color: $rock-blue;
+}
+
+app-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+.result {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  width: 80%;
+}
+
+.description {
+  text-align: center;
+
+  .description-title {
+    color: $dodger-blue;
+    @include rubik-medium();
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .description-content {
+    color: $rock-blue;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}

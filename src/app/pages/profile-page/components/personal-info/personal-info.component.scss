@@ -1,0 +1,37 @@
+@import "src/assets/styles/styles";
+
+.wrapper {
+  padding: 15px 15px 15px 0px;
+  @include default-shadow();
+  border-radius: 15px;
+  position: relative;
+  height: 100%;
+}
+
+h3 {
+  margin-top: 0;
+  margin-left: 15px;
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+form > app-input,
+form > app-select {
+  flex: 1 1 50%;
+  padding-left: 15px;
+
+  @include screen(mobile) {
+    flex-basis: 100%;
+  }
+}
+
+.buttons {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}

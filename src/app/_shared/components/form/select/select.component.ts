@@ -20,7 +20,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
   ],
 })
 export class SelectComponent implements ControlValueAccessor {
-  disabled: boolean = false;
   value: string = "";
   dropdownOpen: boolean = false;
   icon: string = "drop-down";
@@ -31,6 +30,7 @@ export class SelectComponent implements ControlValueAccessor {
   @Input() invalidMessage: string = "Please provide a valid value";
   @Input() invalid: boolean = false;
   @Input() darkLabel: boolean = false;
+  @Input() disabled: boolean = false;
 
   constructor(private elRef: ElementRef) {}
 
@@ -42,18 +42,22 @@ export class SelectComponent implements ControlValueAccessor {
   }
 
   selectOption(option: string) {
-    this.value = option;
-    this.onChange(this.value);
-    this.toggleDropdown();
+    if (!this.disabled) {
+      this.value = option;
+      this.onChange(this.value);
+      this.toggleDropdown();
+    }
   }
 
   toggleDropdown() {
-    this.dropdownOpen = !this.dropdownOpen;
+    if (!this.disabled) {
+      this.dropdownOpen = !this.dropdownOpen;
 
-    if (this.dropdownOpen) {
-      this.icon = "drop-up";
-    } else {
-      this.icon = "drop-down";
+      if (this.dropdownOpen) {
+        this.icon = "drop-up";
+      } else {
+        this.icon = "drop-down";
+      }
     }
   }
 

@@ -1,4 +1,4 @@
 export class Toolbox {
-  link: string;
   title: string;
+  link: string[];
 }

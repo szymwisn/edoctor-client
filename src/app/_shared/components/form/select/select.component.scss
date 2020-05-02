@@ -25,10 +25,18 @@
   cursor: pointer;
 }
 
+.bar.disabled {
+  cursor: default;
+}
+
 .icon {
   position: absolute;
   right: 3px;
   top: 5px;
+}
+
+.icon.disabled {
+  display: none;
 }
 
 .invalid-message {
