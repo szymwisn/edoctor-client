@@ -10,19 +10,19 @@ export class ToolboxComponent {
   boxes: Toolbox[] = [
     {
       title: "Healthcheck",
-      link: "healthcheck",
+      link: ["/examination"],
     },
     {
       title: "Change your data",
-      link: "profile",
+      link: ["/profile"],
     },
     {
       title: "Doctors nearby",
-      link: "doctors",
+      link: ["/doctors"],
     },
     {
       title: "View history",
-      link: "history",
+      link: ["/history"],
     },
   ];
 }

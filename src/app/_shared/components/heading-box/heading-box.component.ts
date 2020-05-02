@@ -12,7 +12,6 @@ export class HeadingBoxComponent implements OnInit {
   @Input() placement: string;
 
   ngOnInit() {
-    console.log(this.placement);
     switch (this.placement) {
       case "profile":
         this.imgSrc = "/assets/images/kitten.svg";
