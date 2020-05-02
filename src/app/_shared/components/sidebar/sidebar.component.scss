@@ -14,13 +14,13 @@
   z-index: 9999;
 
   @include screen(mobile) {
-    left: -70px;
+    display: none;
   }
 }
 
 .mobileOpened.sidebar-wrapper {
   width: 100%;
-  left: 0px;
+  display: flex;
 }
 
 .entry {
@@ -73,9 +73,11 @@
   display: flex;
   justify-content: center;
   align-content: center;
-  position: absolute;
+  position: fixed;
   right: 15px;
   bottom: 15px;
+  cursor: pointer;
+  z-index: 999;
 
   @include screen(desktop) {
     display: none;
