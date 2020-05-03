@@ -38,3 +38,7 @@ img {
     display: none;
   }
 }
+
+.gradient {
+  @include gradient(#504dff, #9b4dff);
+}
