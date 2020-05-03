@@ -9,7 +9,7 @@ class State {
   diagnoses: Diagnosis[] = null;
   latestDiagnosis: Diagnosis = null;
   currentPage: number = 1;
-  totalPages: number = 1;
+  totalPages: number = 5;
   filters: DiagnosisFilters = null;
 }
 

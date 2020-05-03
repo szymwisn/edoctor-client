@@ -1,1 +1,19 @@
-<p>history-page works!</p>
+<div class="wrapper" *ngIf="allData$ | async as allData">
+  <app-breadcrumb text="History"></app-breadcrumb>
+  <app-bar
+    (searchClick)="searchByPhrase($event)"
+    (filtersClick)="openFiltersModal()"
+  ></app-bar>
+  <app-table [diagnoses]="allData.diagnoses"></app-table>
+  <div class="pagination">
+    <p>
+      Page {{ allData.currentPage }} of {{ allData.totalPages }}. 32 diagnoses
+      in total.
+    </p>
+    <app-pagination
+      [totalPages]="allData.totalPages"
+      [currentPage]="allData.currentPage"
+      (currentPageChange)="changePage($event, allData.token.userId)"
+    ></app-pagination>
+  </div>
+</div>
