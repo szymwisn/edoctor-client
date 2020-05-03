@@ -1,5 +1,5 @@
-import { BloodType } from "../blood-type";
-import { Sex } from "../sex";
+import { BloodType } from "../user/blood-type";
+import { Sex } from "../user/sex";
 
 export class RegisterForm {
   email: string;

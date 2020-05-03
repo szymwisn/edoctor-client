@@ -1,13 +1,13 @@
 import { Injectable } from "@angular/core";
-import { DecodedToken } from "./models/token.model";
-import { User } from "./models/user.model";
-import { UserService } from "./services/user.service";
-import { AuthService } from "./services/auth.service";
-import { SigninForm } from "./models/form/signin-form.model";
-import { RegisterForm } from "./models/form/register-form.model";
+import { DecodedToken } from "../models/user/token.model";
+import { User } from "../models/user/user.model";
+import { UserService } from "../services/user.service";
+import { AuthService } from "../services/auth.service";
+import { SigninForm } from "../models/form/signin-form.model";
+import { RegisterForm } from "../models/form/register-form.model";
 import { BehaviorSubject, Observable } from "rxjs";
 import { Router } from "@angular/router";
-import { ChangeSettingsForm } from "./models/form/change-settings-form.model";
+import { ChangeSettingsForm } from "../models/form/change-settings-form.model";
 import { map } from "rxjs/operators";
 
 class State {

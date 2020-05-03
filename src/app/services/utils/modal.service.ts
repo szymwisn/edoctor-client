@@ -8,7 +8,7 @@ import {
   Inject,
   ApplicationRef,
 } from "@angular/core";
-import { ModalComponent } from "../components/modal/modal.component";
+import { ModalComponent } from "../../components/modal/modal.component";
 import { DOCUMENT } from "@angular/common";
 
 export type Content<T> = string | TemplateRef<T> | Type<T>;

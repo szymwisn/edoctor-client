@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { UserFacade } from "src/app/_shared/security/user.facade";
+import { UserFacade } from "src/app/facades/user.facade";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 @Component({

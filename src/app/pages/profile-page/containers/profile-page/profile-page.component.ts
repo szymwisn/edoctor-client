@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { UserFacade } from "src/app/_shared/security/user.facade";
+import { UserFacade } from "src/app/facades/user.facade";
 import { Observable, combineLatest } from "rxjs";
-import { User } from "src/app/_shared/security/models/user.model";
+import { User } from "src/app/models/user/user.model";
 import { map } from "rxjs/operators";
 
 @Component({

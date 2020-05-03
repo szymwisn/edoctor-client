@@ -4,14 +4,14 @@ import {
   TemplateRef,
   ViewChild,
 } from "@angular/core";
-import { UserFacade } from "./_shared/security/user.facade";
+import { UserFacade } from "./facades/user.facade";
 import { Observable, combineLatest } from "rxjs";
-import { DecodedToken } from "./_shared/security/models/token.model";
-import { User } from "./_shared/security/models/user.model";
+import { DecodedToken } from "./models/user/token.model";
+import { User } from "./models/user/user.model";
 import { map } from "rxjs/operators";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { NotificationService } from "./_shared/services/notification.service";
-import { ModalService } from "./_shared/services/modal.service";
+import { NotificationService } from "./services/utils/notification.service";
+import { ModalService } from "./services/utils/modal.service";
 
 @Component({
   selector: "app-root",
@@ -47,10 +47,8 @@ export class AppComponent {
 
   constructor(
     // private fb: FormBuilder,
-    private userFacade: UserFacade // private notificationService: NotificationService,
-  ) // private modalService: ModalService,
-  // private viewContainerRef: ViewContainerRef
-  {
+    private userFacade: UserFacade // private notificationService: NotificationService, // private modalService: ModalService, // private viewContainerRef: ViewContainerRef
+  ) {
     // this.notificationService.setViewContainerRef(this.viewContainerRef);
     // this.modalService.setViewContainerRef(this.viewContainerRef);
 

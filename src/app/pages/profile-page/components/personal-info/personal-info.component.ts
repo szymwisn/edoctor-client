@@ -1,10 +1,10 @@
 import { Component } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { UserFacade } from "src/app/_shared/security/user.facade";
+import { UserFacade } from "src/app/facades/user.facade";
 import { take } from "rxjs/operators";
-import { Sex } from "src/app/_shared/security/models/sex";
-import { BloodType } from "src/app/_shared/security/models/blood-type";
-import { User } from "src/app/_shared/security/models/user.model";
+import { Sex } from "src/app/models/user/sex";
+import { BloodType } from "src/app/models/user/blood-type";
+import { User } from "src/app/models/user/user.model";
 
 @Component({
   selector: "app-personal-info",

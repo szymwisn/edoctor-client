@@ -1,15 +1,15 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { SignInPageComponent } from "./pages/sign-in-page/containers/sign-in-page/sign-in-page.component";
-import { RegisterPageComponent } from "./pages/register-page/containers/register-page/register-page.component";
+import { SignInPageComponent } from "./pages/sign-in-page/sign-in-page/sign-in-page.component";
+import { RegisterPageComponent } from "./pages/register-page/register-page/register-page.component";
 import { ProfilePageComponent } from "./pages/profile-page/containers/profile-page/profile-page.component";
 import { DiagnosisPageComponent } from "./pages/diagnosis-page/containers/diagnosis-page/diagnosis-page.component";
 import { DoctorsNearbyComponent } from "./pages/diagnosis-page/components/doctors-nearby/doctors-nearby.component";
 import { HistoryPageComponent } from "./pages/history-page/containers/history-page/history-page.component";
 import { ExaminationPageComponent } from "./pages/examination-page/containers/examination-page/examination-page.component";
-import { ErrorPageComponent } from "./pages/error-page/containers/error-page/error-page.component";
+import { ErrorPageComponent } from "./pages/error-page/error-page/error-page.component";
 import { LandingPageComponent } from "./pages/landing-page/containers/landing-page/landing-page.component";
-import { AuthGuard } from "./_shared/security/guards/auth-guard.service";
+import { AuthGuard } from "./services/guards/auth-guard.service";
 
 const routes: Routes = [
   {

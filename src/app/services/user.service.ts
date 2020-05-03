@@ -1,18 +1,18 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { User } from "../models/user.model";
+import { User } from "../models/user/user.model";
 import { ChangeSettingsForm } from "../models/form/change-settings-form.model";
 import { Observable, of } from "rxjs";
-import { Sex } from "../models/sex";
-import { BloodType } from "../models/blood-type";
+import { Sex } from "../models/user/sex";
+import { BloodType } from "../models/user/blood-type";
 
 const tempUser: User = {
   email: "john@doe.com",
-  age: 21,
-  height: 178,
-  mass: 82,
+  age: 35,
+  height: 168,
+  mass: 103,
   sex: Sex.Male,
-  bloodType: BloodType.A_Plus,
+  bloodType: BloodType.AB_Plus,
 };
 
 @Injectable({ providedIn: "root" })

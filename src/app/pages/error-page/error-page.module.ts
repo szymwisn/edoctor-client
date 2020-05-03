@@ -1,10 +1,10 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { ErrorPageComponent } from "./containers/error-page/error-page.component";
-import { SharedModule } from "src/app/_shared/shared.module";
+import { ErrorPageComponent } from "./error-page/error-page.component";
+import { ComponentsModule } from "src/app/components/components.module";
 
 @NgModule({
   declarations: [ErrorPageComponent],
-  imports: [CommonModule, SharedModule],
+  imports: [CommonModule, ComponentsModule],
 })
 export class ErrorPageModule {}

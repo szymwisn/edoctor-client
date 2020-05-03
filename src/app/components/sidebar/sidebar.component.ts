@@ -1,5 +1,5 @@
 import { Component, HostListener } from "@angular/core";
-import { UserFacade } from "../../security/user.facade";
+import { UserFacade } from "../../facades/user.facade";
 
 @Component({
   selector: "app-sidebar",

@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { UserFacade } from "src/app/_shared/security/user.facade";
-import { Sex } from "src/app/_shared/security/models/sex";
-import { BloodType } from "src/app/_shared/security/models/blood-type";
+import { UserFacade } from "src/app/facades/user.facade";
+import { Sex } from "src/app/models/user/sex";
+import { BloodType } from "src/app/models/user/blood-type";
 
 @Component({
   selector: "app-register-page",

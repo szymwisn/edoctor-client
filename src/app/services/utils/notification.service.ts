@@ -3,7 +3,7 @@ import {
   ComponentFactoryResolver,
   Injectable,
 } from "@angular/core";
-import { NotificationComponent } from "../components/notification/notification.component";
+import { NotificationComponent } from "../../components/notification/notification.component";
 
 @Injectable({
   providedIn: "root",

@@ -4,7 +4,7 @@ import * as jwtDecode from "jwt-decode";
 import { SigninForm } from "../models/form/signin-form.model";
 import { RegisterForm } from "../models/form/register-form.model";
 import { Observable, of } from "rxjs";
-import { Token, DecodedToken } from "../models/token.model";
+import { Token, DecodedToken } from "../models/user/token.model";
 
 const tempToken: Token = {
   value:

@@ -1,10 +1,10 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { SignInPageComponent } from "./containers/sign-in-page/sign-in-page.component";
-import { SharedModule } from "src/app/_shared/shared.module";
+import { SignInPageComponent } from "./sign-in-page/sign-in-page.component";
+import { ComponentsModule } from "src/app/components/components.module";
 
 @NgModule({
   declarations: [SignInPageComponent],
-  imports: [CommonModule, SharedModule],
+  imports: [CommonModule, ComponentsModule],
 })
 export class SignInPageModule {}
