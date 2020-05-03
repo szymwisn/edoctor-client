@@ -9,14 +9,10 @@ import { BehaviorSubject, Observable } from "rxjs";
 import { Router } from "@angular/router";
 import { ChangeSettingsForm } from "../models/form/change-settings-form.model";
 import { map } from "rxjs/operators";
-import { DiagnosisService } from "../services/diagnosis.service";
-import { Diagnosis } from "../models/diagnosis/diagnosis.model";
-import { History } from "../models/diagnosis/history.model";
 
 class State {
   token: DecodedToken = null;
   profile: User = null;
-  history: History = null;
 }
 
 @Injectable({ providedIn: "root" })
@@ -28,15 +24,10 @@ export class UserFacade {
     map((state) => state.token)
   );
   profile$: Observable<User> = this.state$.pipe(map((state) => state.profile));
-  history$: Observable<History> = this.state$.pipe(
-    map((state) => state.history)
-  );
-  latestDiagnosis$: Observable<Diagnosis>;
 
   constructor(
     private userService: UserService,
     private authService: AuthService,
-    private diagnoseService: DiagnosisService,
     private router: Router
   ) {
     const token = this.authService.getToken();
@@ -45,9 +36,6 @@ export class UserFacade {
       const decodedToken: DecodedToken = this.authService.decodeToken(token);
       this.state$.next((this.state = { ...this.state, token: decodedToken }));
       this.getProfile();
-      this.getHistory();
-
-      this.latestDiagnosis$ = this.history$.pipe(map((history) => history[0]));
     }
   }
 
@@ -101,31 +89,6 @@ export class UserFacade {
   getProfile() {
     this.userService.fetchUser(this.state.token.userId).subscribe(
       (profile) => this.state$.next((this.state = { ...this.state, profile })),
-      (error) => {
-        //TODO: show error notification
-        console.log("Problem with server connection", error);
-      }
-    );
-  }
-
-  saveDiagnosis(diagnosis: Diagnosis) {
-    this.diagnoseService
-      .saveDiagnosis(this.state.token.userId, diagnosis)
-      .subscribe(
-        (success) => {
-          //TODO: show success notification
-          console.log("History fetched");
-        },
-        (error) => {
-          //TODO: show error notification
-          console.log("Problem with server connection", error);
-        }
-      );
-  }
-
-  getHistory() {
-    this.diagnoseService.fetchHistory(this.state.token.userId).subscribe(
-      (history) => this.state$.next((this.state = { ...this.state, history })),
       (error) => {
         //TODO: show error notification
         console.log("Problem with server connection", error);

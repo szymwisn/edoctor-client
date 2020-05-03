@@ -1,6 +1,8 @@
+import { Disease } from "./diseases";
+
 export class Diagnosis {
   date: Date;
-  name: string;
+  disease: Disease;
   probability: number;
   description: string;
   tips: string[];
