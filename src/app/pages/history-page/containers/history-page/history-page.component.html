@@ -1,1 +1,69 @@
-<p>history-page works!</p>
+<div class="wrapper" *ngIf="allData$ | async as allData">
+  <app-breadcrumb text="History"></app-breadcrumb>
+  <app-bar
+    (searchClick)="applySearchPhrase($event, allData.token.userId)"
+    (filtersClick)="openFiltersModal()"
+  ></app-bar>
+  <app-table
+    [diagnoses]="allData.diagnoses"
+    (diagnosisClick)="openDiagnosis($event)"
+  ></app-table>
+  <div class="pagination">
+    <p>Page {{ allData.currentPage }} of {{ allData.totalPages }}</p>
+    <app-pagination
+      [totalPages]="allData.totalPages"
+      [currentPage]="allData.currentPage"
+      (currentPageChange)="changePage($event, allData.token.userId)"
+    ></app-pagination>
+  </div>
+
+  <ng-template #filtersModalContent>
+    <form [formGroup]="form" (ngSubmit)="applyFilters(allData.token.userId)">
+      <app-checkbox
+        formControlName="diseases"
+        label="Diseases"
+        [items]="diseases"
+      ></app-checkbox>
+      <div class="row">
+        <div class="col">
+          <app-input
+            formControlName="minProbability"
+            label="Min. probability [%]"
+            type="number"
+          ></app-input>
+        </div>
+        <div class="col">
+          <app-input
+            formControlName="maxProbability"
+            label="Max. probability [%]"
+            type="number"
+          ></app-input>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <app-input
+            formControlName="dateFrom"
+            label="Date from"
+            type="date"
+          ></app-input>
+        </div>
+        <div class="col">
+          <app-input
+            formControlName="dateTo"
+            label="Date to"
+            type="date"
+          ></app-input>
+        </div>
+      </div>
+      <div class="modal-buttons">
+        <app-button
+          text="Reset"
+          class="secondary"
+          (click)="resetFilters(allData.token.userId)"
+        ></app-button>
+        <app-button text="Apply" type="submit" class="primary"></app-button>
+      </div>
+    </form>
+  </ng-template>
+</div>

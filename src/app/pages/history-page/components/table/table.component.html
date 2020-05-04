@@ -1,1 +1,16 @@
-<p>table works!</p>
+<div class="wrapper">
+  <div class="row heading">
+    <div class="col">Date</div>
+    <div class="col">Disease</div>
+    <div class="col">Probability</div>
+  </div>
+  <div
+    class="row"
+    *ngFor="let diagnosis of diagnoses"
+    (click)="onRowClick(diagnosis)"
+  >
+    <div class="col">{{ diagnosis.date | date }}</div>
+    <div class="col">{{ diagnosis.disease }}</div>
+    <div class="col">{{ diagnosis.probability }}%</div>
+  </div>
+</div>

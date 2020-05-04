@@ -38,7 +38,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: "diagnosis",
+    path: "diagnosis/:id",
     component: DiagnosisPageComponent,
     canActivate: [AuthGuard],
   },

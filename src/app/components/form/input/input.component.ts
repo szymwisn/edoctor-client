@@ -20,7 +20,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
   ],
 })
 export class InputComponent implements ControlValueAccessor {
-  value: string = "";
+  value: any;
   currentlyActive: boolean = false;
 
   @ViewChild("inputEl") inputEl: ElementRef;
@@ -34,7 +34,7 @@ export class InputComponent implements ControlValueAccessor {
   @Input() disabled: boolean = false;
 
   onClear() {
-    this.value = "";
+    this.value = null;
     this.onChange(this.value);
     this.inputEl.nativeElement.focus();
     setTimeout(() => {

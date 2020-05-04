@@ -1,1 +1,11 @@
-<p>bar works!</p>
+<div class="wrapper">
+  <p class="title">Healthcheck diagnosis history</p>
+  <div class="tools">
+    <app-button
+      icon="filter"
+      text="filters"
+      (click)="onFiltersClick()"
+    ></app-button>
+    <app-search (searchClick)="onSearchClick($event)"></app-search>
+  </div>
+</div>

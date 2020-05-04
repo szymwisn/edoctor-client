@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from "@angular/core";
+import { Diagnosis } from "src/app/models/diagnosis/diagnosis.model";
+import { Subject } from "rxjs";
 
 @Component({
-  selector: 'app-table',
-  templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
+  selector: "app-table",
+  templateUrl: "./table.component.html",
+  styleUrls: ["./table.component.scss"],
 })
-export class TableComponent implements OnInit {
+export class TableComponent {
+  @Input() diagnoses: Diagnosis[];
+  @Output() diagnosisClick = new Subject<Diagnosis>();
 
-  constructor() { }
-
-  ngOnInit(): void {
+  onRowClick(diagnosis: Diagnosis) {
+    this.diagnosisClick.next(diagnosis);
   }
-
 }

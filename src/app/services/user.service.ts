@@ -25,6 +25,6 @@ export class UserService {
   }
 
   changeSettings(userId: string, form: ChangeSettingsForm) {
-    return this.http.put("api/settings", { userId, ...form });
+    return this.http.put("api/settings", { userId, form });
   }
 }

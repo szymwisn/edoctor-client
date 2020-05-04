@@ -1,15 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Output } from "@angular/core";
+import { Subject } from "rxjs";
 
 @Component({
-  selector: 'app-bar',
-  templateUrl: './bar.component.html',
-  styleUrls: ['./bar.component.scss']
+  selector: "app-bar",
+  templateUrl: "./bar.component.html",
+  styleUrls: ["./bar.component.scss"],
 })
-export class BarComponent implements OnInit {
+export class BarComponent {
+  @Output() searchClick = new Subject<string>();
+  @Output() filtersClick = new Subject();
 
-  constructor() { }
-
-  ngOnInit(): void {
+  onFiltersClick() {
+    this.filtersClick.next();
   }
 
+  onSearchClick(phrase: string) {
+    this.searchClick.next(phrase);
+  }
 }

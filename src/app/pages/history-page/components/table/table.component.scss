@@ -1,0 +1,47 @@
+@import "src/assets/styles/styles";
+
+.wrapper {
+  padding: 15px;
+  width: 100%;
+  background-color: white;
+  border-radius: 15px;
+  overflow-y: auto;
+
+  @include default-shadow();
+}
+
+.heading {
+  color: $dodger-blue;
+  background-color: $alabaster;
+  border-radius: 15px;
+
+  @include rubik-medium();
+  @include screen(mobile) {
+    background-color: transparent;
+  }
+}
+
+.row {
+  display: flex;
+  flex-direction: row wrap;
+  width: 100%;
+  padding: 10px 0;
+  cursor: pointer;
+}
+
+.row.heading {
+  cursor: default;
+}
+
+.row:hover {
+  background-color: $alabaster;
+  border-radius: 15px;
+}
+
+.col {
+  padding: 0 15px;
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}

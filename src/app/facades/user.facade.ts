@@ -65,20 +65,12 @@ export class UserFacade {
 
   signout() {
     this.authService.removeToken();
-    this.state$.next((this.state = { profile: null, token: null }));
+    this.state$.next(
+      (this.state = { ...this.state, profile: null, token: null })
+    );
     this.router.navigate(["welcome"]);
     //TODO: show success notification
     console.log("User successfully logged out");
-  }
-
-  getProfile() {
-    this.userService.fetchUser(this.state.token.userId).subscribe(
-      (profile) => this.state$.next((this.state = { ...this.state, profile })),
-      (error) => {
-        //TODO: show error notification
-        console.log("Problem with server connection", error);
-      }
-    );
   }
 
   changeSettings(form: ChangeSettingsForm) {
@@ -87,6 +79,16 @@ export class UserFacade {
         //TODO: show success notification
         console.log("Settings successfully changed");
       },
+      (error) => {
+        //TODO: show error notification
+        console.log("Problem with server connection", error);
+      }
+    );
+  }
+
+  getProfile() {
+    this.userService.fetchUser(this.state.token.userId).subscribe(
+      (profile) => this.state$.next((this.state = { ...this.state, profile })),
       (error) => {
         //TODO: show error notification
         console.log("Problem with server connection", error);
