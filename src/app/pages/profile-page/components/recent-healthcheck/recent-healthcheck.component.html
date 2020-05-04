@@ -1,22 +1,30 @@
 <div class="wrapper">
   <div class="heading">
     <h3>Recent healthcheck result</h3>
-    <p class="date">performed on 21 Jun 2019</p>
+    <p class="date">performed on {{ diagnosis.date | date }}</p>
   </div>
   <div class="result">
-    <h2>Healthy</h2>
-    <h2>98%</h2>
+    <h2>{{ diagnosis.disease }}</h2>
+    <h2>{{ diagnosis.probability }}%</h2>
   </div>
   <div class="description">
     <p class="description-title">
-      Everything's fine!
+      {{
+        diagnosis.disease === "Healthy"
+          ? "Everything's fine!"
+          : "Consult a doctor!"
+      }}
     </p>
     <p class="description-content">
-      Keep on checking your health regurarly
+      {{
+        diagnosis.disease === "Healthy"
+          ? "Keep on checking examinating yourself regurarly."
+          : "Something's wrong! Consult a doctor as soon as possible."
+      }}
     </p>
   </div>
   <app-button
-    (click)="showDetails()"
+    [routerLink]="['/diagnosis']"
     text="Details"
     class="tertiary"
   ></app-button>

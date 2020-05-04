@@ -17,9 +17,9 @@ const diagnoses: Diagnosis[] = [
   {
     id: "2",
     date: new Date(),
-    disease: Disease.HEALTHY,
-    description: "Niceee, ezpz",
-    probability: 97,
+    disease: Disease.NON_HEART_RELATED,
+    description: "Lorem ipsum",
+    probability: 99,
     tips: ["eat less", "workout", "live your life"],
   },
   {
@@ -33,17 +33,17 @@ const diagnoses: Diagnosis[] = [
   {
     id: "4",
     date: new Date(),
-    disease: Disease.HEALTHY,
-    description: "Niceee, ezpz",
-    probability: 97,
+    disease: Disease.MYOCARDIAL_INFARCTION_TRANSMURAL,
+    description: "Sample something",
+    probability: 93,
     tips: ["eat less", "workout", "live your life"],
   },
   {
     id: "5",
     date: new Date(),
     disease: Disease.HEALTHY,
-    description: "Niceee, ezpz",
-    probability: 97,
+    description: "Dolor sit",
+    probability: 91,
     tips: ["eat less", "workout", "live your life"],
   },
 ];

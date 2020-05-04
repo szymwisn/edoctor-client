@@ -7,7 +7,9 @@
 
   <div class="boxes">
     <app-personal-info></app-personal-info>
-    <app-recent-healthcheck></app-recent-healthcheck>
+    <app-recent-healthcheck
+      [diagnosis]="allData.diagnosis"
+    ></app-recent-healthcheck>
   </div>
 
   <app-toolbox></app-toolbox>

@@ -1,4 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input } from "@angular/core";
+import { Diagnosis } from "src/app/models/diagnosis/diagnosis.model";
 
 @Component({
   selector: "app-recent-healthcheck",
@@ -6,5 +7,5 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./recent-healthcheck.component.scss"],
 })
 export class RecentHealthcheckComponent {
-  showDetails() {}
+  @Input() diagnosis: Diagnosis;
 }

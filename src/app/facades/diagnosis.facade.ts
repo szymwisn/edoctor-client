@@ -100,7 +100,6 @@ export class DiagnosisFacade {
     this.diagnoseService.fetchDiagnosis(userId, diagnosisId).subscribe(
       (diagnosis) => {
         this.state$.next((this.state = { ...this.state, diagnosis }));
-        console.log(diagnosis);
       },
       (error) => {
         //TODO: show error notification
