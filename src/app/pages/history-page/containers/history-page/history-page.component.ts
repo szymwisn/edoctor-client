@@ -1,10 +1,18 @@
-import { Component } from "@angular/core";
+import {
+  Component,
+  ViewChild,
+  TemplateRef,
+  ViewContainerRef,
+} from "@angular/core";
 import { UserFacade } from "src/app/facades/user.facade";
 import { DiagnosisFacade } from "src/app/facades/diagnosis.facade";
 import { Observable, combineLatest } from "rxjs";
 import { Diagnosis } from "src/app/models/diagnosis/diagnosis.model";
 import { DecodedToken } from "src/app/models/user/token.model";
 import { map, take } from "rxjs/operators";
+import { ModalService } from "src/app/services/utils/modal.service";
+import { Disease } from "src/app/models/diagnosis/diseases";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 @Component({
   selector: "app-history-page",
@@ -12,6 +20,19 @@ import { map, take } from "rxjs/operators";
   styleUrls: ["./history-page.component.scss"],
 })
 export class HistoryPageComponent {
+  @ViewChild("filtersModalContent") filtersModalContent: TemplateRef<any>;
+
+  diseases: Disease[] = [
+    Disease.HEALTHY,
+    Disease.CORONARY_ARTERY,
+    Disease.VARIANT_ANGINA,
+    Disease.MYOCARDIAL_INFARCTION_TRANSMURAL,
+    Disease.MYOCARDIAL_INFARCTION_SUBENDOCARDIAL,
+    Disease.NON_HEART_RELATED,
+  ];
+
+  form: FormGroup;
+
   allData$: Observable<{
     token: DecodedToken;
     diagnoses: Diagnosis[];
@@ -21,8 +42,13 @@ export class HistoryPageComponent {
 
   constructor(
     private userFacade: UserFacade,
-    private diagnosisFacade: DiagnosisFacade
+    private diagnosisFacade: DiagnosisFacade,
+    private modalService: ModalService,
+    private viewContainerRef: ViewContainerRef,
+    private fb: FormBuilder
   ) {
+    this.modalService.setViewContainerRef(this.viewContainerRef);
+
     this.allData$ = combineLatest([
       this.userFacade.token$,
       this.diagnosisFacade.diagnoses$,
@@ -40,20 +66,40 @@ export class HistoryPageComponent {
     this.userFacade.token$.pipe(take(1)).subscribe((token) => {
       this.diagnosisFacade.getDiagnoses(token.userId);
     });
+
+    this.form = this.fb.group({
+      diseases: "",
+      minProbability: ["0", Validators.required],
+      maxProbability: ["100", Validators.required],
+      dateFrom: "",
+      dateTo: "",
+    });
   }
 
   changePage(page: number, userId: string) {
     this.diagnosisFacade.switchPage(userId, page);
-    console.log(userId, page);
   }
 
-  openFiltersModal() {}
-
-  applyFilters() {
-    console.log("filters applied");
+  openFiltersModal() {
+    this.modalService.openModal(this.filtersModalContent);
   }
 
-  searchByPhrase(phrase: string) {
-    console.log(phrase);
+  applyFilters(userId: string) {
+    this.diagnosisFacade.changeFilters(userId, this.form.value);
+  }
+
+  applySearchPhrase(phrase: string, userId: string) {
+    this.diagnosisFacade.changeSearchPhrase(userId, phrase);
+  }
+
+  resetFilters(userId: string) {
+    this.form.reset({
+      diseases: "",
+      minProbability: "0",
+      maxProbability: "100",
+      dateFrom: "",
+      dateTo: "",
+    });
+    this.diagnosisFacade.resetFilters(userId);
   }
 }

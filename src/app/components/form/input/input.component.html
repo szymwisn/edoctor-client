@@ -13,6 +13,7 @@
     [disabled]="disabled"
   />
   <app-icon
+    *ngIf="type == 'text'"
     class="icon"
     name="close"
     (click)="onClear()"

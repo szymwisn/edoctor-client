@@ -52,13 +52,19 @@ export class DiagnosisService {
   fetchDiagnoses(
     userId: string,
     pageNumber: number,
-    filters: DiagnosisFilters
+    filters: DiagnosisFilters,
+    searchPhrase: string
   ): Observable<Diagnosis[]> {
     // return this.http.get<Diagnosis[]>("api/diagnoses", {
     //   params: {
     //     userId,
     //     pageNumber: pageNumber.toString(),
-    //     searchPhrase: filters.toString(),
+    //     searchPhrase,
+    //     diseases: filters.diseases.toString(),
+    //     minProbability: filters.minProbability.toString(),
+    //     maxProbability: filters.maxProbability.toString(),
+    //     dateFrom: filters.dateFrom.toString(),
+    //     dateTo: filters.dateTo.toString(),
     //   },
     // });
     return of(diagnoses);

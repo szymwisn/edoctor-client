@@ -11,6 +11,7 @@ class State {
   currentPage: number = 1;
   totalPages: number = 5;
   filters: DiagnosisFilters = null;
+  searchPhrase: string = null;
 }
 
 @Injectable({ providedIn: "root" })
@@ -38,6 +39,10 @@ export class DiagnosisFacade {
     map((state) => state.filters)
   );
 
+  searchPhrase$: Observable<string> = this.state$.pipe(
+    map((state) => state.searchPhrase)
+  );
+
   constructor(private diagnoseService: DiagnosisService) {}
 
   saveDiagnosis(userId: string, diagnosis: Diagnosis) {
@@ -58,6 +63,11 @@ export class DiagnosisFacade {
     this.getDiagnoses(userId);
   }
 
+  changeSearchPhrase(userId: string, searchPhrase: string) {
+    this.state$.next((this.state = { ...this.state, searchPhrase }));
+    this.getDiagnoses(userId);
+  }
+
   resetFilters(userId: string) {
     this.state$.next((this.state = { ...this.state, filters: null }));
     this.getDiagnoses(userId);
@@ -70,7 +80,12 @@ export class DiagnosisFacade {
 
   getDiagnoses(userId: string) {
     this.diagnoseService
-      .fetchDiagnoses(userId, this.state.currentPage, this.state.filters)
+      .fetchDiagnoses(
+        userId,
+        this.state.currentPage,
+        this.state.filters,
+        this.state.searchPhrase
+      )
       .subscribe(
         (diagnoses) =>
           this.state$.next((this.state = { ...this.state, diagnoses })),
