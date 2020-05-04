@@ -1,1 +1,12 @@
-<p>result works!</p>
+<div class="wrapper">
+  <app-button
+    (click)="onBackButtonClick()"
+    type="icon"
+    icon="back"
+    text="go back"
+  ></app-button>
+  <div class="result">
+    <h2>{{ disease }}</h2>
+    <h2>{{ probability }}%</h2>
+  </div>
+</div>

@@ -35,7 +35,12 @@ export class DiagnosisPageComponent {
   }
 
   navigateBack() {
-    this.router.navigate(["/history"]);
+    const params = this.route.snapshot.params;
+    if (params["id"]) {
+      this.router.navigate(["/history"]);
+    } else {
+      this.router.navigate(["/profile"]);
+    }
   }
 
   navigateToDoctors() {
