@@ -5,15 +5,20 @@
   width: 100%;
   background-color: white;
   border-radius: 15px;
+  overflow-y: auto;
 
   @include default-shadow();
 }
 
 .heading {
   color: $dodger-blue;
-  @include rubik-medium();
   background-color: $alabaster;
   border-radius: 15px;
+
+  @include rubik-medium();
+  @include screen(mobile) {
+    background-color: transparent;
+  }
 }
 
 .row {
@@ -21,6 +26,11 @@
   flex-direction: row wrap;
   width: 100%;
   padding: 10px 0;
+  cursor: pointer;
+}
+
+.row.heading {
+  cursor: default;
 }
 
 .row:hover {

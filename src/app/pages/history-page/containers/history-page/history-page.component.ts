@@ -13,6 +13,7 @@ import { map, take } from "rxjs/operators";
 import { ModalService } from "src/app/services/utils/modal.service";
 import { Disease } from "src/app/models/diagnosis/diseases";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-history-page",
@@ -45,7 +46,8 @@ export class HistoryPageComponent {
     private diagnosisFacade: DiagnosisFacade,
     private modalService: ModalService,
     private viewContainerRef: ViewContainerRef,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {
     this.modalService.setViewContainerRef(this.viewContainerRef);
 
@@ -101,5 +103,9 @@ export class HistoryPageComponent {
       dateTo: "",
     });
     this.diagnosisFacade.resetFilters(userId);
+  }
+
+  openDiagnosis(diagnosis: Diagnosis) {
+    this.router.navigate(["/diagnosis", diagnosis.id]);
   }
 }

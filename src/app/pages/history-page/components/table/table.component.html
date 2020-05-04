@@ -3,12 +3,14 @@
     <div class="col">Date</div>
     <div class="col">Disease</div>
     <div class="col">Probability</div>
-    <div class="col">Open</div>
   </div>
-  <div class="row" *ngFor="let diagnosis of diagnoses">
+  <div
+    class="row"
+    *ngFor="let diagnosis of diagnoses"
+    (click)="onRowClick(diagnosis)"
+  >
     <div class="col">{{ diagnosis.date | date }}</div>
     <div class="col">{{ diagnosis.disease }}</div>
     <div class="col">{{ diagnosis.probability }}%</div>
-    <app-icon class="col" [width]="24" [height]="24" name="open"></app-icon>
   </div>
 </div>

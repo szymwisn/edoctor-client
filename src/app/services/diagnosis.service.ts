@@ -7,6 +7,7 @@ import { Disease } from "../models/diagnosis/diseases";
 
 const diagnoses: Diagnosis[] = [
   {
+    id: "1",
     date: new Date(),
     disease: Disease.CORONARY_ARTERY,
     description: "Wrong news, doc",
@@ -14,6 +15,7 @@ const diagnoses: Diagnosis[] = [
     tips: ["eat less", "workout"],
   },
   {
+    id: "2",
     date: new Date(),
     disease: Disease.HEALTHY,
     description: "Niceee, ezpz",
@@ -21,6 +23,7 @@ const diagnoses: Diagnosis[] = [
     tips: ["eat less", "workout", "live your life"],
   },
   {
+    id: "3",
     date: new Date(),
     disease: Disease.HEALTHY,
     description: "Niceee, ezpz",
@@ -28,6 +31,7 @@ const diagnoses: Diagnosis[] = [
     tips: ["eat less", "live your life"],
   },
   {
+    id: "4",
     date: new Date(),
     disease: Disease.HEALTHY,
     description: "Niceee, ezpz",
@@ -35,6 +39,7 @@ const diagnoses: Diagnosis[] = [
     tips: ["eat less", "workout", "live your life"],
   },
   {
+    id: "5",
     date: new Date(),
     disease: Disease.HEALTHY,
     description: "Niceee, ezpz",

@@ -4,7 +4,10 @@
     (searchClick)="applySearchPhrase($event, allData.token.userId)"
     (filtersClick)="openFiltersModal()"
   ></app-bar>
-  <app-table [diagnoses]="allData.diagnoses"></app-table>
+  <app-table
+    [diagnoses]="allData.diagnoses"
+    (diagnosisClick)="openDiagnosis($event)"
+  ></app-table>
   <div class="pagination">
     <p>Page {{ allData.currentPage }} of {{ allData.totalPages }}</p>
     <app-pagination

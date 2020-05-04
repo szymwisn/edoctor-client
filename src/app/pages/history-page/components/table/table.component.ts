@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit, Output } from "@angular/core";
 import { Diagnosis } from "src/app/models/diagnosis/diagnosis.model";
+import { Subject } from "rxjs";
 
 @Component({
   selector: "app-table",
@@ -8,4 +9,9 @@ import { Diagnosis } from "src/app/models/diagnosis/diagnosis.model";
 })
 export class TableComponent {
   @Input() diagnoses: Diagnosis[];
+  @Output() diagnosisClick = new Subject<Diagnosis>();
+
+  onRowClick(diagnosis: Diagnosis) {
+    this.diagnosisClick.next(diagnosis);
+  }
 }
