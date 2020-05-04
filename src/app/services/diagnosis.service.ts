@@ -75,13 +75,25 @@ export class DiagnosisService {
     return of(diagnoses);
   }
 
-  fetchLatestDiagnosis(userId: string): Observable<Diagnosis> {
-    // return this.http.get<Diagnosis>("api/latestdiagnose", {
-    //   params: {
-    //     userId,
-    //   },
-    // });
-    return of(diagnoses[0]);
+  fetchDiagnosis(userId: string, diagnosisId?: string): Observable<Diagnosis> {
+    if (diagnosisId) {
+      // return this.http.get<Diagnosis>("api/diagnosis", {
+      //   params: {
+      //     userId,
+      //     diagnosisId,
+      //   },
+      // });
+      return of(
+        diagnoses.filter((diagnosis) => diagnosis.id === diagnosisId)[0]
+      );
+    } else {
+      // return this.http.get<Diagnosis>("api/diagnosis", {
+      //   params: {
+      //     userId,
+      //   },
+      // });
+      return of(diagnoses[0]);
+    }
   }
 
   saveDiagnosis(userId: string, diagnosis: Diagnosis): Observable<Diagnosis> {

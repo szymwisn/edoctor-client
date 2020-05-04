@@ -38,6 +38,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: "diagnosis",
+    component: DiagnosisPageComponent,
+    canActivate: [AuthGuard],
+  },
+  {
     path: "diagnosis/:id",
     component: DiagnosisPageComponent,
     canActivate: [AuthGuard],

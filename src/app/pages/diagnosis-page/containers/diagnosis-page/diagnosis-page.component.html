@@ -1,1 +1,8 @@
-<p>diagnosis-page works!</p>
+<div class="wrapper" *ngIf="diagnosis$ | async as diagnosis; else noDiagnosis">
+  <app-breadcrumb text="Diagnosis"></app-breadcrumb>
+  {{ diagnosis.id }}
+</div>
+
+<ng-template #noDiagnosis>
+  no diagnosis
+</ng-template>

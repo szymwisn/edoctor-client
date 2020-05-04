@@ -7,7 +7,7 @@ import { DiagnosisFilters } from "../models/diagnosis/diagnosis-filters.model";
 
 class State {
   diagnoses: Diagnosis[] = null;
-  latestDiagnosis: Diagnosis = null;
+  diagnosis: Diagnosis = null;
   currentPage: number = 1;
   totalPages: number = 5;
   filters: DiagnosisFilters = null;
@@ -23,8 +23,8 @@ export class DiagnosisFacade {
     map((state) => state.diagnoses)
   );
 
-  latestDiagnosis$: Observable<Diagnosis> = this.state$.pipe(
-    map((state) => state.latestDiagnosis)
+  diagnosis$: Observable<Diagnosis> = this.state$.pipe(
+    map((state) => state.diagnosis)
   );
 
   currentPage$: Observable<number> = this.state$.pipe(
@@ -94,5 +94,18 @@ export class DiagnosisFacade {
           console.log("Problem with server connection", error);
         }
       );
+  }
+
+  getDiagnosis(userId: string, diagnosisId?: string) {
+    this.diagnoseService.fetchDiagnosis(userId, diagnosisId).subscribe(
+      (diagnosis) => {
+        this.state$.next((this.state = { ...this.state, diagnosis }));
+        console.log(diagnosis);
+      },
+      (error) => {
+        //TODO: show error notification
+        console.log("Problem with server connection", error);
+      }
+    );
   }
 }
