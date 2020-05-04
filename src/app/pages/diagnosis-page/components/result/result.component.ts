@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, Output } from "@angular/core";
+import { Subject } from "rxjs";
 
 @Component({
-  selector: 'app-result',
-  templateUrl: './result.component.html',
-  styleUrls: ['./result.component.scss']
+  selector: "app-result",
+  templateUrl: "./result.component.html",
+  styleUrls: ["./result.component.scss"],
 })
-export class ResultComponent implements OnInit {
+export class ResultComponent {
+  @Input() disease: string;
+  @Input() probability: number;
+  @Output() backClick = new Subject();
 
-  constructor() { }
-
-  ngOnInit(): void {
+  onBackButtonClick() {
+    this.backClick.next();
   }
-
 }

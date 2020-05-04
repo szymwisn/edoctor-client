@@ -17,9 +17,9 @@ const diagnoses: Diagnosis[] = [
   {
     id: "2",
     date: new Date(),
-    disease: Disease.HEALTHY,
-    description: "Niceee, ezpz",
-    probability: 97,
+    disease: Disease.NON_HEART_RELATED,
+    description: "Lorem ipsum",
+    probability: 99,
     tips: ["eat less", "workout", "live your life"],
   },
   {
@@ -33,17 +33,17 @@ const diagnoses: Diagnosis[] = [
   {
     id: "4",
     date: new Date(),
-    disease: Disease.HEALTHY,
-    description: "Niceee, ezpz",
-    probability: 97,
+    disease: Disease.MYOCARDIAL_INFARCTION_TRANSMURAL,
+    description: "Sample something",
+    probability: 93,
     tips: ["eat less", "workout", "live your life"],
   },
   {
     id: "5",
     date: new Date(),
     disease: Disease.HEALTHY,
-    description: "Niceee, ezpz",
-    probability: 97,
+    description: "Dolor sit",
+    probability: 91,
     tips: ["eat less", "workout", "live your life"],
   },
 ];
@@ -75,13 +75,25 @@ export class DiagnosisService {
     return of(diagnoses);
   }
 
-  fetchLatestDiagnosis(userId: string): Observable<Diagnosis> {
-    // return this.http.get<Diagnosis>("api/latestdiagnose", {
-    //   params: {
-    //     userId,
-    //   },
-    // });
-    return of(diagnoses[0]);
+  fetchDiagnosis(userId: string, diagnosisId?: string): Observable<Diagnosis> {
+    if (diagnosisId) {
+      // return this.http.get<Diagnosis>("api/diagnosis", {
+      //   params: {
+      //     userId,
+      //     diagnosisId,
+      //   },
+      // });
+      return of(
+        diagnoses.filter((diagnosis) => diagnosis.id === diagnosisId)[0]
+      );
+    } else {
+      // return this.http.get<Diagnosis>("api/diagnosis", {
+      //   params: {
+      //     userId,
+      //   },
+      // });
+      return of(diagnoses[0]);
+    }
   }
 
   saveDiagnosis(userId: string, diagnosis: Diagnosis): Observable<Diagnosis> {

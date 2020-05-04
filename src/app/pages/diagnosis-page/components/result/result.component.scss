@@ -1,0 +1,16 @@
+@import "src/assets/styles/styles";
+
+.wrapper {
+  padding: 15px;
+  width: 100%;
+  background-color: white;
+  border-radius: 15px;
+
+  @include default-shadow();
+}
+
+.result {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+}

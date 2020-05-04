@@ -1,0 +1,11 @@
+@import "src/assets/styles/styles";
+
+.wrapper {
+  padding: 15px;
+  width: 100%;
+  background-color: white;
+  border-radius: 15px;
+  height: 100%;
+
+  @include default-shadow();
+}

@@ -2,7 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { UserFacade } from "src/app/facades/user.facade";
 import { Observable, combineLatest } from "rxjs";
 import { User } from "src/app/models/user/user.model";
-import { map } from "rxjs/operators";
+import { map, take } from "rxjs/operators";
+import { DiagnosisFacade } from "src/app/facades/diagnosis.facade";
+import { Diagnosis } from "src/app/models/diagnosis/diagnosis.model";
 
 @Component({
   selector: "app-profile-page",
@@ -12,11 +14,20 @@ import { map } from "rxjs/operators";
 export class ProfilePageComponent {
   allData$: Observable<{
     profile: User;
+    diagnosis: Diagnosis;
   }>;
 
-  constructor(private userFacade: UserFacade) {
-    this.allData$ = combineLatest([this.userFacade.profile$]).pipe(
-      map(([profile]) => ({ profile }))
-    );
+  constructor(
+    private userFacade: UserFacade,
+    private diagnosisFacade: DiagnosisFacade
+  ) {
+    this.allData$ = combineLatest([
+      this.userFacade.profile$,
+      this.diagnosisFacade.diagnosis$,
+    ]).pipe(map(([profile, diagnosis]) => ({ profile, diagnosis })));
+
+    this.userFacade.token$.pipe(take(1)).subscribe((token) => {
+      this.diagnosisFacade.getDiagnosis(token.userId);
+    });
   }
 }

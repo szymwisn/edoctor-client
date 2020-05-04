@@ -1,1 +1,17 @@
-<p>diagnosis-page works!</p>
+<div class="wrapper" *ngIf="diagnosis$ | async as diagnosis; else noDiagnosis">
+  <app-breadcrumb text="Diagnosis"></app-breadcrumb>
+  <app-result
+    (backClick)="navigateBack()"
+    [disease]="diagnosis.disease"
+    [probability]="diagnosis.probability"
+  ></app-result>
+  <app-description [description]="diagnosis.description"></app-description>
+  <div class="boxes">
+    <app-tips [tips]="diagnosis.tips"></app-tips>
+    <app-diagnosis-doctors-nearby></app-diagnosis-doctors-nearby>
+  </div>
+</div>
+
+<ng-template #noDiagnosis>
+  no diagnosis
+</ng-template>
