@@ -1,4 +1,5 @@
 @import "~normalize.css";
+@import "~leaflet/dist/leaflet.css";
 @import "./assets/styles/styles";
 
 * {
@@ -69,4 +70,37 @@ select {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(0, 0, 0, 0.5) !important;
+}
+
+.leaflet-popup-content-wrapper {
+  font-size: 1.5rem;
+  background-color: $alabaster;
+  text-align: center;
+  color: $rock-blue;
+  @include default-shadow();
+  @include rubik-regular();
+}
+
+.leaflet-popup-content-wrapper .leaflet-popup-content {
+  background-color: $alabaster;
+}
+
+.map-popup-doctor {
+  font-size: 1.8rem;
+  color: $dodger-blue;
+  padding: 15px;
+  @include rubik-medium();
+}
+
+.map-popup-clinicks {
+  color: $mine-shaft;
+}
+
+.map-marker {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: $bittersweet;
+  border: 4px solid $dodger-blue;
+  border-radius: 50%;
 }

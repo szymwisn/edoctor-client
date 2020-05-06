@@ -1,0 +1,28 @@
+@import "src/assets/styles/styles";
+
+.wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background-color: white;
+  border-radius: 15px;
+  position: relative;
+  height: 600px;
+  overflow: hidden;
+
+  @include default-shadow();
+}
+
+.map-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+#map {
+  height: 100%;
+}

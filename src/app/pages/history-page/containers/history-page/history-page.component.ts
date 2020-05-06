@@ -88,6 +88,7 @@ export class HistoryPageComponent {
 
   applyFilters(userId: string) {
     this.diagnosisFacade.changeFilters(userId, this.form.value);
+    console.log(this.form.value);
   }
 
   applySearchPhrase(phrase: string, userId: string) {
