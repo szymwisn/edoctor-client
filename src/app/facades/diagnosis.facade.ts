@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { DiagnosisService } from "../services/diagnosis.service";
+import { DiagnosisService } from "../services/diagnosis/diagnosis.service";
 import { Diagnosis } from "../models/diagnosis/diagnosis.model";
 import { DiagnosisFilters } from "../models/diagnosis/diagnosis-filters.model";
 

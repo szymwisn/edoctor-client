@@ -1,7 +1,7 @@
-export class MarkerOptions {
+export class Doctor {
   coordinates: L.LatLngExpression;
+  name: string;
   phone: string;
-  doctor: string;
-  clinicks: string;
+  clinic: string;
   address: string;
 }

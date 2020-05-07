@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable, of } from "rxjs";
-import { Diagnosis } from "../models/diagnosis/diagnosis.model";
-import { DiagnosisFilters } from "../models/diagnosis/diagnosis-filters.model";
-import { Disease } from "../models/diagnosis/diseases";
+import { Diagnosis } from "../../models/diagnosis/diagnosis.model";
+import { DiagnosisFilters } from "../../models/diagnosis/diagnosis-filters.model";
+import { Disease } from "../../models/diagnosis/diseases";
 
 const diagnoses: Diagnosis[] = [
   {

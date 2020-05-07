@@ -1,7 +1,11 @@
-import { Component, AfterViewInit } from "@angular/core";
 import * as L from "leaflet";
-import { MapService } from "src/app/services/map.service";
-import { MarkerOptions } from "src/app/models/map/MarkerOptions.model";
+import { Component, AfterViewInit } from "@angular/core";
+import { take } from "rxjs/operators";
+import { MapService } from "src/app/services/doctors-nearby/map.service";
+import { DoctorsService } from "src/app/services/doctors-nearby/doctors.service";
+import { GeolocationService } from "src/app/services/doctors-nearby/geolocation.service";
+import { MarkerOptions } from "src/app/models/map/marker-options.model";
+import { Doctor } from "src/app/models/map/doctor.model";
 
 @Component({
   selector: "app-map",
@@ -10,27 +14,61 @@ import { MarkerOptions } from "src/app/models/map/MarkerOptions.model";
 })
 export class MapComponent implements AfterViewInit {
   private map: L.Map;
+  private markers: L.Marker[] = [];
 
-  constructor(private mapService: MapService) {}
+  constructor(
+    private mapService: MapService,
+    private geolocationService: GeolocationService,
+    private doctorsService: DoctorsService
+  ) {
+    //TODO: it's probably better to ask user for city
+    this.geolocationService.getUserLocation();
+  }
 
   ngAfterViewInit(): void {
-    this.map = this.mapService.createMap([51.107883, 17.038538]);
+    this.geolocationService.userLocation$
+      .pipe(take(1))
+      .subscribe((userCoordinates) => {
+        this.map = this.mapService.createMap(userCoordinates);
 
-    //TODO: just a temporary data
-    this.mapService.createMarker(this.map, {
-      coordinates: [51.107883, 17.038538],
-      phone: "313 544 344",
-      doctor: "dr John Doe",
-      clinicks: "LoremMed Clinicks",
-      address: "Wrocław, Medykow Street 12/3",
-    } as MarkerOptions);
+        //TODO: coordinates => city
+        const city = this.geolocationService.decodeLatLng(userCoordinates);
 
-    this.mapService.createMarker(this.map, {
-      coordinates: [51.10483, 17.048538],
-      phone: "713 331 332",
-      doctor: "dr Timothy Zahn",
-      clinicks: "Yolo Clinicks",
-      address: "Wrocław, Inna Street 12/3",
-    } as MarkerOptions);
+        this.doctorsService
+          .fetchDoctors("London")
+          .pipe(take(1))
+          .subscribe((doctors) => {
+            this.addDoctorsMarkers(doctors);
+          });
+      });
+  }
+
+  addDoctorsMarkers(doctors: Doctor[]) {
+    doctors.forEach((doctor) => {
+      this.geolocationService
+        .encodeToLatLng(doctor.address)
+        .pipe(take(1))
+        .subscribe((decodedLocation) => {
+          const coordinates = new L.LatLng(
+            decodedLocation[0].y,
+            decodedLocation[0].x
+          );
+
+          const marker = this.mapService.createMarker(this.map, {
+            coordinates: coordinates,
+            phone: doctor.phone,
+            doctor: doctor.name,
+            clinic: doctor.clinic,
+            address: doctor.address,
+          } as MarkerOptions);
+
+          this.markers.push(marker);
+        });
+    });
+  }
+
+  cleanMarkers() {
+    this.mapService.cleanMarkers(this.map, this.markers);
+    this.markers = [];
   }
 }

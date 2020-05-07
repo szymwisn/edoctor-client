@@ -1,16 +1,13 @@
 import { Injectable } from "@angular/core";
 import * as L from "leaflet";
-import { MarkerOptions } from "../models/map/MarkerOptions.model";
+import { MarkerOptions } from "src/app/models/map/marker-options.model";
 
 @Injectable({
   providedIn: "root",
 })
 export class MapService {
   createMap(coordinates: L.LatLngExpression): L.Map {
-    const map: L.Map = L.map("map", {
-      center: coordinates,
-      zoom: 13,
-    });
+    const map: L.Map = L.map("map").setView(coordinates, 12);
 
     const mapLayer: L.TileLayer = L.tileLayer(
       "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
@@ -23,6 +20,10 @@ export class MapService {
     mapLayer.addTo(map);
 
     return map;
+  }
+
+  changeLocation(map: L.Map, coordinates: L.LatLngExpression) {
+    map.flyTo(coordinates);
   }
 
   createMarker(map: L.Map, options: MarkerOptions): L.Marker {
@@ -44,7 +45,7 @@ export class MapService {
         ${options.doctor}
       </div>
       <div class="map-popup-clinicks">
-        ${options.clinicks}
+        ${options.clinic}
       </div>
       <div class="map-popup-address">
         ${options.address}
@@ -65,5 +66,9 @@ export class MapService {
     marker.addTo(map);
 
     return marker;
+  }
+
+  cleanMarkers(map: L.Map, markers: L.Marker[]) {
+    markers.forEach((marker) => map.removeLayer(marker));
   }
 }
