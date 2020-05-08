@@ -101,6 +101,12 @@ select {
   width: 100%;
   height: 100%;
   background-color: $bittersweet;
-  border: 4px solid $dodger-blue;
   border-radius: 50%;
+  background-image: url("src/assets/icons/plus.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
