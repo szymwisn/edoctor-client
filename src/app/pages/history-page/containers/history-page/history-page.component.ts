@@ -91,10 +91,6 @@ export class HistoryPageComponent {
     console.log(this.form.value);
   }
 
-  applySearchPhrase(phrase: string, userId: string) {
-    this.diagnosisFacade.changeSearchPhrase(userId, phrase);
-  }
-
   resetFilters(userId: string) {
     this.form.reset({
       diseases: "",
