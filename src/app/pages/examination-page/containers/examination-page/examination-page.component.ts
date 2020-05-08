@@ -1,5 +1,7 @@
 import { Component } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
+import { take } from "rxjs/operators";
 import { PainLocation } from "src/app/models/examination/pain-location";
 import { ChestPainRadiation } from "src/app/models/examination/chest-pain-radiation";
 import { PainCharacter } from "src/app/models/examination/pain-character";
@@ -13,6 +15,7 @@ import { EcgExamination } from "src/app/models/examination/ecg-examination";
 import { ExaminationFormAvailableValues } from "src/app/models/examination/examination-form-available-values.model";
 import { DurationOfTheLastEpisode } from "src/app/models/examination/duration-of-the-last-episode";
 import { HistoryOfSimiliarPain } from "src/app/models/examination/history-of-similiar-pain";
+import { ExaminationService } from "src/app/services/examination/examination.service";
 
 @Component({
   selector: "app-examination-page",
@@ -24,7 +27,11 @@ export class ExaminationPageComponent {
   form: FormGroup;
   availableValues: ExaminationFormAvailableValues;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private examinationService: ExaminationService,
+    private router: Router
+  ) {
     this.initializeFormAvailableValues();
 
     this.form = this.fb.group({
@@ -50,8 +57,21 @@ export class ExaminationPageComponent {
 
   submitForm() {
     this.formSubmitted = true;
+    window.scrollTo(0, 0);
+
     if (this.form.valid) {
-      console.log(this.form.value);
+      this.examinationService
+        .sendExaminationForm(this.form.value)
+        .pipe(take(1))
+        .subscribe(
+          (diagnosis) => {
+            this.form.reset();
+            this.router.navigate(["diagnosis"]);
+          },
+          (error) => {
+            // TODO: display error message
+          }
+        );
     }
   }
 
