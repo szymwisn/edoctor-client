@@ -1,7 +1,9 @@
 <div class="wrapper">
-  <p class="title">These cardiologists will help you</p>
+  <p class="title">
+    {{ city ? "Doctors in " + city : "Please enter your location." }}
+  </p>
   <app-search
-    placeholder="Enter your address..."
+    placeholder="Location..."
     (searchClick)="onSearchClick($event)"
   ></app-search>
 </div>

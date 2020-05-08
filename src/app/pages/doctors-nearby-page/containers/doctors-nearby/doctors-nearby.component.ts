@@ -6,9 +6,14 @@ import { Component } from "@angular/core";
   styleUrls: ["./doctors-nearby.component.scss"],
 })
 export class DoctorsNearbyComponent {
+  city: string = "";
   address: string;
 
   searchByAddress(address: string) {
     this.address = address;
+  }
+
+  setCurrentCity(city: string) {
+    this.city = city;
   }
 }

@@ -1,4 +1,4 @@
-import { Component, Output } from "@angular/core";
+import { Component, Output, Input } from "@angular/core";
 import { Subject } from "rxjs";
 
 @Component({
@@ -7,6 +7,7 @@ import { Subject } from "rxjs";
   styleUrls: ["./bar.component.scss"],
 })
 export class BarComponent {
+  @Input() city: string;
   @Output() searchClick = new Subject<string>();
 
   onSearchClick(phrase: string) {

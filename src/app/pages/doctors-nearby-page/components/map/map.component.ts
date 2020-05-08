@@ -1,11 +1,12 @@
 import * as L from "leaflet";
-import { Component, AfterViewInit, Input } from "@angular/core";
+import { Component, AfterViewInit, Input, Output } from "@angular/core";
 import { take } from "rxjs/operators";
 import { MapService } from "src/app/services/doctors-nearby/map.service";
 import { DoctorsService } from "src/app/services/doctors-nearby/doctors.service";
 import { GeolocationService } from "src/app/services/doctors-nearby/geolocation.service";
 import { MarkerOptions } from "src/app/models/map/marker-options.model";
 import { Doctor } from "src/app/models/map/doctor.model";
+import { Subject } from "rxjs";
 
 @Component({
   selector: "app-map",
@@ -15,6 +16,8 @@ import { Doctor } from "src/app/models/map/doctor.model";
 export class MapComponent implements AfterViewInit {
   private map: L.Map;
   private markers: L.Marker[] = [];
+
+  @Output() cityChange = new Subject<string>();
 
   @Input()
   set address(address: string) {
@@ -32,6 +35,7 @@ export class MapComponent implements AfterViewInit {
 
             this.geolocationService.getCityFromCoordinates(coordinates);
             this.geolocationService.city$.pipe(take(1)).subscribe((city) => {
+              this.cityChange.next(city);
               this.setDoctorsMarkersOnMap(city);
             });
           }
@@ -55,6 +59,7 @@ export class MapComponent implements AfterViewInit {
 
         this.geolocationService.getCityFromCoordinates(coordinates);
         this.geolocationService.city$.pipe(take(1)).subscribe((city) => {
+          this.cityChange.next(city);
           this.setDoctorsMarkersOnMap(city);
         });
       });
