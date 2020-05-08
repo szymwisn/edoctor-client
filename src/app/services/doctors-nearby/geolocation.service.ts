@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
+import { Subject, from } from "rxjs";
 import * as L from "leaflet";
 import { OpenStreetMapProvider } from "leaflet-geosearch";
+import * as esriGeo from "esri-leaflet-geocoder";
 import geolocation from "geolocation";
-import { Subject, from } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -10,6 +11,7 @@ import { Subject, from } from "rxjs";
 export class GeolocationService {
   private provider = new OpenStreetMapProvider();
   userLocation$ = new Subject<L.LatLngExpression>();
+  city$ = new Subject<string>();
 
   getUserLocation() {
     geolocation.getCurrentPosition((error, position) => {
@@ -24,8 +26,13 @@ export class GeolocationService {
     return from(this.provider.search({ query }));
   }
 
-  getCityFromCoordinates(coordinates: L.LatLngExpression): string {
-    console.log(coordinates);
-    return "London";
+  getCityFromCoordinates(coordinates: L.LatLngExpression) {
+    esriGeo
+      .reverseGeocode()
+      .latlng(coordinates)
+      .run((error, result, response) => {
+        if (error) throw error;
+        this.city$.next(result.address.City);
+      });
   }
 }

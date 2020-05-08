@@ -30,12 +30,10 @@ export class MapComponent implements AfterViewInit {
             this.mapService.changeLocation(this.map, coordinates);
             this.mapService.cleanMarkers(this.map, this.markers);
 
-            //TODO: coordinates => city
-            const city = this.geolocationService.getCityFromCoordinates(
-              coordinates
-            );
-
-            this.setDoctorsMarkersOnMap(city);
+            this.geolocationService.getCityFromCoordinates(coordinates);
+            this.geolocationService.city$.pipe(take(1)).subscribe((city) => {
+              this.setDoctorsMarkersOnMap(city);
+            });
           }
         });
     }
@@ -52,15 +50,13 @@ export class MapComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.geolocationService.userLocation$
       .pipe(take(1))
-      .subscribe((userCoordinates) => {
-        this.map = this.mapService.createMap(userCoordinates);
+      .subscribe((coordinates) => {
+        this.map = this.mapService.createMap(coordinates);
 
-        //TODO: coordinates => city
-        const city = this.geolocationService.getCityFromCoordinates(
-          userCoordinates
-        );
-
-        this.setDoctorsMarkersOnMap(city);
+        this.geolocationService.getCityFromCoordinates(coordinates);
+        this.geolocationService.city$.pipe(take(1)).subscribe((city) => {
+          this.setDoctorsMarkersOnMap(city);
+        });
       });
   }
 
