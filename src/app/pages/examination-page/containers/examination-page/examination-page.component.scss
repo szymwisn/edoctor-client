@@ -1,0 +1,92 @@
+@import "src/assets/styles/styles";
+
+.form-fields {
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.left {
+  width: 32%;
+  padding: 15px;
+  background-color: white;
+  border-radius: 15px;
+
+  @include screen(desktop) {
+    @include default-shadow();
+  }
+
+  @include screen(mobile) {
+    width: 100%;
+  }
+
+  @include screen(tablet) {
+    width: 100%;
+  }
+}
+
+.center {
+  width: 32%;
+  padding: 15px;
+  background-color: white;
+  border-radius: 15px;
+
+  @include screen(desktop) {
+    @include default-shadow();
+  }
+
+  @include screen(mobile) {
+    display: block;
+    margin-top: 15px;
+    width: 100%;
+  }
+
+  @include screen(tablet) {
+    width: 49%;
+    display: block;
+    margin-top: 15px;
+  }
+}
+
+.right {
+  width: 32%;
+  padding: 15px;
+  background-color: white;
+  border-radius: 15px;
+
+  @include screen(desktop) {
+    @include default-shadow();
+  }
+
+  @include screen(mobile) {
+    display: block;
+    margin-top: 15px;
+    width: 100%;
+  }
+
+  @include screen(tablet) {
+    display: block;
+    margin-top: 15px;
+    width: 49%;
+  }
+}
+
+.button {
+  width: 100%;
+  margin-top: 30px;
+  border: none;
+  border-radius: 4px;
+  padding: 15px;
+  cursor: pointer;
+  background-color: $dodger-blue;
+  color: $alabaster;
+  transition: all 0.1s ease-in-out;
+
+  @include rubik-medium();
+  @include default-shadow();
+}
+
+.button:hover {
+  background-color: $rock-blue;
+}

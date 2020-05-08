@@ -1,1 +1,132 @@
-<p>examination-page works!</p>
+<div class="wrapper">
+  <app-breadcrumb text="Examination"></app-breadcrumb>
+
+  <form [formGroup]="form" (ngSubmit)="submitForm()">
+    <div class="form-fields">
+      <div class="left">
+        <app-select
+          formControlName="painLocation"
+          label="Pain location"
+          [options]="availableValues.painLocations"
+          [invalid]="formSubmitted && !form.get('painLocation').valid"
+        ></app-select>
+
+        <app-select
+          formControlName="chestPainRadiation"
+          label="Chest pain radiation"
+          [options]="availableValues.chestPainRadiations"
+          [invalid]="formSubmitted && !form.get('chestPainRadiation').valid"
+        ></app-select>
+
+        <app-select
+          formControlName="painCharacter"
+          label="Pain character"
+          [options]="availableValues.painCharacters"
+          [invalid]="formSubmitted && !form.get('painCharacter').valid"
+        ></app-select>
+
+        <app-select
+          formControlName="onsetOfPain"
+          label="Onset of pain"
+          [options]="availableValues.onsetsOfPain"
+          [invalid]="formSubmitted && !form.get('onsetOfPain').valid"
+        ></app-select>
+
+        <app-select
+          formControlName="durationOfTheLastEpisode"
+          label="Duration of the last episode"
+          [options]="availableValues.durationsOfTheLastEpisode"
+          [invalid]="
+            formSubmitted && !form.get('durationOfTheLastEpisode').valid
+          "
+        ></app-select>
+
+        <app-select
+          formControlName="palliativeFactor"
+          label="Palliative factors"
+          [options]="availableValues.palliativeFactors"
+          [invalid]="formSubmitted && !form.get('palliativeFactor').valid"
+        ></app-select>
+
+        <app-input
+          formControlName="numberOfHoursSinceOnset"
+          label="Number of hours since onset"
+          type="number"
+          [invalid]="
+            formSubmitted && !form.get('numberOfHoursSinceOnset').valid
+          "
+        ></app-input>
+
+        <app-input
+          formControlName="systolicBloodPressure"
+          label="Systolic blood pressure"
+          type="number"
+          [invalid]="formSubmitted && !form.get('systolicBloodPressure').valid"
+        ></app-input>
+
+        <app-input
+          formControlName="diastolicBloodPressure"
+          label="Disatolic blood pressure"
+          type="number"
+          [invalid]="formSubmitted && !form.get('diastolicBloodPressure').valid"
+        ></app-input>
+
+        <app-input
+          formControlName="heartRate"
+          label="Heart rate"
+          type="number"
+          [invalid]="formSubmitted && !form.get('heartRate').valid"
+        ></app-input>
+
+        <app-input
+          formControlName="respirationRate"
+          label="Respiration rate"
+          type="number"
+          [invalid]="formSubmitted && !form.get('respirationRate').valid"
+        ></app-input>
+      </div>
+
+      <div class="center">
+        <app-checkbox
+          formControlName="historyOfSimiliarPain"
+          label="History of similiar pain"
+          [items]="availableValues.historiesOfSimiliarPain"
+        ></app-checkbox>
+
+        <app-checkbox
+          formControlName="associatedSymptoms"
+          label="Associated symptoms"
+          [items]="availableValues.associatedSymptoms"
+        ></app-checkbox>
+
+        <app-checkbox
+          formControlName="pastMedicalHistory"
+          label="Past medical histories"
+          [items]="availableValues.pastMedicalHistories"
+        ></app-checkbox>
+
+        <app-checkbox
+          formControlName="currentMedicationUsage"
+          label="Current medication usage"
+          [items]="availableValues.currentMedicationUsages"
+        ></app-checkbox>
+      </div>
+
+      <div class="right">
+        <app-checkbox
+          formControlName="physicalExaminations"
+          label="Physical examinations"
+          [items]="availableValues.physicalExaminations"
+        ></app-checkbox>
+
+        <app-checkbox
+          formControlName="ecgExamination"
+          label="ECG examination"
+          [items]="availableValues.ecgExaminations"
+        ></app-checkbox>
+      </div>
+    </div>
+
+    <button class="button" type="submit">GET RESULTS</button>
+  </form>
+</div>
