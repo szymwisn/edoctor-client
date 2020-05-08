@@ -20,11 +20,12 @@ export class GeolocationService {
     });
   }
 
-  decodeLatLng(coordinates: L.LatLngExpression) {
-    //TODO
+  convertQueryToLatLng(query: string) {
+    return from(this.provider.search({ query }));
   }
 
-  encodeToLatLng(query: string) {
-    return from(this.provider.search({ query }));
+  getCityFromCoordinates(coordinates: L.LatLngExpression): string {
+    console.log(coordinates);
+    return "London";
   }
 }

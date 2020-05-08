@@ -6,7 +6,9 @@ import { Component } from "@angular/core";
   styleUrls: ["./doctors-nearby.component.scss"],
 })
 export class DoctorsNearbyComponent {
+  address: string;
+
   searchByAddress(address: string) {
-    console.log(address);
+    this.address = address;
   }
 }

@@ -1,5 +1,5 @@
 <div class="wrapper">
   <app-breadcrumb text="Doctors in your area"></app-breadcrumb>
   <app-bar (searchClick)="searchByAddress($event)"></app-bar>
-  <app-map></app-map>
+  <app-map [address]="address"></app-map>
 </div>
