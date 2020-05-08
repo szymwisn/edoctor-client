@@ -4,7 +4,7 @@ import { DoctorsNearbyComponent } from "./containers/doctors-nearby/doctors-near
 import { BarComponent } from "./components/bar/bar.component";
 import { MapComponent } from "./components/map/map.component";
 import { DetailsComponent } from "./components/details/details.component";
-import { MarkerComponent } from "./components/marker/marker.component";
+import { ComponentsModule } from "src/app/components/components.module";
 
 @NgModule({
   declarations: [
@@ -12,8 +12,7 @@ import { MarkerComponent } from "./components/marker/marker.component";
     BarComponent,
     MapComponent,
     DetailsComponent,
-    MarkerComponent,
   ],
-  imports: [CommonModule],
+  imports: [CommonModule, ComponentsModule],
 })
 export class DoctorsNearbyPageModule {}

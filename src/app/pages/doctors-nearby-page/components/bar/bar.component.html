@@ -1,1 +1,7 @@
-<p>bar works!</p>
+<div class="wrapper">
+  <p class="title">These cardiologists will help you</p>
+  <app-search
+    placeholder="Enter your address..."
+    (searchClick)="onSearchClick($event)"
+  ></app-search>
+</div>

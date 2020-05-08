@@ -1,0 +1,33 @@
+@import "src/assets/styles/styles";
+
+.wrapper {
+  padding: 15px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background-color: white;
+  border-radius: 15px;
+
+  @include default-shadow();
+}
+
+.title {
+  margin: 0;
+  @include rubik-regular();
+
+  @include screen(mobile) {
+    width: 100%;
+  }
+}
+
+app-search {
+  margin-left: 15px;
+
+  @include screen(mobile) {
+    display: block;
+    margin-left: 0;
+    margin-top: 15px;
+  }
+}

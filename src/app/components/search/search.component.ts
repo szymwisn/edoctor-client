@@ -1,4 +1,4 @@
-import { Component, Input, Output } from "@angular/core";
+import { Component, Input, Output, HostListener } from "@angular/core";
 import { Subject } from "rxjs";
 
 @Component({
@@ -11,6 +11,13 @@ export class SearchComponent {
 
   @Input() placeholder: string = "Search...";
   @Output() searchClick = new Subject();
+
+  @HostListener("window:keyup", ["$event"])
+  keyEvent(event: KeyboardEvent) {
+    if (event.keyCode === 13) {
+      this.onSearch();
+    }
+  }
 
   changeValue(event: any) {
     this.value = event.target.value;

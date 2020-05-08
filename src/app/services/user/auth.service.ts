@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import * as jwtDecode from "jwt-decode";
-import { SigninForm } from "../models/form/signin-form.model";
-import { RegisterForm } from "../models/form/register-form.model";
+import { SigninForm } from "../../models/form/signin-form.model";
+import { RegisterForm } from "../../models/form/register-form.model";
 import { Observable, of } from "rxjs";
-import { Token, DecodedToken } from "../models/user/token.model";
+import { Token, DecodedToken } from "../../models/user/token.model";
 
 const tempToken: Token = {
   value:
