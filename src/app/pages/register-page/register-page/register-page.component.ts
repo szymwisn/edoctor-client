@@ -13,16 +13,16 @@ export class RegisterPageComponent {
   form: FormGroup;
   formSubmitted = false;
 
-  sexes: Sex[] = [Sex.Female, Sex.Male, Sex.Other];
+  sexes: Sex[] = [Sex.FEMALE, Sex.MALE, Sex.OTHER];
   bloodTypes: BloodType[] = [
-    BloodType.A_Plus,
-    BloodType.A_Minus,
-    BloodType.B_Plus,
-    BloodType.B_Minus,
-    BloodType.AB_Plus,
-    BloodType.AB_Minus,
-    BloodType.Zero_Plus,
-    BloodType.Zero_Minus,
+    BloodType.A_PLUS,
+    BloodType.A_MINUS,
+    BloodType.B_PLUS,
+    BloodType.B_MINUS,
+    BloodType.AB_PLUS,
+    BloodType.AB_MINUS,
+    BloodType.ZERO_PLUS,
+    BloodType.ZERO_MINUS,
   ];
 
   constructor(private fb: FormBuilder, private userFacade: UserFacade) {

@@ -8,11 +8,19 @@ import { RegisterForm } from "../models/form/register-form.model";
 import { BehaviorSubject, Observable } from "rxjs";
 import { Router } from "@angular/router";
 import { ChangeSettingsForm } from "../models/form/change-settings-form.model";
-import { map } from "rxjs/operators";
+import { map, take } from "rxjs/operators";
 
 class State {
   token: DecodedToken = null;
-  profile: User = null;
+  profile: User = {
+    name: null,
+    email: null,
+    age: null,
+    bloodType: null,
+    height: null,
+    mass: null,
+    sex: null,
+  };
 }
 
 @Injectable({ providedIn: "root" })
@@ -40,27 +48,38 @@ export class UserFacade {
   }
 
   signin(form: SigninForm) {
-    this.authService.signIn(form).subscribe(
-      (token) => {
-        this.authService.storeToken(token);
-        const decodedToken: DecodedToken = this.authService.decodeToken(token);
-        this.state$.next((this.state = { ...this.state, token: decodedToken }));
-        this.getProfile();
-        this.router.navigate(["profile"]);
-      },
-      (error) => {
-        // TODO: show error notification
-        console.log("Failed to signin", error);
-      }
-    );
+    this.authService
+      .signIn(form)
+      .pipe(take(1))
+      .subscribe(
+        (token) => {
+          console.log(token);
+          this.authService.storeToken(token);
+          const decodedToken: DecodedToken = this.authService.decodeToken(
+            token
+          );
+          this.state$.next(
+            (this.state = { ...this.state, token: decodedToken })
+          );
+          this.getProfile();
+          this.router.navigate(["profile"]);
+        },
+        (error) => {
+          // TODO: show error notification
+          console.log("Failed to signin", error);
+        }
+      );
   }
 
   register(form: RegisterForm) {
-    this.authService.register(form).subscribe((success) => {
-      this.router.navigate(["signin"]);
-      //TODO: show success notification
-      console.log("Account successfully created");
-    });
+    this.authService
+      .register(form)
+      .pipe(take(1))
+      .subscribe((success) => {
+        this.router.navigate(["signin"]);
+        //TODO: show success notification
+        console.log("Account successfully created");
+      });
   }
 
   signout() {
@@ -74,25 +93,33 @@ export class UserFacade {
   }
 
   changeSettings(form: ChangeSettingsForm) {
-    this.userService.changeSettings(this.state.token.userId, form).subscribe(
-      (success) => {
-        //TODO: show success notification
-        console.log("Settings successfully changed");
-      },
-      (error) => {
-        //TODO: show error notification
-        console.log("Problem with server connection", error);
-      }
-    );
+    this.userService
+      .changeSettings(this.state.token.userId, form)
+      .pipe(take(1))
+      .subscribe(
+        (success) => {
+          //TODO: show success notification
+          console.log("Settings successfully changed");
+        },
+        (error) => {
+          //TODO: show error notification
+          console.log("Problem with server connection", error);
+        }
+      );
   }
 
   getProfile() {
-    this.userService.fetchUser(this.state.token.userId).subscribe(
-      (profile) => this.state$.next((this.state = { ...this.state, profile })),
-      (error) => {
-        //TODO: show error notification
-        console.log("Problem with server connection", error);
-      }
-    );
+    this.userService
+      .fetchUser(this.state.token.userId)
+      .pipe(take(1))
+      .subscribe(
+        (profile) => {
+          this.state$.next((this.state = { ...this.state, profile }));
+        },
+        (error) => {
+          //TODO: show error notification
+          console.log("Problem with server connection", error);
+        }
+      );
   }
 }

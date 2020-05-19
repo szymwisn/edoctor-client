@@ -1,17 +1,24 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
-import { map } from "rxjs/operators";
+import { map, take } from "rxjs/operators";
 import { DiagnosisService } from "../services/diagnosis/diagnosis.service";
 import { Diagnosis } from "../models/diagnosis/diagnosis.model";
 import { DiagnosisFilters } from "../models/diagnosis/diagnosis-filters.model";
+import { DiagnosesResponse } from "../models/diagnosis/diagnoses-response.model";
 
 class State {
-  diagnoses: Diagnosis[] = null;
-  diagnosis: Diagnosis = null;
+  diagnoses: Diagnosis[] = [];
+  diagnosis: Diagnosis = {
+    date: null,
+    description: null,
+    disease: null,
+    id: null,
+    probability: null,
+    tips: null,
+  };
   currentPage: number = 1;
-  totalPages: number = 5;
+  totalPages: number = 1;
   filters: DiagnosisFilters = null;
-  searchPhrase: string = null;
 }
 
 @Injectable({ providedIn: "root" })
@@ -39,32 +46,26 @@ export class DiagnosisFacade {
     map((state) => state.filters)
   );
 
-  searchPhrase$: Observable<string> = this.state$.pipe(
-    map((state) => state.searchPhrase)
-  );
-
   constructor(private diagnoseService: DiagnosisService) {}
 
   saveDiagnosis(userId: string, diagnosis: Diagnosis) {
-    this.diagnoseService.saveDiagnosis(userId, diagnosis).subscribe(
-      (success) => {
-        //TODO: show success notification
-        console.log("History fetched");
-      },
-      (error) => {
-        //TODO: show error notification
-        console.log("Problem with server connection", error);
-      }
-    );
+    this.diagnoseService
+      .saveDiagnosis(userId, diagnosis)
+      .pipe(take(1))
+      .subscribe(
+        (success) => {
+          //TODO: show success notification
+          console.log("History fetched");
+        },
+        (error) => {
+          //TODO: show error notification
+          console.log("Problem with server connection", error);
+        }
+      );
   }
 
   changeFilters(userId: string, filters: DiagnosisFilters) {
     this.state$.next((this.state = { ...this.state, filters }));
-    this.getDiagnoses(userId);
-  }
-
-  changeSearchPhrase(userId: string, searchPhrase: string) {
-    this.state$.next((this.state = { ...this.state, searchPhrase }));
     this.getDiagnoses(userId);
   }
 
@@ -80,15 +81,18 @@ export class DiagnosisFacade {
 
   getDiagnoses(userId: string) {
     this.diagnoseService
-      .fetchDiagnoses(
-        userId,
-        this.state.currentPage,
-        this.state.filters,
-        this.state.searchPhrase
-      )
+      .fetchDiagnoses(userId, this.state.currentPage, this.state.filters)
+      .pipe(take(1))
       .subscribe(
-        (diagnoses) =>
-          this.state$.next((this.state = { ...this.state, diagnoses })),
+        (response: DiagnosesResponse) => {
+          this.state$.next(
+            (this.state = {
+              ...this.state,
+              diagnoses: response[0],
+              totalPages: response[1],
+            })
+          );
+        },
         (error) => {
           //TODO: show error notification
           console.log("Problem with server connection", error);
@@ -97,14 +101,17 @@ export class DiagnosisFacade {
   }
 
   getDiagnosis(userId: string, diagnosisId?: string) {
-    this.diagnoseService.fetchDiagnosis(userId, diagnosisId).subscribe(
-      (diagnosis) => {
-        this.state$.next((this.state = { ...this.state, diagnosis }));
-      },
-      (error) => {
-        //TODO: show error notification
-        console.log("Problem with server connection", error);
-      }
-    );
+    this.diagnoseService
+      .fetchDiagnosis(userId, diagnosisId)
+      .pipe(take(1))
+      .subscribe(
+        (diagnosis) => {
+          this.state$.next((this.state = { ...this.state, diagnosis }));
+        },
+        (error) => {
+          //TODO: show error notification
+          console.log("Problem with server connection", error);
+        }
+      );
   }
 }

@@ -1,6 +1,9 @@
 <div class="wrapper" *ngIf="allData$ | async as allData">
   <app-breadcrumb text="History"></app-breadcrumb>
-  <app-bar (filtersClick)="openFiltersModal()"></app-bar>
+  <app-bar
+    [filters]="allData.filters"
+    (filtersClick)="openFiltersModal()"
+  ></app-bar>
   <app-table
     [diagnoses]="allData.diagnoses"
     (diagnosisClick)="openDiagnosis($event)"

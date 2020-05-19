@@ -6,5 +6,5 @@ export class Diagnosis {
   disease: Disease;
   probability: number;
   description: string;
-  tips: string[];
+  tips: string;
 }

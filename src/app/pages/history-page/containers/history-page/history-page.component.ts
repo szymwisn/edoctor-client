@@ -3,6 +3,7 @@ import {
   ViewChild,
   TemplateRef,
   ViewContainerRef,
+  OnInit,
 } from "@angular/core";
 import { UserFacade } from "src/app/facades/user.facade";
 import { DiagnosisFacade } from "src/app/facades/diagnosis.facade";
@@ -14,13 +15,14 @@ import { ModalService } from "src/app/services/utils/modal.service";
 import { Disease } from "src/app/models/diagnosis/diseases";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
+import { DiagnosisFilters } from "src/app/models/diagnosis/diagnosis-filters.model";
 
 @Component({
   selector: "app-history-page",
   templateUrl: "./history-page.component.html",
   styleUrls: ["./history-page.component.scss"],
 })
-export class HistoryPageComponent {
+export class HistoryPageComponent implements OnInit {
   @ViewChild("filtersModalContent") filtersModalContent: TemplateRef<any>;
 
   diseases: Disease[] = [
@@ -39,6 +41,7 @@ export class HistoryPageComponent {
     diagnoses: Diagnosis[];
     currentPage: number;
     totalPages: number;
+    filters: DiagnosisFilters;
   }>;
 
   constructor(
@@ -56,12 +59,14 @@ export class HistoryPageComponent {
       this.diagnosisFacade.diagnoses$,
       this.diagnosisFacade.currentPage$,
       this.diagnosisFacade.totalPages$,
+      this.diagnosisFacade.filters$,
     ]).pipe(
-      map(([token, diagnoses, currentPage, totalPages]) => ({
+      map(([token, diagnoses, currentPage, totalPages, filters]) => ({
         token,
         diagnoses,
         currentPage,
         totalPages,
+        filters,
       }))
     );
 
@@ -78,6 +83,14 @@ export class HistoryPageComponent {
     });
   }
 
+  ngOnInit() {
+    this.diagnosisFacade.filters$.pipe(take(1)).subscribe((filters) => {
+      if (filters) {
+        this.form.setValue(filters);
+      }
+    });
+  }
+
   changePage(page: number, userId: string) {
     this.diagnosisFacade.switchPage(userId, page);
   }
@@ -88,7 +101,6 @@ export class HistoryPageComponent {
 
   applyFilters(userId: string) {
     this.diagnosisFacade.changeFilters(userId, this.form.value);
-    console.log(this.form.value);
   }
 
   resetFilters(userId: string) {

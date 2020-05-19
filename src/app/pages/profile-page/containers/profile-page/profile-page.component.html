@@ -1,12 +1,12 @@
 <div class="wrapper" *ngIf="allData$ | async as allData">
   <app-breadcrumb text="User Profile"></app-breadcrumb>
   <app-heading-box
-    [text]="'We\'re glad youre back, ' + allData.profile.email + '!'"
+    [text]="'We\'re glad youre back, ' + allData.profile.name + '!'"
     placement="profile"
   ></app-heading-box>
 
   <div class="boxes">
-    <app-personal-info></app-personal-info>
+    <app-personal-info [profile]="allData.profile"></app-personal-info>
     <app-recent-healthcheck
       [diagnosis]="allData.diagnosis"
     ></app-recent-healthcheck>

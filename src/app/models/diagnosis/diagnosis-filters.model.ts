@@ -6,4 +6,8 @@ export class DiagnosisFilters {
   maxProbability: number;
   dateFrom: Date;
   dateTo: Date;
+
+  getStr(): string {
+    return "xd";
+  }
 }
