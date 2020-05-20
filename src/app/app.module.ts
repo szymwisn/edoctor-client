@@ -31,6 +31,6 @@ import { HttpInterceptor } from "./services/interceptors/http-interceptor.servic
     },
   ],
   bootstrap: [AppComponent],
-  entryComponents: [NotificationComponent, ModalComponent],
+  entryComponents: [ModalComponent],
 })
 export class AppModule {}

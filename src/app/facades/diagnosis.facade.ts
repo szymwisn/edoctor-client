@@ -5,6 +5,7 @@ import { DiagnosisService } from "../services/diagnosis/diagnosis.service";
 import { Diagnosis } from "../models/diagnosis/diagnosis.model";
 import { DiagnosisFilters } from "../models/diagnosis/diagnosis-filters.model";
 import { DiagnosesResponse } from "../models/diagnosis/diagnoses-response.model";
+import { NotificationService } from "../services/utils/notification.service";
 
 class State {
   diagnoses: Diagnosis[] = [];
@@ -46,7 +47,10 @@ export class DiagnosisFacade {
     map((state) => state.filters)
   );
 
-  constructor(private diagnoseService: DiagnosisService) {}
+  constructor(
+    private diagnoseService: DiagnosisService,
+    private notificationService: NotificationService
+  ) {}
 
   saveDiagnosis(userId: string, diagnosis: Diagnosis) {
     this.diagnoseService
@@ -54,12 +58,12 @@ export class DiagnosisFacade {
       .pipe(take(1))
       .subscribe(
         (success) => {
-          //TODO: show success notification
-          console.log("History fetched");
+          this.notificationService.addNotification("Diagnosis saved");
         },
         (error) => {
-          //TODO: show error notification
-          console.log("Problem with server connection", error);
+          this.notificationService.addNotification(
+            "Problem with server connection"
+          );
         }
       );
   }
@@ -94,8 +98,9 @@ export class DiagnosisFacade {
           );
         },
         (error) => {
-          //TODO: show error notification
-          console.log("Problem with server connection", error);
+          this.notificationService.addNotification(
+            "Problem with server connection"
+          );
         }
       );
   }
@@ -109,8 +114,9 @@ export class DiagnosisFacade {
           this.state$.next((this.state = { ...this.state, diagnosis }));
         },
         (error) => {
-          //TODO: show error notification
-          console.log("Problem with server connection", error);
+          this.notificationService.addNotification(
+            "Problem with server connection"
+          );
         }
       );
   }

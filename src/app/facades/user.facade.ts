@@ -9,6 +9,7 @@ import { BehaviorSubject, Observable } from "rxjs";
 import { Router } from "@angular/router";
 import { ChangeSettingsForm } from "../models/form/change-settings-form.model";
 import { map, take } from "rxjs/operators";
+import { NotificationService } from "../services/utils/notification.service";
 
 class State {
   token: DecodedToken = null;
@@ -36,6 +37,7 @@ export class UserFacade {
   constructor(
     private userService: UserService,
     private authService: AuthService,
+    private notificationService: NotificationService,
     private router: Router
   ) {
     const token = this.authService.getToken();
@@ -65,8 +67,7 @@ export class UserFacade {
           this.router.navigate(["profile"]);
         },
         (error) => {
-          // TODO: show error notification
-          console.log("Failed to signin", error);
+          this.notificationService.addNotification("Failed to signin");
         }
       );
   }
@@ -75,11 +76,20 @@ export class UserFacade {
     this.authService
       .register(form)
       .pipe(take(1))
-      .subscribe((success) => {
-        this.router.navigate(["signin"]);
-        //TODO: show success notification
-        console.log("Account successfully created");
-      });
+      .subscribe(
+        (success) => {
+          this.router.navigate(["signin"]);
+          this.notificationService.addNotification(
+            "Account successfully created",
+            3000
+          );
+        },
+        (error) => {
+          this.notificationService.addNotification(
+            "Problem with server connection"
+          );
+        }
+      );
   }
 
   signout() {
@@ -88,8 +98,7 @@ export class UserFacade {
       (this.state = { ...this.state, profile: null, token: null })
     );
     this.router.navigate(["welcome"]);
-    //TODO: show success notification
-    console.log("User successfully logged out");
+    this.notificationService.addNotification("User successfully logged out");
   }
 
   changeSettings(form: ChangeSettingsForm) {
@@ -98,12 +107,15 @@ export class UserFacade {
       .pipe(take(1))
       .subscribe(
         (success) => {
-          //TODO: show success notification
-          console.log("Settings successfully changed");
+          this.notificationService.addNotification(
+            "Settings successfully changed",
+            3000
+          );
         },
         (error) => {
-          //TODO: show error notification
-          console.log("Problem with server connection", error);
+          this.notificationService.addNotification(
+            "Problem with server connection"
+          );
         }
       );
   }
@@ -117,8 +129,9 @@ export class UserFacade {
           this.state$.next((this.state = { ...this.state, profile }));
         },
         (error) => {
-          //TODO: show error notification
-          console.log("Problem with server connection", error);
+          this.notificationService.addNotification(
+            "Problem with server connection"
+          );
         }
       );
   }

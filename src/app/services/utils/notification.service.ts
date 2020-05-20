@@ -1,36 +1,27 @@
-import {
-  ViewContainerRef,
-  ComponentFactoryResolver,
-  Injectable,
-} from "@angular/core";
-import { NotificationComponent } from "../../components/notification/notification.component";
+import { Injectable } from "@angular/core";
+import { Observable, Subject } from "rxjs";
 
 @Injectable({
   providedIn: "root",
 })
 export class NotificationService {
-  viewContainerRef: ViewContainerRef;
+  notification$ = new Subject<string>();
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver) {}
-
-  setViewContainerRef(viewContainerRef: ViewContainerRef) {
-    this.viewContainerRef = viewContainerRef;
+  getNotification(): Observable<any> {
+    return this.notification$.asObservable();
   }
 
-  createNotification(message: string, timeout?: number) {
-    const factory = this.componentFactoryResolver.resolveComponentFactory(
-      NotificationComponent
-    );
-
-    const componentRef = this.viewContainerRef.createComponent(factory);
-    componentRef.instance.message = message;
+  addNotification(message: string, timeout?: number) {
+    this.notification$.next(message);
 
     if (timeout) {
       setTimeout(() => {
-        componentRef.instance.close();
+        this.notification$.next(null);
       }, timeout);
     }
+  }
 
-    componentRef.changeDetectorRef.detectChanges();
+  close() {
+    this.notification$.next(null);
   }
 }
