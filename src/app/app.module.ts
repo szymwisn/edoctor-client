@@ -24,6 +24,6 @@ import { ComponentsModule } from "./components/components.module";
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [NotificationComponent, ModalComponent],
+  entryComponents: [ModalComponent],
 })
 export class AppModule {}

@@ -1,9 +1,10 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
-import { map } from "rxjs/operators";
+import { map, take } from "rxjs/operators";
 import { DiagnosisService } from "../services/diagnosis/diagnosis.service";
 import { Diagnosis } from "../models/diagnosis/diagnosis.model";
 import { DiagnosisFilters } from "../models/diagnosis/diagnosis-filters.model";
+import { NotificationService } from "../services/utils/notification.service";
 
 class State {
   diagnoses: Diagnosis[] = null;
@@ -39,23 +40,25 @@ export class DiagnosisFacade {
     map((state) => state.filters)
   );
 
-  searchPhrase$: Observable<string> = this.state$.pipe(
-    map((state) => state.searchPhrase)
-  );
-
-  constructor(private diagnoseService: DiagnosisService) {}
+  constructor(
+    private diagnoseService: DiagnosisService,
+    private notificationService: NotificationService
+  ) {}
 
   saveDiagnosis(userId: string, diagnosis: Diagnosis) {
-    this.diagnoseService.saveDiagnosis(userId, diagnosis).subscribe(
-      (success) => {
-        //TODO: show success notification
-        console.log("History fetched");
-      },
-      (error) => {
-        //TODO: show error notification
-        console.log("Problem with server connection", error);
-      }
-    );
+    this.diagnoseService
+      .saveDiagnosis(userId, diagnosis)
+      .pipe(take(1))
+      .subscribe(
+        (success) => {
+          this.notificationService.addNotification("Diagnosis saved");
+        },
+        (error) => {
+          this.notificationService.addNotification(
+            "Problem with server connection"
+          );
+        }
+      );
   }
 
   changeFilters(userId: string, filters: DiagnosisFilters) {
@@ -90,21 +93,26 @@ export class DiagnosisFacade {
         (diagnoses) =>
           this.state$.next((this.state = { ...this.state, diagnoses })),
         (error) => {
-          //TODO: show error notification
-          console.log("Problem with server connection", error);
+          this.notificationService.addNotification(
+            "Problem with server connection"
+          );
         }
       );
   }
 
   getDiagnosis(userId: string, diagnosisId?: string) {
-    this.diagnoseService.fetchDiagnosis(userId, diagnosisId).subscribe(
-      (diagnosis) => {
-        this.state$.next((this.state = { ...this.state, diagnosis }));
-      },
-      (error) => {
-        //TODO: show error notification
-        console.log("Problem with server connection", error);
-      }
-    );
+    this.diagnoseService
+      .fetchDiagnosis(userId, diagnosisId)
+      .pipe(take(1))
+      .subscribe(
+        (diagnosis) => {
+          this.state$.next((this.state = { ...this.state, diagnosis }));
+        },
+        (error) => {
+          this.notificationService.addNotification(
+            "Problem with server connection"
+          );
+        }
+      );
   }
 }
