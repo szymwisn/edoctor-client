@@ -10,10 +10,19 @@ import { Router } from "@angular/router";
 import { ChangeSettingsForm } from "../models/form/change-settings-form.model";
 import { map, take } from "rxjs/operators";
 import { NotificationService } from "../services/utils/notification.service";
+import { LoadingService } from "../services/utils/loading.service";
 
 class State {
   token: DecodedToken = null;
-  profile: User = null;
+  profile: User = {
+    name: null,
+    email: null,
+    age: null,
+    bloodType: null,
+    height: null,
+    mass: null,
+    sex: null,
+  };
 }
 
 @Injectable({ providedIn: "root" })
@@ -30,6 +39,7 @@ export class UserFacade {
     private userService: UserService,
     private authService: AuthService,
     private notificationService: NotificationService,
+    private loadingService: LoadingService,
     private router: Router
   ) {
     const token = this.authService.getToken();
@@ -42,6 +52,7 @@ export class UserFacade {
   }
 
   signin(form: SigninForm) {
+    this.loadingService.start();
     this.authService
       .signIn(form)
       .pipe(take(1))
@@ -59,12 +70,17 @@ export class UserFacade {
           this.router.navigate(["profile"]);
         },
         (error) => {
+          this.loadingService.stop();
           this.notificationService.addNotification("Failed to signin");
+        },
+        () => {
+          this.loadingService.stop();
         }
       );
   }
 
   register(form: RegisterForm) {
+    this.loadingService.start();
     this.authService
       .register(form)
       .pipe(take(1))
@@ -77,9 +93,13 @@ export class UserFacade {
           );
         },
         (error) => {
+          this.loadingService.stop();
           this.notificationService.addNotification(
             "Problem with server connection"
           );
+        },
+        () => {
+          this.loadingService.stop();
         }
       );
   }
@@ -90,29 +110,31 @@ export class UserFacade {
       (this.state = { ...this.state, profile: null, token: null })
     );
     this.router.navigate(["welcome"]);
-    this.notificationService.addNotification("User successfully logged out");
   }
 
   changeSettings(form: ChangeSettingsForm) {
+    this.loadingService.start();
     this.userService
       .changeSettings(this.state.token.userId, form)
       .pipe(take(1))
       .subscribe(
         (success) => {
-          this.notificationService.addNotification(
-            "Settings successfully changed",
-            3000
-          );
+          this.notificationService.addNotification("Settings changed", 3000);
         },
         (error) => {
+          this.loadingService.stop();
           this.notificationService.addNotification(
             "Problem with server connection"
           );
+        },
+        () => {
+          this.loadingService.stop();
         }
       );
   }
 
   getProfile() {
+    this.loadingService.start();
     this.userService
       .fetchUser(this.state.token.userId)
       .pipe(take(1))
@@ -121,9 +143,13 @@ export class UserFacade {
           this.state$.next((this.state = { ...this.state, profile }));
         },
         (error) => {
+          this.loadingService.stop();
           this.notificationService.addNotification(
             "Problem with server connection"
           );
+        },
+        () => {
+          this.loadingService.stop();
         }
       );
   }

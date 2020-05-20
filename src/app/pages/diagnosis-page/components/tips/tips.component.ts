@@ -6,5 +6,5 @@ import { Component, Input } from "@angular/core";
   styleUrls: ["./tips.component.scss"],
 })
 export class TipsComponent {
-  @Input() tips: string[];
+  @Input() tips: string;
 }

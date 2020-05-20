@@ -5,5 +5,5 @@ export class DecodedToken {
 }
 
 export class Token {
-  value: string;
+  token: string;
 }

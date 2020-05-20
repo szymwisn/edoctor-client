@@ -1,5 +1,7 @@
 <div class="wrapper">
-  <p class="title">Healthcheck diagnosis history</p>
+  <p class="title">
+    {{ filters ? "Has filters selected" : "No filters selected" }}
+  </p>
   <app-button
     icon="filter"
     text="filters"

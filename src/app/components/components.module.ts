@@ -21,6 +21,7 @@ import { ToolboxComponent } from "./toolbox/toolbox.component";
 import { BoxComponent } from "./toolbox/box/box.component";
 import { ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
+import { LoadingSpinnerComponent } from "./loading-spinner/loading-spinner.component";
 
 const items = [
   InputComponent,
@@ -42,6 +43,7 @@ const items = [
   PaginationButtonComponent,
   ToolboxComponent,
   BoxComponent,
+  LoadingSpinnerComponent,
 ];
 
 @NgModule({

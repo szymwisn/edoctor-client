@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule } from "@angular/router";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { ReactiveFormsModule } from "@angular/forms";
 
 import { AppRoutingModule } from "./app-routing.module";
@@ -10,6 +10,7 @@ import { AppComponent } from "./app.component";
 import { ModalComponent } from "./components/modal/modal.component";
 import { NotificationComponent } from "./components/notification/notification.component";
 import { ComponentsModule } from "./components/components.module";
+import { HttpInterceptor } from "./services/interceptors/http-interceptor.service";
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +23,13 @@ import { ComponentsModule } from "./components/components.module";
     ComponentsModule,
     PagesModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
   entryComponents: [ModalComponent],
 })

@@ -4,15 +4,23 @@ import { map, take } from "rxjs/operators";
 import { DiagnosisService } from "../services/diagnosis/diagnosis.service";
 import { Diagnosis } from "../models/diagnosis/diagnosis.model";
 import { DiagnosisFilters } from "../models/diagnosis/diagnosis-filters.model";
+import { DiagnosesResponse } from "../models/diagnosis/diagnoses-response.model";
 import { NotificationService } from "../services/utils/notification.service";
+import { LoadingService } from "../services/utils/loading.service";
 
 class State {
-  diagnoses: Diagnosis[] = null;
-  diagnosis: Diagnosis = null;
+  diagnoses: Diagnosis[] = [];
+  diagnosis: Diagnosis = {
+    date: null,
+    description: null,
+    disease: null,
+    id: null,
+    probability: null,
+    tips: null,
+  };
   currentPage: number = 1;
-  totalPages: number = 5;
+  totalPages: number = 1;
   filters: DiagnosisFilters = null;
-  searchPhrase: string = null;
 }
 
 @Injectable({ providedIn: "root" })
@@ -42,10 +50,12 @@ export class DiagnosisFacade {
 
   constructor(
     private diagnoseService: DiagnosisService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private loadingService: LoadingService
   ) {}
 
   saveDiagnosis(userId: string, diagnosis: Diagnosis) {
+    this.loadingService.start();
     this.diagnoseService
       .saveDiagnosis(userId, diagnosis)
       .pipe(take(1))
@@ -57,22 +67,22 @@ export class DiagnosisFacade {
           this.notificationService.addNotification(
             "Problem with server connection"
           );
+        },
+        () => {
+          this.loadingService.stop();
         }
       );
   }
 
   changeFilters(userId: string, filters: DiagnosisFilters) {
-    this.state$.next((this.state = { ...this.state, filters }));
-    this.getDiagnoses(userId);
-  }
-
-  changeSearchPhrase(userId: string, searchPhrase: string) {
-    this.state$.next((this.state = { ...this.state, searchPhrase }));
+    this.state$.next((this.state = { ...this.state, currentPage: 1, filters }));
     this.getDiagnoses(userId);
   }
 
   resetFilters(userId: string) {
-    this.state$.next((this.state = { ...this.state, filters: null }));
+    this.state$.next(
+      (this.state = { ...this.state, currentPage: 1, filters: null })
+    );
     this.getDiagnoses(userId);
   }
 
@@ -82,25 +92,34 @@ export class DiagnosisFacade {
   }
 
   getDiagnoses(userId: string) {
+    this.loadingService.start();
     this.diagnoseService
-      .fetchDiagnoses(
-        userId,
-        this.state.currentPage,
-        this.state.filters,
-        this.state.searchPhrase
-      )
+      .fetchDiagnoses(userId, this.state.currentPage, this.state.filters)
+      .pipe(take(1))
       .subscribe(
-        (diagnoses) =>
-          this.state$.next((this.state = { ...this.state, diagnoses })),
+        (response: DiagnosesResponse) => {
+          this.state$.next(
+            (this.state = {
+              ...this.state,
+              diagnoses: response[0],
+              totalPages: response[1],
+            })
+          );
+        },
         (error) => {
+          this.loadingService.stop();
           this.notificationService.addNotification(
             "Problem with server connection"
           );
+        },
+        () => {
+          this.loadingService.stop();
         }
       );
   }
 
   getDiagnosis(userId: string, diagnosisId?: string) {
+    this.loadingService.start();
     this.diagnoseService
       .fetchDiagnosis(userId, diagnosisId)
       .pipe(take(1))
@@ -109,9 +128,13 @@ export class DiagnosisFacade {
           this.state$.next((this.state = { ...this.state, diagnosis }));
         },
         (error) => {
+          this.loadingService.stop();
           this.notificationService.addNotification(
             "Problem with server connection"
           );
+        },
+        () => {
+          this.loadingService.stop();
         }
       );
   }

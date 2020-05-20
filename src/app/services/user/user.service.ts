@@ -5,26 +5,27 @@ import { ChangeSettingsForm } from "../../models/form/change-settings-form.model
 import { Observable, of } from "rxjs";
 import { Sex } from "../../models/user/sex";
 import { BloodType } from "../../models/user/blood-type";
-
-const tempUser: User = {
-  email: "john@doe.com",
-  age: 35,
-  height: 168,
-  mass: 103,
-  sex: Sex.Male,
-  bloodType: BloodType.AB_Plus,
-};
+import { take, map } from "rxjs/operators";
 
 @Injectable({ providedIn: "root" })
 export class UserService {
   constructor(private http: HttpClient) {}
 
   fetchUser(userId: string): Observable<User> {
-    // return this.http.get<User>(`api/user/${id}`);
-    return of(tempUser);
+    return this.http.get<any>(`api/user/18`).pipe(
+      map((response) => ({
+        name: response.name ? response.name : "",
+        email: response.email ? response.email : "",
+        age: response.age ? response.age : 0,
+        height: response.height ? response.height : 0,
+        mass: response.weight ? response.weight : 0,
+        sex: response.sex ? response.sex : "",
+        bloodType: response.bloodType ? response.bloodType : "",
+      }))
+    );
   }
 
   changeSettings(userId: string, form: ChangeSettingsForm) {
-    return this.http.put("api/settings", { userId, form });
+    return this.http.put("api/settings", { userId: 18, ...form });
   }
 }
