@@ -6,6 +6,7 @@ import { Diagnosis } from "../models/diagnosis/diagnosis.model";
 import { DiagnosisFilters } from "../models/diagnosis/diagnosis-filters.model";
 import { DiagnosesResponse } from "../models/diagnosis/diagnoses-response.model";
 import { NotificationService } from "../services/utils/notification.service";
+import { LoadingService } from "../services/utils/loading.service";
 
 class State {
   diagnoses: Diagnosis[] = [];
@@ -49,10 +50,12 @@ export class DiagnosisFacade {
 
   constructor(
     private diagnoseService: DiagnosisService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private loadingService: LoadingService
   ) {}
 
   saveDiagnosis(userId: string, diagnosis: Diagnosis) {
+    this.loadingService.start();
     this.diagnoseService
       .saveDiagnosis(userId, diagnosis)
       .pipe(take(1))
@@ -64,17 +67,22 @@ export class DiagnosisFacade {
           this.notificationService.addNotification(
             "Problem with server connection"
           );
+        },
+        () => {
+          this.loadingService.stop();
         }
       );
   }
 
   changeFilters(userId: string, filters: DiagnosisFilters) {
-    this.state$.next((this.state = { ...this.state, filters }));
+    this.state$.next((this.state = { ...this.state, currentPage: 1, filters }));
     this.getDiagnoses(userId);
   }
 
   resetFilters(userId: string) {
-    this.state$.next((this.state = { ...this.state, filters: null }));
+    this.state$.next(
+      (this.state = { ...this.state, currentPage: 1, filters: null })
+    );
     this.getDiagnoses(userId);
   }
 
@@ -84,6 +92,7 @@ export class DiagnosisFacade {
   }
 
   getDiagnoses(userId: string) {
+    this.loadingService.start();
     this.diagnoseService
       .fetchDiagnoses(userId, this.state.currentPage, this.state.filters)
       .pipe(take(1))
@@ -98,14 +107,19 @@ export class DiagnosisFacade {
           );
         },
         (error) => {
+          this.loadingService.stop();
           this.notificationService.addNotification(
             "Problem with server connection"
           );
+        },
+        () => {
+          this.loadingService.stop();
         }
       );
   }
 
   getDiagnosis(userId: string, diagnosisId?: string) {
+    this.loadingService.start();
     this.diagnoseService
       .fetchDiagnosis(userId, diagnosisId)
       .pipe(take(1))
@@ -114,9 +128,13 @@ export class DiagnosisFacade {
           this.state$.next((this.state = { ...this.state, diagnosis }));
         },
         (error) => {
+          this.loadingService.stop();
           this.notificationService.addNotification(
             "Problem with server connection"
           );
+        },
+        () => {
+          this.loadingService.stop();
         }
       );
   }
