@@ -16,6 +16,7 @@ import { Disease } from "src/app/models/diagnosis/diseases";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { DiagnosisFilters } from "src/app/models/diagnosis/diagnosis-filters.model";
+import { Sorting } from "src/app/models/diagnosis/sorting";
 
 @Component({
   selector: "app-history-page",
@@ -42,6 +43,7 @@ export class HistoryPageComponent implements OnInit {
     currentPage: number;
     totalPages: number;
     filters: DiagnosisFilters;
+    sorting: Sorting;
   }>;
 
   constructor(
@@ -60,13 +62,15 @@ export class HistoryPageComponent implements OnInit {
       this.diagnosisFacade.currentPage$,
       this.diagnosisFacade.totalPages$,
       this.diagnosisFacade.filters$,
+      this.diagnosisFacade.sorting$,
     ]).pipe(
-      map(([token, diagnoses, currentPage, totalPages, filters]) => ({
+      map(([token, diagnoses, currentPage, totalPages, filters, sorting]) => ({
         token,
         diagnoses,
         currentPage,
         totalPages,
         filters,
+        sorting,
       }))
     );
 
@@ -89,6 +93,30 @@ export class HistoryPageComponent implements OnInit {
         this.form.setValue(filters);
       }
     });
+  }
+
+  sortByDate(currentSorting: Sorting, userId: string) {
+    if (currentSorting === Sorting.DATE_ASC) {
+      this.diagnosisFacade.changeSorting(userId, Sorting.DATE_DESC);
+    } else {
+      this.diagnosisFacade.changeSorting(userId, Sorting.DATE_ASC);
+    }
+  }
+
+  sortByDisease(currentSorting: Sorting, userId: string) {
+    if (currentSorting === Sorting.DISEASE_ASC) {
+      this.diagnosisFacade.changeSorting(userId, Sorting.DISEASE_DESC);
+    } else {
+      this.diagnosisFacade.changeSorting(userId, Sorting.DISEASE_ASC);
+    }
+  }
+
+  sortByProbability(currentSorting: Sorting, userId: string) {
+    if (currentSorting === Sorting.PROBABILITY_ASC) {
+      this.diagnosisFacade.changeSorting(userId, Sorting.PROBABILITY_DESC);
+    } else {
+      this.diagnosisFacade.changeSorting(userId, Sorting.PROBABILITY_ASC);
+    }
   }
 
   changePage(page: number, userId: string) {

@@ -1,8 +1,12 @@
 <div class="wrapper">
   <div class="row heading">
-    <div class="col">Date</div>
-    <div class="col">Disease</div>
-    <div class="col">Probability</div>
+    <div class="col" (click)="sortByDate()">Date {{ dateSortingIcon }}</div>
+    <div class="col" (click)="sortByDisease()">
+      Disease {{ diseaseSortingIcon }}
+    </div>
+    <div class="col" (click)="sortByProbability()">
+      Probability {{ probabilitySortingIcon }}
+    </div>
   </div>
   <div
     class="row"
