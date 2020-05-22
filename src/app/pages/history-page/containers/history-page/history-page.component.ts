@@ -76,10 +76,6 @@ export class HistoryPageComponent implements OnInit {
       }))
     );
 
-    this.userFacade.token$.pipe(take(1)).subscribe((token) => {
-      this.diagnosisFacade.getDiagnoses(token.userId);
-    });
-
     this.form = this.fb.group({
       diseases: "",
       minProbability: ["0", Validators.required],

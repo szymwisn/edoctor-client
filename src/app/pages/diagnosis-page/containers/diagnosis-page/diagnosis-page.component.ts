@@ -28,9 +28,11 @@ export class DiagnosisPageComponent {
         map((params) => params.get("id"))
       )
       .subscribe((diagnosisId) => {
-        this.userFacade.token$.pipe(take(1)).subscribe((token) => {
-          this.diagnosisFacade.getDiagnosis(token.userId, diagnosisId);
-        });
+        if (diagnosisId) {
+          this.userFacade.token$.pipe(take(1)).subscribe((token) => {
+            this.diagnosisFacade.getDiagnosis(token.userId, diagnosisId);
+          });
+        }
       });
   }
 
