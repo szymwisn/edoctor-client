@@ -7,7 +7,6 @@
       placeholder="eg. edoktor@mail.com"
       [invalid]="formSubmitted && !form.get('email').valid"
       [darkLabel]="true"
-      [disabled]="!editMode"
     ></app-input>
 
     <app-input
@@ -18,7 +17,6 @@
       invalidMessage="Please provide age in years, eg. 33"
       [darkLabel]="true"
       [invalid]="formSubmitted && !form.get('age').valid"
-      [disabled]="!editMode"
     ></app-input>
 
     <app-input
@@ -29,7 +27,6 @@
       invalidMessage="Please provide height in centimeters, eg. 178"
       [darkLabel]="true"
       [invalid]="formSubmitted && !form.get('height').valid"
-      [disabled]="!editMode"
     ></app-input>
 
     <app-input
@@ -40,7 +37,6 @@
       invalidMessage="Please provide mass in kilograms, eg. 85"
       [darkLabel]="true"
       [invalid]="formSubmitted && !form.get('mass').valid"
-      [disabled]="!editMode"
     ></app-input>
 
     <app-select
@@ -50,7 +46,6 @@
       [options]="bloodTypes"
       [invalid]="formSubmitted && !form.get('bloodType').valid"
       [darkLabel]="true"
-      [disabled]="!editMode"
     ></app-select>
 
     <app-select
@@ -60,7 +55,6 @@
       [options]="sexes"
       [invalid]="formSubmitted && !form.get('sex').valid"
       [darkLabel]="true"
-      [disabled]="!editMode"
     ></app-select>
 
     <div class="buttons">

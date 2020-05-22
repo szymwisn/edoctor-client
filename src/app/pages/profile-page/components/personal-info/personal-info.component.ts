@@ -52,10 +52,18 @@ export class PersonalInfoComponent {
       bloodType: ["", [Validators.required]],
       sex: ["", [Validators.required]],
     });
+
+    this.form.disable();
   }
 
   toggleEditMode() {
     this.editMode = !this.editMode;
+
+    if (this.editMode) {
+      this.form.enable();
+    } else {
+      this.form.disable();
+    }
   }
 
   save() {
