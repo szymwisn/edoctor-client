@@ -7,6 +7,7 @@ import {
   Injector,
   Inject,
   ApplicationRef,
+  ElementRef,
 } from "@angular/core";
 import { ModalComponent } from "../../components/modal/modal.component";
 import { DOCUMENT } from "@angular/common";
@@ -30,7 +31,7 @@ export class ModalService {
     this.viewContainerRef = viewContainerRef;
   }
 
-  openModal<T>(content: Content<T>) {
+  openModal<T>(content: Content<T>): ElementRef {
     const factory = this.componentFactoryResolver.resolveComponentFactory(
       ModalComponent
     );
@@ -41,6 +42,7 @@ export class ModalService {
 
     const { nativeElement } = componentRef.location;
     this.document.body.appendChild(nativeElement);
+    return componentRef.location;
   }
 
   resolveNgContent<T>(content: Content<T>) {

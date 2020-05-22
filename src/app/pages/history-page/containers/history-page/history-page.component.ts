@@ -4,6 +4,7 @@ import {
   TemplateRef,
   ViewContainerRef,
   OnInit,
+  ElementRef,
 } from "@angular/core";
 import { UserFacade } from "src/app/facades/user.facade";
 import { DiagnosisFacade } from "src/app/facades/diagnosis.facade";
@@ -16,6 +17,7 @@ import { Disease } from "src/app/models/diagnosis/diseases";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { DiagnosisFilters } from "src/app/models/diagnosis/diagnosis-filters.model";
+import { Sorting } from "src/app/models/diagnosis/sorting";
 
 @Component({
   selector: "app-history-page",
@@ -24,6 +26,9 @@ import { DiagnosisFilters } from "src/app/models/diagnosis/diagnosis-filters.mod
 })
 export class HistoryPageComponent implements OnInit {
   @ViewChild("filtersModalContent") filtersModalContent: TemplateRef<any>;
+
+  filtersModal: ElementRef;
+  form: FormGroup;
 
   diseases: Disease[] = [
     Disease.HEALTHY,
@@ -34,14 +39,13 @@ export class HistoryPageComponent implements OnInit {
     Disease.NON_HEART_RELATED,
   ];
 
-  form: FormGroup;
-
   allData$: Observable<{
     token: DecodedToken;
     diagnoses: Diagnosis[];
     currentPage: number;
     totalPages: number;
     filters: DiagnosisFilters;
+    sorting: Sorting;
   }>;
 
   constructor(
@@ -60,19 +64,17 @@ export class HistoryPageComponent implements OnInit {
       this.diagnosisFacade.currentPage$,
       this.diagnosisFacade.totalPages$,
       this.diagnosisFacade.filters$,
+      this.diagnosisFacade.sorting$,
     ]).pipe(
-      map(([token, diagnoses, currentPage, totalPages, filters]) => ({
+      map(([token, diagnoses, currentPage, totalPages, filters, sorting]) => ({
         token,
         diagnoses,
         currentPage,
         totalPages,
         filters,
+        sorting,
       }))
     );
-
-    this.userFacade.token$.pipe(take(1)).subscribe((token) => {
-      this.diagnosisFacade.getDiagnoses(token.userId);
-    });
 
     this.form = this.fb.group({
       diseases: "",
@@ -91,16 +93,41 @@ export class HistoryPageComponent implements OnInit {
     });
   }
 
+  sortByDate(currentSorting: Sorting, userId: string) {
+    if (currentSorting === Sorting.DATE_ASC) {
+      this.diagnosisFacade.changeSorting(userId, Sorting.DATE_DESC);
+    } else {
+      this.diagnosisFacade.changeSorting(userId, Sorting.DATE_ASC);
+    }
+  }
+
+  sortByDisease(currentSorting: Sorting, userId: string) {
+    if (currentSorting === Sorting.DISEASE_ASC) {
+      this.diagnosisFacade.changeSorting(userId, Sorting.DISEASE_DESC);
+    } else {
+      this.diagnosisFacade.changeSorting(userId, Sorting.DISEASE_ASC);
+    }
+  }
+
+  sortByProbability(currentSorting: Sorting, userId: string) {
+    if (currentSorting === Sorting.PROBABILITY_ASC) {
+      this.diagnosisFacade.changeSorting(userId, Sorting.PROBABILITY_DESC);
+    } else {
+      this.diagnosisFacade.changeSorting(userId, Sorting.PROBABILITY_ASC);
+    }
+  }
+
   changePage(page: number, userId: string) {
     this.diagnosisFacade.switchPage(userId, page);
   }
 
   openFiltersModal() {
-    this.modalService.openModal(this.filtersModalContent);
+    this.filtersModal = this.modalService.openModal(this.filtersModalContent);
   }
 
   applyFilters(userId: string) {
     this.diagnosisFacade.changeFilters(userId, this.form.value);
+    this.filtersModal.nativeElement.remove();
   }
 
   resetFilters(userId: string) {
@@ -112,6 +139,7 @@ export class HistoryPageComponent implements OnInit {
       dateTo: "",
     });
     this.diagnosisFacade.resetFilters(userId);
+    this.filtersModal.nativeElement.remove();
   }
 
   openDiagnosis(diagnosis: Diagnosis) {

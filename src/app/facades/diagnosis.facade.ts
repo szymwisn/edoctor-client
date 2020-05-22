@@ -7,6 +7,8 @@ import { DiagnosisFilters } from "../models/diagnosis/diagnosis-filters.model";
 import { DiagnosesResponse } from "../models/diagnosis/diagnoses-response.model";
 import { NotificationService } from "../services/utils/notification.service";
 import { LoadingService } from "../services/utils/loading.service";
+import { Sorting } from "../models/diagnosis/sorting";
+import { UserFacade } from "./user.facade";
 
 class State {
   diagnoses: Diagnosis[] = [];
@@ -21,6 +23,7 @@ class State {
   currentPage: number = 1;
   totalPages: number = 1;
   filters: DiagnosisFilters = null;
+  sorting: Sorting = Sorting.DATE_DESC;
 }
 
 @Injectable({ providedIn: "root" })
@@ -48,11 +51,21 @@ export class DiagnosisFacade {
     map((state) => state.filters)
   );
 
+  sorting$: Observable<Sorting> = this.state$.pipe(
+    map((state) => state.sorting)
+  );
+
   constructor(
     private diagnoseService: DiagnosisService,
     private notificationService: NotificationService,
-    private loadingService: LoadingService
-  ) {}
+    private loadingService: LoadingService,
+    private userFacade: UserFacade
+  ) {
+    this.userFacade.token$.pipe(take(1)).subscribe((token) => {
+      this.getDiagnoses(token.userId);
+      this.getDiagnosis(token.userId);
+    });
+  }
 
   saveDiagnosis(userId: string, diagnosis: Diagnosis) {
     this.loadingService.start();
@@ -79,6 +92,11 @@ export class DiagnosisFacade {
     this.getDiagnoses(userId);
   }
 
+  changeSorting(userId: string, sorting: Sorting) {
+    this.state$.next((this.state = { ...this.state, currentPage: 1, sorting }));
+    this.getDiagnoses(userId);
+  }
+
   resetFilters(userId: string) {
     this.state$.next(
       (this.state = { ...this.state, currentPage: 1, filters: null })
@@ -94,7 +112,12 @@ export class DiagnosisFacade {
   getDiagnoses(userId: string) {
     this.loadingService.start();
     this.diagnoseService
-      .fetchDiagnoses(userId, this.state.currentPage, this.state.filters)
+      .fetchDiagnoses(
+        userId,
+        this.state.currentPage,
+        this.state.sorting,
+        this.state.filters
+      )
       .pipe(take(1))
       .subscribe(
         (response: DiagnosesResponse) => {

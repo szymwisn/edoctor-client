@@ -120,6 +120,7 @@ export class UserFacade {
       .subscribe(
         (success) => {
           this.notificationService.addNotification("Settings changed", 3000);
+          this.getProfile();
         },
         (error) => {
           this.loadingService.stop();

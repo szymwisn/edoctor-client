@@ -6,7 +6,11 @@
   ></app-bar>
   <app-table
     [diagnoses]="allData.diagnoses"
+    [sorting]="allData.sorting"
     (diagnosisClick)="openDiagnosis($event)"
+    (sortByDateClick)="sortByDate($event, allData.token.userId)"
+    (sortByDiseaseClick)="sortByDisease($event, allData.token.userId)"
+    (sortByProbabilityClick)="sortByProbability($event, allData.token.userId)"
   ></app-table>
   <div class="pagination">
     <p>Page {{ allData.currentPage }} of {{ allData.totalPages }}</p>

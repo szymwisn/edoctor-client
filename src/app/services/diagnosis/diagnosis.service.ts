@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { Diagnosis } from "../../models/diagnosis/diagnosis.model";
 import { DiagnosisFilters } from "../../models/diagnosis/diagnosis-filters.model";
 import { DiagnosesResponse } from "src/app/models/diagnosis/diagnoses-response.model";
+import { Sorting } from "src/app/models/diagnosis/sorting";
 
 @Injectable({
   providedIn: "root",
@@ -14,6 +15,7 @@ export class DiagnosisService {
   fetchDiagnoses(
     userId: string,
     pageNumber: number,
+    sorting: Sorting,
     filters?: DiagnosisFilters
   ): Observable<DiagnosesResponse> {
     if (filters) {
@@ -26,6 +28,7 @@ export class DiagnosisService {
           maxProbability: filters.maxProbability.toString(),
           dateFrom: filters.dateFrom.toString(),
           dateTo: filters.dateTo.toString(),
+          sorting: sorting.toString(),
         },
       });
     } else {
@@ -33,6 +36,7 @@ export class DiagnosisService {
         params: {
           userId: "18",
           pageNumber: pageNumber.toString(),
+          sorting: sorting.toString(),
         },
       });
     }

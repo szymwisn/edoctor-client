@@ -25,9 +25,5 @@ export class ProfilePageComponent {
       this.userFacade.profile$,
       this.diagnosisFacade.diagnosis$,
     ]).pipe(map(([profile, diagnosis]) => ({ profile, diagnosis })));
-
-    this.userFacade.token$.pipe(take(1)).subscribe((token) => {
-      this.diagnosisFacade.getDiagnosis(token.userId);
-    });
   }
 }
