@@ -71,7 +71,7 @@ export class UserFacade {
         },
         (error) => {
           this.loadingService.stop();
-          this.notificationService.addNotification("Failed to signin");
+          this.notificationService.addNotification("Failed to signin", 3000);
         },
         () => {
           this.loadingService.stop();
