@@ -8,13 +8,22 @@
       Probability {{ probabilitySortingIcon }}
     </div>
   </div>
-  <div
-    class="row"
-    *ngFor="let diagnosis of diagnoses"
-    (click)="onRowClick(diagnosis)"
-  >
-    <div class="col">{{ diagnosis.date | date }}</div>
-    <div class="col">{{ diagnosis.disease }}</div>
-    <div class="col">{{ diagnosis.probability }}%</div>
-  </div>
+  <ng-container *ngIf="diagnoses.length > 0; else noDiagnoses">
+    <div
+      class="row"
+      *ngFor="let diagnosis of diagnoses"
+      (click)="onRowClick(diagnosis)"
+    >
+      <div class="col">{{ diagnosis.date | date }}</div>
+      <div class="col">{{ diagnosis.disease }}</div>
+      <div class="col">{{ diagnosis.probability }}%</div>
+    </div>
+  </ng-container>
 </div>
+
+<ng-template #noDiagnoses>
+  <p class="no-diagnoses no-diagnoses-header">No diagnoses</p>
+  <p class="no-diagnoses no-diagnoses-text">
+    Change your filters or examinte yourself
+  </p>
+</ng-template>

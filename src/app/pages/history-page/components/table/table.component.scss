@@ -41,3 +41,18 @@
   flex-basis: 100%;
   flex: 1;
 }
+
+.no-diagnoses {
+  text-align: center;
+  color: $rock-blue;
+  @include rubik-medium;
+}
+
+.no-diagnoses-header {
+  font-size: 1.8rem;
+  padding-top: 30px;
+}
+
+.no-diagnoses-text {
+  padding-bottom: 30px;
+}
