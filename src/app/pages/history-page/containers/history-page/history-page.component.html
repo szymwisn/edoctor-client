@@ -12,7 +12,7 @@
     (sortByDiseaseClick)="sortByDisease($event, allData.token.userId)"
     (sortByProbabilityClick)="sortByProbability($event, allData.token.userId)"
   ></app-table>
-  <div class="pagination">
+  <div class="pagination" *ngIf="allData.diagnoses.length > 0">
     <p>Page {{ allData.currentPage }} of {{ allData.totalPages }}</p>
     <app-pagination
       [totalPages]="allData.totalPages"
