@@ -4,6 +4,7 @@ import {
   TemplateRef,
   ViewContainerRef,
   OnInit,
+  ElementRef,
 } from "@angular/core";
 import { UserFacade } from "src/app/facades/user.facade";
 import { DiagnosisFacade } from "src/app/facades/diagnosis.facade";
@@ -26,6 +27,9 @@ import { Sorting } from "src/app/models/diagnosis/sorting";
 export class HistoryPageComponent implements OnInit {
   @ViewChild("filtersModalContent") filtersModalContent: TemplateRef<any>;
 
+  filtersModal: ElementRef;
+  form: FormGroup;
+
   diseases: Disease[] = [
     Disease.HEALTHY,
     Disease.CORONARY_ARTERY,
@@ -34,8 +38,6 @@ export class HistoryPageComponent implements OnInit {
     Disease.MYOCARDIAL_INFARCTION_SUBENDOCARDIAL,
     Disease.NON_HEART_RELATED,
   ];
-
-  form: FormGroup;
 
   allData$: Observable<{
     token: DecodedToken;
@@ -124,11 +126,12 @@ export class HistoryPageComponent implements OnInit {
   }
 
   openFiltersModal() {
-    this.modalService.openModal(this.filtersModalContent);
+    this.filtersModal = this.modalService.openModal(this.filtersModalContent);
   }
 
   applyFilters(userId: string) {
     this.diagnosisFacade.changeFilters(userId, this.form.value);
+    this.filtersModal.nativeElement.remove();
   }
 
   resetFilters(userId: string) {
@@ -140,6 +143,7 @@ export class HistoryPageComponent implements OnInit {
       dateTo: "",
     });
     this.diagnosisFacade.resetFilters(userId);
+    this.filtersModal.nativeElement.remove();
   }
 
   openDiagnosis(diagnosis: Diagnosis) {
