@@ -16,6 +16,10 @@ import { ExaminationFormAvailableValues } from "src/app/models/examination/exami
 import { DurationOfTheLastEpisode } from "src/app/models/examination/duration-of-the-last-episode";
 import { HistoryOfSimiliarPain } from "src/app/models/examination/history-of-similiar-pain";
 import { ExaminationService } from "src/app/services/examination/examination.service";
+import { NotificationService } from "src/app/services/utils/notification.service";
+import { UserService } from "src/app/services/user/user.service";
+import { UserFacade } from "src/app/facades/user.facade";
+import { AuthService } from "src/app/services/user/auth.service";
 
 @Component({
   selector: "app-examination-page",
@@ -28,8 +32,11 @@ export class ExaminationPageComponent {
   availableValues: ExaminationFormAvailableValues;
 
   constructor(
-    private fb: FormBuilder,
+    private userFacade: UserFacade,
     private examinationService: ExaminationService,
+    private notificationService: NotificationService,
+    private authService: AuthService,
+    private fb: FormBuilder,
     private router: Router
   ) {
     this.initializeFormAvailableValues();
@@ -60,18 +67,27 @@ export class ExaminationPageComponent {
     window.scrollTo(0, 0);
 
     if (this.form.valid) {
-      this.examinationService
-        .sendExaminationForm(this.form.value)
-        .pipe(take(1))
-        .subscribe(
-          (diagnosis) => {
-            this.form.reset();
-            this.router.navigate(["diagnosis"]);
-          },
-          (error) => {
-            // TODO: display error message
-          }
-        );
+      console.log(this.form.value);
+      this.userFacade.profile$.pipe(take(1)).subscribe((user) => {
+        this.examinationService
+          .sendExaminationForm(
+            this.form.value,
+            user,
+            this.authService.decodeToken(this.authService.getToken())
+          )
+          .pipe(take(1))
+          .subscribe(
+            (diagnosis) => {
+              this.form.reset();
+              this.router.navigate(["diagnosis"]);
+            },
+            (error) => {
+              this.notificationService.addNotification(
+                "Error with backend connection."
+              );
+            }
+          );
+      });
     }
   }
 

@@ -4,5 +4,5 @@ export enum CurrentMedicationUsage {
   BETA_BLOCKERS = "Beta blockers",
   DIGITALIS = "Digitalis",
   NONSTEROIDAL_ANTIINFLAMMATORY = "Nonsteroidal anti-inflammatory",
-  ANTACITS_H2BLOCKERS = "Antacids/H2 blockers",
+  ANTACIDS_H2_BLOCKERS = "Antacids/H2 blockers",
 }
