@@ -145,7 +145,7 @@ export class ExaminationService {
       )
         ? 1
         : 0,
-      nirates: form.currentMedicationUsage.includes(
+      nitrates: form.currentMedicationUsage.includes(
         CurrentMedicationUsage.NITRATES
       )
         ? 1
@@ -318,7 +318,7 @@ export class ExaminationService {
         return 6;
       case PainCharacter.BURNING:
         return 7;
-      case PainCharacter.PLEUTRITIC:
+      case PainCharacter.PLEURITIC:
         return 8;
     }
   }

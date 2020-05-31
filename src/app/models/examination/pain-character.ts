@@ -6,5 +6,5 @@ export enum PainCharacter {
   DULL_PRESSURE = "Dull/pressure",
   SHARP = "Sharp",
   BURNING = "Burning",
-  PLEUTRITIC = "Pleutric",
+  PLEURITIC = "Pleuritric",
 }
