@@ -2,17 +2,15 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { User } from "../../models/user/user.model";
 import { ChangeSettingsForm } from "../../models/form/change-settings-form.model";
-import { Observable, of } from "rxjs";
-import { Sex } from "../../models/user/sex";
-import { BloodType } from "../../models/user/blood-type";
-import { take, map } from "rxjs/operators";
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
 
 @Injectable({ providedIn: "root" })
 export class UserService {
   constructor(private http: HttpClient) {}
 
   fetchUser(userId: string): Observable<User> {
-    return this.http.get<any>(`api/user/18`).pipe(
+    return this.http.get<any>(`api/user/${userId}`).pipe(
       map((response) => ({
         name: response.name ? response.name : "",
         email: response.email ? response.email : "",
@@ -26,6 +24,6 @@ export class UserService {
   }
 
   changeSettings(userId: string, form: ChangeSettingsForm) {
-    return this.http.put("api/settings", { userId: 18, ...form });
+    return this.http.put("api/settings", { userId, ...form });
   }
 }

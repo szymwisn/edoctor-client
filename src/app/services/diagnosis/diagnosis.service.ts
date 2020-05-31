@@ -21,7 +21,7 @@ export class DiagnosisService {
     if (filters) {
       return this.http.get<DiagnosesResponse>("api/diagnoses", {
         params: {
-          userId: "18",
+          userId,
           pageNumber: pageNumber.toString(),
           diseases: filters.diseases.toString(),
           minProbability: filters.minProbability.toString(),
@@ -34,7 +34,7 @@ export class DiagnosisService {
     } else {
       return this.http.get<DiagnosesResponse>("api/diagnoses", {
         params: {
-          userId: "18",
+          userId,
           pageNumber: pageNumber.toString(),
           sorting: sorting.toString(),
         },
@@ -46,14 +46,14 @@ export class DiagnosisService {
     if (diagnosisId) {
       return this.http.get<Diagnosis>("api/diagnosis", {
         params: {
-          userId: "18",
+          userId,
           diagnosisId,
         },
       });
     } else {
       return this.http.get<Diagnosis>("api/diagnosis", {
         params: {
-          userId: "18",
+          userId,
         },
       });
     }

@@ -19,7 +19,15 @@ export class AuthService {
   }
 
   decodeToken(token: Token): DecodedToken {
-    return jwtDecode(token.token) as DecodedToken;
+    const t = jwtDecode(token.token);
+
+    const decodedToken: DecodedToken = {
+      userId: t.user_id,
+      exp: t.exp,
+      iat: t.orig_iat,
+    };
+
+    return decodedToken;
   }
 
   refreshToken(token: Token) {

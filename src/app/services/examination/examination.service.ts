@@ -16,7 +16,6 @@ import { CurrentMedicationUsage } from "src/app/models/examination/current-medic
 import { PhysicalExaminations } from "src/app/models/examination/physical-examinations";
 import { EcgExamination } from "src/app/models/examination/ecg-examination";
 import { User } from "src/app/models/user/user.model";
-import { DecodedToken } from "src/app/models/user/token.model";
 import { Sex } from "src/app/models/user/sex";
 
 @Injectable({
@@ -28,16 +27,14 @@ export class ExaminationService {
   sendExaminationForm(
     form: ExaminationForm,
     user: User,
-    token: DecodedToken
+    userId: string
   ): Observable<Diagnosis> {
     const body = {
-      userId: "18",
+      userId,
       age: user.age,
       sex: user.sex === Sex.MALE ? 1 : 0,
       ...this.convertFormToBody(form),
     };
-
-    console.log(body);
 
     return this.http.post<Diagnosis>("api/examination", body);
   }

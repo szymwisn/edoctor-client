@@ -58,14 +58,16 @@ export class UserFacade {
       .pipe(take(1))
       .subscribe(
         (token) => {
-          console.log(token);
           this.authService.storeToken(token);
+
           const decodedToken: DecodedToken = this.authService.decodeToken(
             token
           );
+
           this.state$.next(
             (this.state = { ...this.state, token: decodedToken })
           );
+
           this.getProfile();
           this.router.navigate(["profile"]);
         },

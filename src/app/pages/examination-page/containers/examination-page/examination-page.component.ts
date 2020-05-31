@@ -17,9 +17,9 @@ import { DurationOfTheLastEpisode } from "src/app/models/examination/duration-of
 import { HistoryOfSimiliarPain } from "src/app/models/examination/history-of-similiar-pain";
 import { ExaminationService } from "src/app/services/examination/examination.service";
 import { NotificationService } from "src/app/services/utils/notification.service";
-import { UserService } from "src/app/services/user/user.service";
 import { UserFacade } from "src/app/facades/user.facade";
 import { AuthService } from "src/app/services/user/auth.service";
+import { combineLatest } from "rxjs";
 
 @Component({
   selector: "app-examination-page",
@@ -67,27 +67,24 @@ export class ExaminationPageComponent {
     window.scrollTo(0, 0);
 
     if (this.form.valid) {
-      console.log(this.form.value);
-      this.userFacade.profile$.pipe(take(1)).subscribe((user) => {
-        this.examinationService
-          .sendExaminationForm(
-            this.form.value,
-            user,
-            this.authService.decodeToken(this.authService.getToken())
-          )
-          .pipe(take(1))
-          .subscribe(
-            (diagnosis) => {
-              this.form.reset();
-              this.router.navigate(["diagnosis"]);
-            },
-            (error) => {
-              this.notificationService.addNotification(
-                "Error with backend connection."
-              );
-            }
-          );
-      });
+      combineLatest([this.userFacade.profile$, this.userFacade.token$])
+        .pipe(take(1))
+        .subscribe(([user, decodedToken]) => {
+          this.examinationService
+            .sendExaminationForm(this.form.value, user, decodedToken.userId)
+            .pipe(take(1))
+            .subscribe(
+              (diagnosis) => {
+                this.form.reset();
+                this.router.navigate(["diagnosis"]);
+              },
+              (error) => {
+                this.notificationService.addNotification(
+                  "Error with backend connection."
+                );
+              }
+            );
+        });
     }
   }
 
