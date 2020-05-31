@@ -17,6 +17,7 @@ import { PhysicalExaminations } from "src/app/models/examination/physical-examin
 import { EcgExamination } from "src/app/models/examination/ecg-examination";
 import { User } from "src/app/models/user/user.model";
 import { DecodedToken } from "src/app/models/user/token.model";
+import { Sex } from "src/app/models/user/sex";
 
 @Injectable({
   providedIn: "root",
@@ -32,7 +33,7 @@ export class ExaminationService {
     const body = {
       userId: "18",
       age: user.age,
-      sex: user.sex,
+      sex: user.sex === Sex.MALE ? 1 : 0,
       ...this.convertFormToBody(form),
     };
 
