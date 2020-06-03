@@ -18,8 +18,9 @@ import { HistoryOfSimiliarPain } from "src/app/models/examination/history-of-sim
 import { ExaminationService } from "src/app/services/examination/examination.service";
 import { NotificationService } from "src/app/services/utils/notification.service";
 import { UserFacade } from "src/app/facades/user.facade";
-import { AuthService } from "src/app/services/user/auth.service";
 import { combineLatest } from "rxjs";
+import { DiagnosisFacade } from "src/app/facades/diagnosis.facade";
+import { LoadingService } from "src/app/services/utils/loading.service";
 
 @Component({
   selector: "app-examination-page",
@@ -35,7 +36,8 @@ export class ExaminationPageComponent {
     private userFacade: UserFacade,
     private examinationService: ExaminationService,
     private notificationService: NotificationService,
-    private authService: AuthService,
+    private diagnosisFacade: DiagnosisFacade,
+    private loadingService: LoadingService,
     private fb: FormBuilder,
     private router: Router
   ) {
@@ -63,6 +65,7 @@ export class ExaminationPageComponent {
   }
 
   submitForm() {
+    this.loadingService.start();
     this.formSubmitted = true;
     window.scrollTo(0, 0);
 
@@ -76,12 +79,15 @@ export class ExaminationPageComponent {
             .subscribe(
               (diagnosis) => {
                 this.form.reset();
+                this.diagnosisFacade.getDiagnosis(decodedToken.userId);
+                this.diagnosisFacade.getDiagnoses(decodedToken.userId);
                 this.router.navigate(["diagnosis"]);
               },
               (error) => {
                 this.notificationService.addNotification(
-                  "Error with backend connection."
+                  "Problem with server connection"
                 );
+                this.loadingService.stop();
               }
             );
         });
