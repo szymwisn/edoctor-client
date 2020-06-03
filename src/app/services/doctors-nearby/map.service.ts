@@ -52,21 +52,51 @@ export class MapService {
   }
 
   private getPopupHTML(options: MarkerOptions) {
-    return `
-    <div class="map-popup">
-      <div class="map-popup-phone">
-        ${options.phone}
-      </div>
-      <div class="map-popup-doctor">
-        ${options.doctor}
-      </div>
-      <div class="map-popup-clinicks">
-        ${options.clinic}
-      </div>
-      <div class="map-popup-address">
-        ${options.address}
-      </div>
-    </div>
-  `;
+    if (options.phone && options.clinic) {
+      return `
+        <div class="map-popup">
+          <div class="map-popup-phone">
+            ${options.phone}
+          </div>
+          <div class="map-popup-doctor">
+            ${options.doctor}
+          </div>
+          <div class="map-popup-clinicks">
+            ${options.clinic}
+          </div>
+          <div class="map-popup-address">
+            ${options.address}
+          </div>
+        </div>
+      `;
+    } else if (!options.phone) {
+      return `
+        <div class="map-popup">
+          <div class="map-popup-doctor">
+            ${options.doctor}
+          </div>
+          <div class="map-popup-clinicks">
+            ${options.clinic}
+          </div>
+          <div class="map-popup-address">
+            ${options.address}
+          </div>
+        </div>
+      `;
+    } else if (!options.clinic) {
+      return `
+        <div class="map-popup">
+          <div class="map-popup-phone">
+            ${options.phone}
+          </div>
+          <div class="map-popup-doctor">
+            ${options.doctor}
+          </div>
+          <div class="map-popup-address">
+            ${options.address}
+          </div>
+        </div>
+      `;
+    }
   }
 }
