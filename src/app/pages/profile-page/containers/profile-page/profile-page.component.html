@@ -1,6 +1,7 @@
 <div class="wrapper" *ngIf="allData$ | async as allData">
   <app-breadcrumb text="User Profile"></app-breadcrumb>
   <app-heading-box
+    *ngIf="allData.profile"
     [text]="'We\'re glad youre back, ' + allData.profile.name + '!'"
     placement="profile"
   ></app-heading-box>

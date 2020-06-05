@@ -17,6 +17,14 @@
     <div class="register-box">
       <form [formGroup]="form" (ngSubmit)="register()">
         <app-input
+          formControlName="name"
+          label="Name"
+          placeholder="John Doe"
+          [invalid]="formSubmitted && !form.get('name').valid"
+          [darkLabel]="true"
+        ></app-input>
+
+        <app-input
           formControlName="email"
           label="Email"
           placeholder="eg. edoktor@mail.com"

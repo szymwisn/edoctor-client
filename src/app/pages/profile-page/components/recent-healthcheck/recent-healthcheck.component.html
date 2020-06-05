@@ -1,31 +1,42 @@
 <div class="wrapper">
   <div class="heading">
     <h3>Recent healthcheck result</h3>
-    <p class="date">performed on {{ diagnosis.date | date }}</p>
-  </div>
-  <div class="result">
-    <h2>{{ diagnosis.disease }}</h2>
-    <h2>{{ diagnosis.probability }}%</h2>
-  </div>
-  <div class="description">
-    <p class="description-title">
-      {{
-        diagnosis.disease === "Healthy"
-          ? "Everything's fine!"
-          : "Consult a doctor!"
-      }}
-    </p>
-    <p class="description-content">
-      {{
-        diagnosis.disease === "Healthy"
-          ? "Keep on checking examinating yourself regurarly."
-          : "Something's wrong! Consult a doctor as soon as possible."
-      }}
+    <p *ngIf="diagnosis" class="date">
+      performed on {{ diagnosis.date | date }}
     </p>
   </div>
+  <ng-container *ngIf="diagnosis; else noDiagnosis">
+    <div class="result">
+      <h2>{{ diagnosis.disease }}</h2>
+      <h2>{{ diagnosis.probability }}%</h2>
+    </div>
+    <div class="description">
+      <p class="description-title">
+        {{
+          diagnosis.disease === "Healthy"
+            ? "Everything's fine!"
+            : "Consult a doctor!"
+        }}
+      </p>
+      <p class="description-content">
+        {{
+          diagnosis.disease === "Healthy"
+            ? "Keep on checking examinating yourself regurarly."
+            : "Something's wrong! Consult a doctor as soon as possible."
+        }}
+      </p>
+    </div>
+  </ng-container>
   <app-button
     [routerLink]="['/diagnosis']"
     text="Details"
     class="tertiary"
   ></app-button>
 </div>
+
+<ng-template #noDiagnosis>
+  <p class="no-diagnoses no-diagnoses-header">No diagnosis</p>
+  <p class="no-diagnoses no-diagnoses-text">
+    Examinate yourself!
+  </p>
+</ng-template>

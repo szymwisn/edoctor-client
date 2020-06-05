@@ -50,3 +50,18 @@ app-button {
     margin-bottom: 0;
   }
 }
+
+.no-diagnoses {
+  text-align: center;
+  color: $rock-blue;
+  @include rubik-medium;
+}
+
+.no-diagnoses-header {
+  margin-top: 80px;
+  font-size: 1.8rem;
+}
+
+.no-diagnoses-text {
+  margin-bottom: 80px;
+}

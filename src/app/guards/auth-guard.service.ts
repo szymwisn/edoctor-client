@@ -7,7 +7,7 @@ import {
 } from "@angular/router";
 import { map } from "rxjs/operators";
 import { Observable } from "rxjs";
-import { UserFacade } from "../../facades/user.facade";
+import { UserFacade } from "../facades/user.facade";
 
 @Injectable({
   providedIn: "root",

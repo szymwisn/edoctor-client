@@ -58,14 +58,8 @@ export class DiagnosisFacade {
   constructor(
     private diagnoseService: DiagnosisService,
     private notificationService: NotificationService,
-    private loadingService: LoadingService,
-    private userFacade: UserFacade
-  ) {
-    this.userFacade.token$.pipe(take(1)).subscribe((token) => {
-      this.getDiagnoses(token.userId);
-      this.getDiagnosis(token.userId);
-    });
-  }
+    private loadingService: LoadingService // private userFacade: UserFacade
+  ) {}
 
   saveDiagnosis(userId: string, diagnosis: Diagnosis) {
     this.loadingService.start();
@@ -131,9 +125,7 @@ export class DiagnosisFacade {
         },
         (error) => {
           this.loadingService.stop();
-          this.notificationService.addNotification(
-            "Problem with server connection"
-          );
+          this.notificationService.addNotification(error.error);
         },
         () => {
           this.loadingService.stop();
@@ -152,9 +144,6 @@ export class DiagnosisFacade {
         },
         (error) => {
           this.loadingService.stop();
-          this.notificationService.addNotification(
-            "Problem with server connection"
-          );
         },
         () => {
           this.loadingService.stop();

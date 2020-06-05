@@ -11,6 +11,7 @@ import { ChangeSettingsForm } from "../models/form/change-settings-form.model";
 import { map, take } from "rxjs/operators";
 import { NotificationService } from "../services/utils/notification.service";
 import { LoadingService } from "../services/utils/loading.service";
+import { DiagnosisFacade } from "./diagnosis.facade";
 
 class State {
   token: DecodedToken = null;
@@ -36,6 +37,7 @@ export class UserFacade {
   profile$: Observable<User> = this.state$.pipe(map((state) => state.profile));
 
   constructor(
+    private diagnosisFacade: DiagnosisFacade,
     private userService: UserService,
     private authService: AuthService,
     private notificationService: NotificationService,
@@ -144,14 +146,10 @@ export class UserFacade {
       .subscribe(
         (profile) => {
           this.state$.next((this.state = { ...this.state, profile }));
+          this.diagnosisFacade.getDiagnosis(this.state.token.userId);
+          this.diagnosisFacade.getDiagnoses(this.state.token.userId);
         },
         (error) => {
-          this.loadingService.stop();
-          this.notificationService.addNotification(
-            "Problem with server connection"
-          );
-        },
-        () => {
           this.loadingService.stop();
         }
       );
