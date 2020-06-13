@@ -11,10 +11,10 @@
 
     <app-input
       formControlName="age"
-      label="Age [years]"
+      label="Age (36-79) [years]"
       type="number"
-      placeholder="eg. 33"
-      invalidMessage="Please provide age in years, eg. 33"
+      placeholder="eg. 56"
+      invalidMessage="Please provide age in years, between 36 and 79"
       [darkLabel]="true"
       [invalid]="formSubmitted && !form.get('age').valid"
     ></app-input>

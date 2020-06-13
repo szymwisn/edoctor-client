@@ -30,7 +30,7 @@ export class RegisterPageComponent {
       name: ["", [Validators.required]],
       email: ["", [Validators.required, Validators.email]],
       password: ["", Validators.required],
-      age: ["", [Validators.required]],
+      age: ["", [Validators.required, Validators.min(36), Validators.max(79)]],
       height: ["", [Validators.required]],
       mass: ["", [Validators.required]],
       bloodType: ["", [Validators.required]],

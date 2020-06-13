@@ -46,7 +46,7 @@ export class PersonalInfoComponent {
   constructor(private fb: FormBuilder, private userFacade: UserFacade) {
     this.form = this.fb.group({
       email: ["", [Validators.required, Validators.email]],
-      age: ["", [Validators.required]],
+      age: ["", [Validators.required, Validators.min(36), Validators.max(79)]],
       height: ["", [Validators.required]],
       mass: ["", [Validators.required]],
       bloodType: ["", [Validators.required]],

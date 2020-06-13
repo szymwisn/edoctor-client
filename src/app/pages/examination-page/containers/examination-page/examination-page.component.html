@@ -9,6 +9,7 @@
           label="Pain location"
           [options]="availableValues.painLocations"
           [invalid]="formSubmitted && !form.get('painLocation').valid"
+          invalidMessage="Please choose exactly one option"
         ></app-select>
 
         <app-select
@@ -16,6 +17,7 @@
           label="Chest pain radiation"
           [options]="availableValues.chestPainRadiations"
           [invalid]="formSubmitted && !form.get('chestPainRadiation').valid"
+          invalidMessage="Please choose exactly one option"
         ></app-select>
 
         <app-select
@@ -23,6 +25,7 @@
           label="Pain character"
           [options]="availableValues.painCharacters"
           [invalid]="formSubmitted && !form.get('painCharacter').valid"
+          invalidMessage="Please choose exactly one option"
         ></app-select>
 
         <app-select
@@ -30,6 +33,7 @@
           label="Onset of pain"
           [options]="availableValues.onsetsOfPain"
           [invalid]="formSubmitted && !form.get('onsetOfPain').valid"
+          invalidMessage="Please choose exactly one option"
         ></app-select>
 
         <app-select
@@ -39,6 +43,7 @@
           [invalid]="
             formSubmitted && !form.get('durationOfTheLastEpisode').valid
           "
+          invalidMessage="Please choose exactly one option"
         ></app-select>
 
         <app-select
@@ -46,11 +51,13 @@
           label="Palliative factors"
           [options]="availableValues.palliativeFactors"
           [invalid]="formSubmitted && !form.get('palliativeFactor').valid"
+          invalidMessage="Please choose exactly one option"
         ></app-select>
 
         <app-input
           formControlName="numberOfHoursSinceOnset"
-          label="Number of hours since onset"
+          label="Number of hours since onset (1-20)"
+          invalidMessage="Please provide a value between 1 and 20"
           type="number"
           [invalid]="
             formSubmitted && !form.get('numberOfHoursSinceOnset').valid
@@ -59,28 +66,32 @@
 
         <app-input
           formControlName="systolicBloodPressure"
-          label="Systolic blood pressure"
+          label="Systolic blood pressure (105-240)"
+          invalidMessage="Please provide a value between 105 and 240"
           type="number"
           [invalid]="formSubmitted && !form.get('systolicBloodPressure').valid"
         ></app-input>
 
         <app-input
           formControlName="diastolicBloodPressure"
-          label="Disatolic blood pressure"
+          label="Disatolic blood pressure (68-105)"
+          invalidMessage="Please provide a value between 68 and 105"
           type="number"
           [invalid]="formSubmitted && !form.get('diastolicBloodPressure').valid"
         ></app-input>
 
         <app-input
           formControlName="heartRate"
-          label="Heart rate"
+          label="Heart rate (56-93)"
+          invalidMessage="Please provide a value between 56 and 93"
           type="number"
           [invalid]="formSubmitted && !form.get('heartRate').valid"
         ></app-input>
 
         <app-input
           formControlName="respirationRate"
-          label="Respiration rate"
+          label="Respiration rate (10-24)"
+          invalidMessage="Please provide a value between 10 and 24"
           type="number"
           [invalid]="formSubmitted && !form.get('respirationRate').valid"
         ></app-input>

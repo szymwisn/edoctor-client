@@ -49,17 +49,32 @@ export class ExaminationPageComponent {
       painCharacter: ["", [Validators.required]],
       onsetOfPain: ["", [Validators.required]],
       durationOfTheLastEpisode: ["", [Validators.required]],
-      numberOfHoursSinceOnset: ["", [Validators.required]],
+      numberOfHoursSinceOnset: [
+        "",
+        [Validators.required, Validators.min(1), Validators.max(20)],
+      ],
       historyOfSimiliarPain: [""],
       palliativeFactor: ["", [Validators.required]],
       associatedSymptoms: [""],
       pastMedicalHistory: [""],
       currentMedicationUsage: [""],
       physicalExaminations: [""],
-      systolicBloodPressure: ["", [Validators.required]],
-      diastolicBloodPressure: ["", [Validators.required]],
-      heartRate: ["", [Validators.required]],
-      respirationRate: ["", [Validators.required]],
+      systolicBloodPressure: [
+        "",
+        [Validators.required, Validators.min(105), Validators.max(240)],
+      ],
+      diastolicBloodPressure: [
+        "",
+        [Validators.required, Validators.min(68), Validators.max(105)],
+      ],
+      heartRate: [
+        "",
+        [Validators.required, Validators.min(56), Validators.max(93)],
+      ],
+      respirationRate: [
+        "",
+        [Validators.required, Validators.min(10), Validators.max(24)],
+      ],
       ecgExamination: [""],
     });
   }
@@ -91,6 +106,8 @@ export class ExaminationPageComponent {
               }
             );
         });
+    } else {
+      this.loadingService.stop();
     }
   }
 
