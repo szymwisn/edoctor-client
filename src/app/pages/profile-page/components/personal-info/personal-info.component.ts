@@ -61,6 +61,7 @@ export class PersonalInfoComponent {
 
     if (this.editMode) {
       this.form.enable();
+      this.form.get("email").disable();
     } else {
       this.form.disable();
     }

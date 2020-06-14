@@ -13,16 +13,16 @@ export class ToolboxComponent {
       link: ["/examination"],
     },
     {
-      title: "Change your data",
-      link: ["/profile"],
+      title: "Latest diagnosis",
+      link: ["/diagnosis"],
+    },
+    {
+      title: "Diagnosis history",
+      link: ["/history"],
     },
     {
       title: "Doctors nearby",
       link: ["/doctors"],
-    },
-    {
-      title: "View history",
-      link: ["/history"],
     },
   ];
 }

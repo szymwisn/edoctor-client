@@ -30,13 +30,16 @@
   <app-button
     [routerLink]="['/diagnosis']"
     text="Details"
-    class="tertiary"
+    class="tertiary details-button"
   ></app-button>
 </div>
 
 <ng-template #noDiagnosis>
   <p class="no-diagnoses no-diagnoses-header">No diagnosis</p>
-  <p class="no-diagnoses no-diagnoses-text">
-    Examinate yourself!
-  </p>
+  <app-button
+    [routerLink]="['/examination']"
+    class="no-diagnoses no-diagnoses-text"
+    text="Examinate yourself!"
+  >
+  </app-button>
 </ng-template>

@@ -12,6 +12,12 @@
   </div>
 </div>
 
-<ng-template #noDiagnosis>
-  no diagnosis
+<ng-template #noDiagnosis class="wrapper">
+  <p class="no-diagnoses no-diagnoses-header">No diagnosis</p>
+  <app-button
+    [routerLink]="['/examination']"
+    class="no-diagnoses no-diagnoses-text"
+    text="Examinate yourself!"
+  >
+  </app-button>
 </ng-template>

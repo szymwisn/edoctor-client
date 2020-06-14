@@ -21,7 +21,7 @@ h3 {
   color: $rock-blue;
 }
 
-app-button {
+.details-button {
   position: absolute;
   top: 15px;
   right: 15px;
@@ -63,5 +63,6 @@ app-button {
 }
 
 .no-diagnoses-text {
+  display: block;
   margin-bottom: 80px;
 }
