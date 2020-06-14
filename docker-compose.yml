@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+    edoktor-client:
+        container_name: edoktor-client
+        build: .
+        command: bash -c "npm start"
+        volumes:
+            - .:/edoktor-client
+        ports:
+            - '4200:4200'
+        networks:
+            - edoktor
+            
+networks:
+    edoktor:
+        external: true
