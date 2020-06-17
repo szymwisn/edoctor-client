@@ -49,10 +49,7 @@ export class ExaminationPageComponent {
       painCharacter: ["", [Validators.required]],
       onsetOfPain: ["", [Validators.required]],
       durationOfTheLastEpisode: ["", [Validators.required]],
-      numberOfHoursSinceOnset: [
-        "",
-        [Validators.required, Validators.min(1), Validators.max(20)],
-      ],
+      numberOfHoursSinceOnset: ["", [Validators.required]],
       historyOfSimiliarPain: [""],
       palliativeFactor: ["", [Validators.required]],
       associatedSymptoms: [""],
@@ -61,19 +58,19 @@ export class ExaminationPageComponent {
       physicalExaminations: [""],
       systolicBloodPressure: [
         "",
-        [Validators.required, Validators.min(105), Validators.max(240)],
+        [Validators.required, Validators.min(104), Validators.max(240)],
       ],
       diastolicBloodPressure: [
         "",
-        [Validators.required, Validators.min(68), Validators.max(105)],
+        [Validators.required, Validators.min(67), Validators.max(105)],
       ],
       heartRate: [
         "",
-        [Validators.required, Validators.min(56), Validators.max(93)],
+        [Validators.required, Validators.min(55), Validators.max(93)],
       ],
       respirationRate: [
         "",
-        [Validators.required, Validators.min(10), Validators.max(24)],
+        [Validators.required, Validators.min(9), Validators.max(24)],
       ],
       ecgExamination: [""],
     });

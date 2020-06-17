@@ -31,12 +31,11 @@ export class HistoryPageComponent implements OnInit {
   form: FormGroup;
 
   diseases: Disease[] = [
-    Disease.HEALTHY,
+    Disease.NON_HEART_RELATED,
     Disease.CORONARY_ARTERY,
     Disease.VARIANT_ANGINA,
     Disease.MYOCARDIAL_INFARCTION_TRANSMURAL,
     Disease.MYOCARDIAL_INFARCTION_SUBENDOCARDIAL,
-    Disease.NON_HEART_RELATED,
   ];
 
   allData$: Observable<{

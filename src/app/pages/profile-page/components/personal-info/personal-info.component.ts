@@ -70,6 +70,7 @@ export class PersonalInfoComponent {
   save() {
     this.formSubmitted = true;
     if (this.form.valid) {
+      console.log(this.form.value);
       this.userFacade.changeSettings(this.form.value);
       this.toggleEditMode();
       this.formSubmitted = false;
